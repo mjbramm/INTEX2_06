@@ -24,12 +24,10 @@ namespace INTEX2_06.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
         public IActionResult Create() => View();
 
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(User user)
         {
             if (ModelState.IsValid)
