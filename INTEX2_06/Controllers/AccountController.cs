@@ -19,6 +19,7 @@ namespace INTEX2_06.Controllers
             signInManager = signinMgr;
         }
 
+
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
@@ -26,6 +27,7 @@ namespace INTEX2_06.Controllers
             login.ReturnUrl = returnUrl;
             return View(login);
         }
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -71,10 +73,12 @@ namespace INTEX2_06.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
         public IActionResult AccessDenied()
         {
             return View();
         }
+
 
         /*[AllowAnonymous]
         public IActionResult GoogleLogin()
@@ -117,6 +121,7 @@ namespace INTEX2_06.Controllers
             }
         }*/
 
+
         [AllowAnonymous]
         public async Task<IActionResult> LoginTwoStep(string email, string returnUrl)
         {
@@ -129,6 +134,7 @@ namespace INTEX2_06.Controllers
 
             return View();
         }
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -151,11 +157,13 @@ namespace INTEX2_06.Controllers
             }
         }
 
+        
         [AllowAnonymous]
         public IActionResult ForgotPassword()
         {
             return View();
         }
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -183,11 +191,13 @@ namespace INTEX2_06.Controllers
             return View(email);
         }
 
+
         [AllowAnonymous]
         public IActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
+
 
         [AllowAnonymous]
         public IActionResult ResetPassword(string token, string email)
@@ -195,6 +205,7 @@ namespace INTEX2_06.Controllers
             var model = new ResetPassword { Token = token, Email = email };
             return View(model);
         }
+
 
         [HttpPost]
         [AllowAnonymous]

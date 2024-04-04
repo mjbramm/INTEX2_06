@@ -9,24 +9,27 @@ namespace INTEX2_06.Controllers
     public class HomeController : Controller
     {
         private IBookRepository _repo;
+        //private UserManager<AppUser> userManager;
 
-
-        private UserManager<AppUser> userManager;
-
-        public HomeController(UserManager<AppUser> userMgr, IBookRepository temp)
+        public HomeController(IBookRepository temp) //UserManager<AppUser> userMgr
         {
-            userManager = userMgr;
+            //userManager = userMgr;
             _repo = temp;
         }
 
-        [Authorize]
+
         public async Task<IActionResult> Index(int pageNum, string? bookCategory)
         {
+            return (View());
+        }
+
+        public async Task<IActionResult> Bookstore(int pageNum, string? bookCategory)
+        {
             // Check if the user is authenticated
-            if (User.Identity.IsAuthenticated)
-            {
-                AppUser user = await userManager.GetUserAsync(HttpContext.User);
-            }
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    AppUser user = await userManager.GetUserAsync(HttpContext.User);
+            //}
             
             int pageSize = 10;
 
@@ -48,6 +51,7 @@ namespace INTEX2_06.Controllers
 
                 CurrentBookCategory = bookCategory
             };
+
             return View(blah);
         }
 

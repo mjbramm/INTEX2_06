@@ -100,12 +100,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllerRoute("pagenumandcategory", "{bookCategory}/Page{pageNum}", new { Controller = "Home", Action = "Index" });
-app.MapControllerRoute("page", "Page/{pageNum}", new { Controller = "Home", Action = "Index", pageNum = 1 });
-app.MapControllerRoute("bookCategory", "{bookCategory}", new { Controller = "Home", Action = "Index", pageNum = 1 });
-app.MapControllerRoute("pagination", "Books/{pageNum}", new { Controller = "Home", Action = "Index", pageNum = 1 });
-
-
+app.MapControllerRoute("pagenumandcategory", "{bookCategory}/Page{pageNum}", new { Controller = "Home", Action = "Bookstore" });
+app.MapControllerRoute("page", "Page/{pageNum}", new { Controller = "Home", Action = "Bookstore", pageNum = 1 });
+app.MapControllerRoute("bookCategory", "{bookCategory}", new { Controller = "Home", Action = "Bookstore", pageNum = 1 });
+app.MapControllerRoute("pagination", "Books/{pageNum}", new { Controller = "Home", Action = "Bookstore", pageNum = 1 });
 
 app.MapDefaultControllerRoute();
 

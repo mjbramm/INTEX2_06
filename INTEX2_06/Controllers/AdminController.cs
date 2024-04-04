@@ -1,4 +1,5 @@
 ﻿using INTEX2_06.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,14 +16,20 @@ namespace INTEX2_06.Controllers
             passwordHasher = passwordHash;
         }
 
+
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View(userManager.Users);
         }
 
+
+        [Authorize(Roles = "Admin")]
         public IActionResult Create() => View();
 
+
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(User user)
         {
             if (ModelState.IsValid)
@@ -63,6 +70,8 @@ namespace INTEX2_06.Controllers
             return View(user);
         }
 
+
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(string id)
         {
             AppUser user = await userManager.FindByIdAsync(id);
@@ -72,7 +81,9 @@ namespace INTEX2_06.Controllers
                 return RedirectToAction("Index");
         }
 
+
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(string id, string email, string password)
         {
             AppUser user = await userManager.FindByIdAsync(id);
@@ -102,13 +113,17 @@ namespace INTEX2_06.Controllers
             return View(user);
         }
 
+
+        [Authorize(Roles = "Admin")]
         private void Errors(IdentityResult result)
         {
             foreach (IdentityError error in result.Errors)
                 ModelState.AddModelError("", error.Description);
         }
 
+
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             AppUser user = await userManager.FindByIdAsync(id);
