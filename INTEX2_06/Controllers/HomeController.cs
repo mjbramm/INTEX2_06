@@ -1,32 +1,30 @@
-using INTEX2_06.Models;
+﻿using INTEX2_06.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace INTEX2_06.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private UserManager<AppUser> userManager;
+        public HomeController(UserManager<AppUser> userMgr)
         {
-            _logger = logger;
+            userManager = userMgr;
         }
 
-        public IActionResult Index()
+        [Authorize]
+        //[Authorize(Roles = "Manager")]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            AppUser user = await userManager.GetUserAsync(HttpContext.User);
+            string message = "Hello " + user.UserName;
+            return View((object)message);
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(Privacy);
         }
     }
 }
