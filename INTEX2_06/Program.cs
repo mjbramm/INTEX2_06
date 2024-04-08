@@ -13,11 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppIdentityDbContext>(options =>
-    options.UseSqlite(builder.Configuration["ConnectionStrings:DefaultConnection"]));
-
-builder.Services.AddDbContext<LegostoreContext>(options =>
-    options.UseSqlite(builder.Configuration["ConnectionStrings:BookConnection"]));
-
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]));
 
 builder.Services.AddScoped<ILegoRepository, EFLegoRepository>();
 builder.Services.AddRazorPages();
