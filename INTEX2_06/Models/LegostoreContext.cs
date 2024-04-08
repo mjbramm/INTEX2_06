@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace INTEX2_06.Models;
 
 public partial class LegostoreContext : DbContext
 {
+    public class AppIdentityDbContext : IdentityDbContext<AppUser>
+    {
+        public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options) { }
+    }
     public LegostoreContext()
     {
     }
