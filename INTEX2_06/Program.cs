@@ -96,10 +96,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllerRoute("pagenumandcategory", "{bookCategory}/Page{pageNum}", new { Controller = "Home", Action = "Bookstore" });
-app.MapControllerRoute("page", "Page/{pageNum}", new { Controller = "Home", Action = "Bookstore", pageNum = 1 });
-app.MapControllerRoute("bookCategory", "{bookCategory}", new { Controller = "Home", Action = "Bookstore", pageNum = 1 });
-app.MapControllerRoute("pagination", "Books/{pageNum}", new { Controller = "Home", Action = "Bookstore", pageNum = 1 });
+app.MapControllerRoute("pagenumandcategory", "{legoCategory}/Page{pageNum}", new { Controller = "Home", Action = "Legostore" });
+app.MapControllerRoute("page", "Page/{pageNum}", new { Controller = "Home", Action = "Legostore", pageNum = 1 });
+app.MapControllerRoute("legoCategory", "{legoCategory}", new { Controller = "Home", Action = "Legostore", pageNum = 1 });
+app.MapControllerRoute("pagination", "Legos/{pageNum}", new { Controller = "Home", Action = "Legostore", pageNum = 1 });
 
 app.MapDefaultControllerRoute();
 
