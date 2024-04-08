@@ -3,6 +3,7 @@ using INTEX2_06.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace INTEX2_06.Migrations.Legostore
 {
     [DbContext(typeof(LegostoreContext))]
-    partial class LegostoreContextModelSnapshot : ModelSnapshot
+    [Migration("20240408224855_initialLegos")]
+    partial class initialLegos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

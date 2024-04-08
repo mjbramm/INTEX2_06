@@ -17,6 +17,9 @@ public partial class LegostoreContext : DbContext
     }
 
     public virtual DbSet<Lego> Legos { get; set; }
+    public virtual DbSet<Customer> Customers { get; set; }
+    public virtual DbSet<Order> Orders { get; set; }
+    public virtual DbSet<LineItem> LineItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
