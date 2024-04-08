@@ -26,7 +26,7 @@ namespace INTEX2_06.Migrations.Legostore
                     b.Property<int>("product_ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("BookID");
+                        .HasColumnName("product_ID");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("product_ID"));
 
@@ -65,7 +65,7 @@ namespace INTEX2_06.Migrations.Legostore
                     b.Property<string>("secondary_color")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ISBN");
+                        .HasColumnName("secondary_color");
 
                     b.Property<int>("total_ordered")
                         .HasColumnType("int");
@@ -75,7 +75,7 @@ namespace INTEX2_06.Migrations.Legostore
 
                     b.HasKey("product_ID");
 
-                    b.HasIndex(new[] { "product_ID" }, "IX_Books_BookID")
+                    b.HasIndex(new[] { "product_ID" }, "INTEX2_06_Legos_product_ID")
                         .IsUnique();
 
                     b.ToTable("Legos");

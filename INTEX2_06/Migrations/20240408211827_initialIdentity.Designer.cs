@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace INTEX2_06.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20240408195939_loginInitial")]
-    partial class loginInitial
+    [Migration("20240408211827_initialIdentity")]
+    partial class initialIdentity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

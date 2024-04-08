@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace INTEX2_06.Migrations
 {
     /// <inheritdoc />
-    public partial class loginInitial : Migration
+    public partial class initialIdentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -5,7 +5,7 @@
 namespace INTEX2_06.Migrations.Legostore
 {
     /// <inheritdoc />
-    public partial class legoInitial : Migration
+    public partial class initialLegos : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,14 +14,14 @@ namespace INTEX2_06.Migrations.Legostore
                 name: "Legos",
                 columns: table => new
                 {
-                    BookID = table.Column<int>(type: "int", nullable: false)
+                    product_ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     year = table.Column<int>(type: "int", nullable: false),
                     num_parts = table.Column<int>(type: "int", nullable: false),
                     img_link = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     primary_color = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ISBN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    secondary_color = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     category = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PageCount = table.Column<int>(type: "int", nullable: false),
@@ -31,13 +31,13 @@ namespace INTEX2_06.Migrations.Legostore
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Legos", x => x.BookID);
+                    table.PrimaryKey("PK_Legos", x => x.product_ID);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_BookID",
+                name: "INTEX2_06_Legos_product_ID",
                 table: "Legos",
-                column: "BookID",
+                column: "product_ID",
                 unique: true);
         }
 
