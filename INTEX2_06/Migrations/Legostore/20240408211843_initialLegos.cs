@@ -24,7 +24,6 @@ namespace INTEX2_06.Migrations.Legostore
                     secondary_color = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     category = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PageCount = table.Column<int>(type: "int", nullable: false),
                     total_ordered = table.Column<int>(type: "int", nullable: false),
                     avg_rating = table.Column<double>(type: "float", nullable: false),
                     price = table.Column<double>(type: "float", nullable: false)

@@ -31,7 +31,7 @@ namespace INTEX2_06.Controllers
             //    AppUser user = await userManager.GetUserAsync(HttpContext.User);
             //}
             
-            int pageSize = 10;
+            int pageSize = 5;
 
             var blah = new LegosListViewModel
             {

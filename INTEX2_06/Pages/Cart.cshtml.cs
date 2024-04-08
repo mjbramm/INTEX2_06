@@ -26,10 +26,10 @@ namespace INTEX2_06.Pages
             Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
         }
 
-        public IActionResult OnPost(int bookId, string returnUrl) 
+        public IActionResult OnPost(int product_Id, string returnUrl) 
         {
             Lego boo = _repo.Legos
-                .FirstOrDefault(x => x.product_ID == bookId);
+                .FirstOrDefault(x => x.product_ID == product_Id);
 
             if (boo != null)
             {

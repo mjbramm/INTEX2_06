@@ -30,9 +30,6 @@ namespace INTEX2_06.Migrations.Legostore
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("product_ID"));
 
-                    b.Property<int>("PageCount")
-                        .HasColumnType("int");
-
                     b.Property<double>("avg_rating")
                         .HasColumnType("float");
 

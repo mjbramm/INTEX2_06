@@ -15,7 +15,7 @@ namespace INTEX2_06.Components
         }
         public IViewComponentResult Invoke()
         {
-            ViewBag.SelectedBookCategory = RouteData?.Values["bookCategory"];
+            ViewBag.SelectedLegoCategory = RouteData?.Values["legoCategory"];
 
             var legoCategories = _legoRepo.Legos
                 .Select(x => x.category)
