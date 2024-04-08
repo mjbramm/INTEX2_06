@@ -25,8 +25,6 @@ public partial class Lego
 
     public string category { get; set; } = null!;
 
-    public int PageCount { get; set; }
-
     public int total_ordered { get; set; }
 
     public double avg_rating { get; set; }
