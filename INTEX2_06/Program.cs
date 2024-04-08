@@ -15,11 +15,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppIdentityDbContext>(options =>
     options.UseSqlite(builder.Configuration["ConnectionStrings:DefaultConnection"]));
 
-builder.Services.AddDbContext<BookstoreContext>(options =>
+builder.Services.AddDbContext<LegostoreContext>(options =>
     options.UseSqlite(builder.Configuration["ConnectionStrings:BookConnection"]));
 
 
-builder.Services.AddScoped<IBookRepository, EFBookRepository>();
+builder.Services.AddScoped<ILegoRepository, EFLegoRepository>();
 builder.Services.AddRazorPages();
 
 builder.Services.AddDistributedMemoryCache();

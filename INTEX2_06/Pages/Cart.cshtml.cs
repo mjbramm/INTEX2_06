@@ -8,9 +8,9 @@ namespace INTEX2_06.Pages
     public class CartModel : PageModel
     {
 
-        private IBookRepository _repo;
+        private ILegoRepository _repo;
 
-        public CartModel(IBookRepository temp) 
+        public CartModel(ILegoRepository temp) 
         {
             _repo = temp;
         }
@@ -28,8 +28,8 @@ namespace INTEX2_06.Pages
 
         public IActionResult OnPost(int bookId, string returnUrl) 
         {
-            Book boo = _repo.Books
-                .FirstOrDefault(x => x.BookId == bookId);
+            Lego boo = _repo.Legos
+                .FirstOrDefault(x => x.product_ID == bookId);
 
             if (boo != null)
             {

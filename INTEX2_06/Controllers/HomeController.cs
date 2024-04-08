@@ -8,22 +8,22 @@ namespace INTEX2_06.Controllers
 {
     public class HomeController : Controller
     {
-        private IBookRepository _repo;
+        private ILegoRepository _repo;
         //private UserManager<AppUser> userManager;
 
-        public HomeController(IBookRepository temp) //UserManager<AppUser> userMgr
+        public HomeController(ILegoRepository temp) //UserManager<AppUser> userMgr
         {
             //userManager = userMgr;
             _repo = temp;
         }
 
 
-        public async Task<IActionResult> Index(int pageNum, string? bookCategory)
+        public async Task<IActionResult> Index(int pageNum, string? legoCategory)
         {
             return (View());
         }
 
-        public async Task<IActionResult> Bookstore(int pageNum, string? bookCategory)
+        public async Task<IActionResult> Legostore(int pageNum, string? legoCategory)
         {
             // Check if the user is authenticated
             //if (User.Identity.IsAuthenticated)
@@ -33,11 +33,11 @@ namespace INTEX2_06.Controllers
             
             int pageSize = 10;
 
-            var blah = new BooksListViewModel
+            var blah = new LegosListViewModel
             {
-                Books = _repo.Books
-                    .Where(x => x.Category == bookCategory || bookCategory == null)
-                    .OrderBy(x => x.Title)
+                Legos = _repo.Legos
+                    .Where(x => x.category == legoCategory || legoCategory == null)
+                    .OrderBy(x => x.name)
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize),
 
@@ -45,11 +45,11 @@ namespace INTEX2_06.Controllers
                 {
                     CurrentPage = pageNum,
                     ItemsPerPage = pageSize,
-                    TotalItems = bookCategory == null ? _repo.Books.Count() : _repo.Books.Where(x => x.Category == bookCategory).Count()
+                    TotalItems = legoCategory == null ? _repo.Legos.Count() : _repo.Legos.Where(x => x.category == legoCategory).Count()
 
                 },
 
-                CurrentBookCategory = bookCategory
+                CurrentLegoCategory = legoCategory
             };
 
             return View(blah);

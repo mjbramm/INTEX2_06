@@ -3,26 +3,26 @@ using INTEX2_06.Models;
 
 namespace INTEX2_06.Components
 {
-    public class BookCategoriesViewComponent : ViewComponent
+    public class LegoCategoriesViewComponent : ViewComponent
     {
 
-        private IBookRepository _bookRepo;
+        private ILegoRepository _legoRepo;
         //Constructor 
-        public BookCategoriesViewComponent(IBookRepository temp) 
+        public LegoCategoriesViewComponent(ILegoRepository temp) 
         { 
-            _bookRepo = temp;
+            _legoRepo = temp;
 
         }
         public IViewComponentResult Invoke()
         {
             ViewBag.SelectedBookCategory = RouteData?.Values["bookCategory"];
 
-            var bookCategories = _bookRepo.Books
-                .Select(x => x.Category)
+            var legoCategories = _legoRepo.Legos
+                .Select(x => x.category)
                 .Distinct()
                 .OrderBy(x => x);
 
-            return View(bookCategories);
+            return View(legoCategories);
 
         }
     }

@@ -2,15 +2,15 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model BooksListViewModel
+@model LegosListViewModel
 
-<h1>The Book Store</h1>
+<h1>The Lego Store</h1>
 
-@foreach (Book b in Model.Books)
+@foreach (Lego b in Model.Legos)
 {
-    <partial name="BookSummary" model="b" />
+    <partial name="LegoSummary" model="b" />
 }
 
 <div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
-     page-url-bookCategory="@Model.CurrentBookCategory" class="btn-group pull-right m-1"></div>
+     page-url-legoCategory="@Model.CurrentLegoCategory" class="btn-group pull-right m-1"></div>

@@ -4,10 +4,10 @@
     {
         public List<CartLine> Lines { get; set; } = new List<CartLine>();
 
-        public virtual void AddItem(Book boo, int quantity) 
+        public virtual void AddItem(Lego leg, int quantity) 
         {
             CartLine? line = Lines
-                .Where(x => x.Book.BookId == boo.BookId)
+                .Where(x => x.Lego.product_ID == leg.product_ID)
                 .FirstOrDefault();
 
             //Has this item already been added to our cart?
@@ -15,7 +15,7 @@
             {
                 Lines.Add(new CartLine
                 {
-                    Book = boo,
+                    Lego = leg,
                     Quantity = quantity
                 });
             }
@@ -25,7 +25,7 @@
             }
         }
 
-        public virtual void RemoveLine(Book boo) => Lines.RemoveAll(x => x.Book.BookId == boo.BookId);
+        public virtual void RemoveLine(Lego leg) => Lines.RemoveAll(x => x.Lego.product_ID == leg.product_ID);
 
         public virtual void Clear() => Lines.Clear(); 
 
@@ -34,7 +34,7 @@
         public class CartLine 
         {
             public int CartLineId { get; set; }
-            public Book Book { get; set; }
+            public Lego Lego { get; set; }
             public int Quantity { get; set; }
 
         }

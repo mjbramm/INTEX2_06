@@ -4,30 +4,30 @@ using Microsoft.EntityFrameworkCore;
 
 namespace INTEX2_06.Models;
 
-public partial class BookstoreContext : DbContext
+public partial class LegostoreContext : DbContext
 {
-    public BookstoreContext()
+    public LegostoreContext()
     {
     }
 
-    public BookstoreContext(DbContextOptions<BookstoreContext> options)
+    public LegostoreContext(DbContextOptions<LegostoreContext> options)
         : base(options)
     {
     }
 
-    public virtual DbSet<Book> Books { get; set; }
+    public virtual DbSet<Lego> Legos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlite("Data Source=Bookstore.sqlite");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Book>(entity =>
+        modelBuilder.Entity<Lego>(entity =>
         {
-            entity.HasIndex(e => e.BookId, "IX_Books_BookID").IsUnique();
+            entity.HasIndex(e => e.product_ID, "IX_Books_BookID").IsUnique();
 
-            entity.Property(e => e.BookId).HasColumnName("BookID");
-            entity.Property(e => e.Isbn).HasColumnName("ISBN");
+            entity.Property(e => e.product_ID).HasColumnName("BookID");
+            entity.Property(e => e.secondary_color).HasColumnName("ISBN");
         });
 
         OnModelCreatingPartial(modelBuilder);

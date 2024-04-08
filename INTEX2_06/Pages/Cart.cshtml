@@ -8,7 +8,7 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>Book Name</th>
+            <th>Lego Name</th>
             <th>Quantity</th>
             <th class="text-right">Amount</th>
             <th class="text-right">Subtotal</th>
@@ -18,7 +18,7 @@
         @foreach(var l in Model.Cart?.Lines ?? Enumerable.Empty<Cart.CartLine>())
         {
             <tr>
-                <td class="text-left">@l.Book.Title</td>
+                <td class="text-left">@l.Lego.name</td>
                 <td class="text-center">@l.Quantity</td>
                 <td class="text-right">$25</td>
                 <td class="text-right">@((l.Quantity * 25).ToString("c"))</td>
