@@ -26,33 +26,51 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Legostore">View Legostore</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="UpdateProfile">Profile</a>
-                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage</a>
-
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" asp-controller="Administration" asp-action="ListUsers">Users</a>
-
-                                <a class="dropdown-item" asp-controller="Administration" asp-action="ListRoles">Roles</a>
+                                <a class="dropdown-item" asp-controller="Admin" asp-action="ListUsers">Users</a>
+                                <a class="dropdown-item" asp-controller="Admin" asp-action="ListRoles">Roles</a>
                             </ul>
                         </li>
                     </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form method="post" id="logout" asp-controller="Account" asp-action="Logout" style="display: none"></form>
+                        <ul class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Hello User</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="javascript:void(0);" onclick="document.getElementById('logout').submit();">Logout</a>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">Change Password</a>
+                                @if (userDetail.TwoFactorEnabled)
+                                {
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="ManageTwoFactorAuthentication">Disable 2FA</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="ManageTwoFactorAuthentication">Enable 2FA</a>
+                                }
+                                <a class="dropdown-item" asp-controller="Account" asp-action="UpdateProfile">View Profile</a>
+                            </ul>
+                        </ul>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                    }
+
                 </div>
             </div>
         </nav>

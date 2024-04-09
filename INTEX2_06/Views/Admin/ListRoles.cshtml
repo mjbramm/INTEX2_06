@@ -27,7 +27,7 @@
             <div class="card-footer">
 
                 <form method="post" asp-action="DeleteRole" asp-route-roleId="@role.Id" onsubmit="return confirmDelete()">
-                    <a asp-controller="Administration" asp-action="EditRole" asp-route-RoleId="@role.Id" class="btn btn-primary">Edit</a>
+                    <a asp-controller="Admin" asp-action="EditRole" asp-route-RoleId="@role.Id" class="btn btn-primary">Edit</a>
 
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>

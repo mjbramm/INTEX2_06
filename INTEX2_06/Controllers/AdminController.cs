@@ -48,7 +48,7 @@ namespace INTEX2_06.Controllers
 
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("ListRoles", "Administration");
+                        return RedirectToAction("ListRoles", "Admin");
                     }
 
                     foreach (IdentityError error in result.Errors)
