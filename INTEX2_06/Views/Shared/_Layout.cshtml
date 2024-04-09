@@ -1,10 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
+
 @{
     var userDetail = await UserManager.GetUserAsync(User);
 }
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,6 +86,14 @@
             @RenderBody()
         </main>
     </div>
+    <div id="cookieConsent" style="display:none; position: fixed; bottom: 0; width: 100%; background: black; color: white; text-align: center; padding: 10px; z-index: 1000;">
+        <p>
+            We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
+            <a href="@Url.Action("Privacy", "Home")" style="color: #4CAF50;">Learn More</a>
+            <button onclick="acceptCookies()" style="margin-left: 15px; background-color: #4CAF50; color: white; border: none; padding: 5px 10px;">Accept</button>
+        </p>
+    </div>
+
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -96,5 +104,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/js/cookieConsent.js"></script>
 </body>
 </html>

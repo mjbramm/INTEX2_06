@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using INTEX2_06.Models.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace INTEX2_06.Controllers
 {
@@ -20,7 +21,7 @@ namespace INTEX2_06.Controllers
 
         public async Task<IActionResult> Index(int pageNum, string? legoCategory)
         {
-            return (View());
+            return View();
         }
 
         public async Task<IActionResult> Legostore(int pageNum, string? legoCategory)

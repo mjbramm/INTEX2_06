@@ -20,3 +20,27 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+@keyframes slideUp {
+    from {
+        bottom: -50px;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        bottom: 0;
+        opacity: 1;
+    }
+
+    to {
+        bottom: -50px;
+        opacity: 0;
+    }
+}
