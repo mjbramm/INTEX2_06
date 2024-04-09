@@ -1,12 +1,11 @@
-using INTEX2_06.CustomPolicy;
 using INTEX2_06.Models;
 using INTEX2_06.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Sqlite;
-using INTEX2_06.Models;
 using Microsoft.Extensions.Configuration;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,56 +35,36 @@ builder.Services.AddRazorPages();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
-builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
-builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(10));
+builder.Services.AddIdentity<AppUser, IdentityRole>(
+    options =>
+    {
+        // Password settings
+        options.Password.RequireDigit = true;
+        options.Password.RequiredLength = 8;
+        options.Password.RequireNonAlphanumeric = true;
+        options.Password.RequireUppercase = true;
+        options.Password.RequireLowercase = true;
+        options.Password.RequiredUniqueChars = 4;
+        // Other settings can be configured here
+
+    })
+    .AddEntityFrameworkStores<AppIdentityDbContext>()
+    .AddDefaultTokenProviders(); builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(10));
+
+builder.Services.AddTransient<ISenderEmail, EmailSender>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.Cookie.Name = ".AspNetCore.Identity.Application";
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-    options.SlidingExpiration = true;
+    // If the LoginPath isn't set, ASP.NET Core defaults the path to /Account/Login.
+    options.LoginPath = "/Account/Login"; // Set your login path here
+    options.AccessDeniedPath = "/Account/InsufficientPrivileges"; // Set the path to the page for insufficient privileges
 });
 
-builder.Services.AddAuthorization(opts =>
+builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
 {
-    opts.AddPolicy("AspManager", policy =>
-    {
-        policy.RequireRole("Manager");
-        policy.RequireClaim("Coding-Skill", "ASP.NET Core MVC");
-    });
+    // Set token lifespan to 2 hours
+    options.TokenLifespan = TimeSpan.FromHours(2);
 });
-
-builder.Services.AddTransient<IAuthorizationHandler, AllowUsersHandler>();
-builder.Services.AddAuthorization(opts =>
-{
-    opts.AddPolicy("AllowTom", policy =>
-    {
-        policy.AddRequirements(new AllowUserPolicy("tom"));
-    });
-});
-
-builder.Services.AddTransient<IAuthorizationHandler, AllowPrivateHandler>();
-builder.Services.AddAuthorization(opts =>
-{
-    opts.AddPolicy("PrivateAccess", policy =>
-    {
-        policy.AddRequirements(new AllowPrivatePolicy());
-    });
-});
-
-builder.Services.Configure<IdentityOptions>(opts =>
-{
-    opts.Lockout.AllowedForNewUsers = true;
-    opts.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-    opts.Lockout.MaxFailedAccessAttempts = 3;
-});
-
-/*builder.Services.Configure<IdentityOptions>(opts =>
-{
-    opts.SignIn.RequireConfirmedEmail = true;
-});*/
-
-
 
 var app = builder.Build();
 
