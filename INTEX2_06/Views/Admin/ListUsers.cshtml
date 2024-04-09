@@ -25,7 +25,7 @@
             <div class="card-footer">
 
                 <form method="post" asp-action="DeleteUser" asp-route-UserId="@user.Id" onsubmit="return confirmDelete()">
-                    <a asp-controller="Administration" asp-action="EditUser" asp-route-UserId="@user.Id" class="btn btn-primary">Edit</a>
+                    <a asp-controller="Admin" asp-action="EditUser" asp-route-UserId="@user.Id" class="btn btn-primary">Edit</a>
 
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
