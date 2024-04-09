@@ -38,7 +38,7 @@ namespace INTEX2_06.Controllers
                 Legos = _repo.Legos
                     .Where(x => x.category == legoCategory || legoCategory == null)
                     .OrderBy(x => x.name)
-                    .Skip((pageNum - 1) * pageSize)
+                    .Skip((2 - 1) * pageSize)
                     .Take(pageSize),
 
                 PaginationInfo = new PaginationInfo

@@ -13,23 +13,11 @@ public partial class Customer
 
     public string last_name { get; set; } = null!;
 
-    public int year { get; set; }
+    public string birth_date { get; set; } = null!;
 
-    public int num_parts { get; set; }
+    public string counrty_of_residence { get; set; } = null!;
 
-    public string img_link { get; set; } = null!;
+    public string gender { get; set; } = null!;
 
-    public string primary_color { get; set; } = null!;
-
-    public string secondary_color { get; set; } = null!;
-
-    public string description { get; set; } = null!;
-
-    public string category { get; set; } = null!;
-
-    public int total_ordered { get; set; }
-
-    public double avg_rating { get; set; }
-
-    public double price { get; set; }
+    public double age { get; set; }
 }
