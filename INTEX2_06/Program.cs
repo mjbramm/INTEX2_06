@@ -12,13 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-//services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
-//{
-//    microsoftOptions.ClientId = configuration["Authentication:Microsoft:ClientId"];
-//    microsoftOptions.ClientSecret = configuration["Authentication:Microsoft:ClientSecret"];
-//});
-
-
+builder.Services.AddAuthentication()
+    .AddGoogle(options =>
+    {
+        options.ClientId = "687230939192-kg621ar4dhaeek3c8al4c4jgrikfqt1f.apps.googleusercontent.com";
+        options.ClientSecret = "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";
+        // You can set other options as needed.
+    });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

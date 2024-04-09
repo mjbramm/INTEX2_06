@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Identity</title>
+    <title>@ViewData["Title"] Brickwell Bricks</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Identity.styles.css" asp-append-version="true" />
@@ -36,13 +36,19 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Legostore">Product Catalog</a>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" asp-controller="Admin" asp-action="ListUsers">Users</a>
-                                <a class="dropdown-item" asp-controller="Admin" asp-action="ListRoles">Roles</a>
-                            </ul>
-                        </li>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" asp-controller="Admin" asp-action="ListUsers">Customer Catalog</a>
+                                    <a class="dropdown-item" asp-controller="Home" asp-action="Legostore">Product Catalog</a>
+                                    <a class="dropdown-item" asp-controller="" asp-action="">Order Catalog</a>
+                                    @*                                 <a class="dropdown-item" asp-controller="Admin" asp-action="ListRoles">Roles</a> *@
+                                </ul>
+                            </li>
+                        }
+
                     </ul>
                     @if (User.Identity.IsAuthenticated)
                     {

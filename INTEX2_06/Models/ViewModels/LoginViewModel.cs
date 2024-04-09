@@ -16,5 +16,7 @@ namespace INTEX2_06.Models
         public bool RememberMe { get; set; }
 
         public string? ReturnUrl;
+
+        public IList<AuthenticationScheme>? ExternalLogins { get; set; }
     }
 }
