@@ -15,7 +15,7 @@ public partial class Customer
 
     public string birth_date { get; set; } = null!;
 
-    public string counrty_of_residence { get; set; } = null!;
+    public string country_of_residence { get; set; } = null!;
 
     public string gender { get; set; } = null!;
 
