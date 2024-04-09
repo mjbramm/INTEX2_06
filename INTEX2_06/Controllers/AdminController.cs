@@ -17,7 +17,8 @@ namespace INTEX2_06.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
+        [Authorize]
         public IActionResult Index()
         {
             return View(userManager.Users);
@@ -69,7 +70,8 @@ namespace INTEX2_06.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<IActionResult> Update(string id)
         {
             AppUser user = await userManager.FindByIdAsync(id);
@@ -81,7 +83,8 @@ namespace INTEX2_06.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(string id, string email, string password)
         {
             AppUser user = await userManager.FindByIdAsync(id);
@@ -112,7 +115,8 @@ namespace INTEX2_06.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
+        [Authorize]
         private void Errors(IdentityResult result)
         {
             foreach (IdentityError error in result.Errors)
@@ -121,7 +125,8 @@ namespace INTEX2_06.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             AppUser user = await userManager.FindByIdAsync(id);
