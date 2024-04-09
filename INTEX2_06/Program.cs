@@ -3,7 +3,6 @@ using INTEX2_06.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Sqlite;
 using Microsoft.Extensions.Configuration;
 using System;
 
@@ -12,12 +11,26 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
+var googleClientId = builder.Configuration["GoogleClientId"];
+var googleClientSecret = builder.Configuration["GoogleClientSecret"];
+
+// Logging the environment variables to verify they are picked up correctly
+Console.WriteLine($"Google Client ID: {builder.Configuration["GoogleClientId"]}");
+Console.WriteLine($"Google Client Secret: {builder.Configuration["GoogleClientSecret"]}");
+
 builder.Services.AddAuthentication()
     .AddGoogle(options =>
     {
-        options.ClientId = "687230939192-kg621ar4dhaeek3c8al4c4jgrikfqt1f.apps.googleusercontent.com";
-        options.ClientSecret = "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";
-        // You can set other options as needed.
+        options.ClientId = builder.Configuration["GoogleClientId"];
+        options.ClientSecret = builder.Configuration["GoogleClientSecret"];
+        if (string.IsNullOrEmpty(options.ClientId))
+        {
+            throw new InvalidOperationException("Google Client ID is not set.");
+        }
+        if (string.IsNullOrEmpty(options.ClientSecret))
+        {
+            throw new InvalidOperationException("Google Client Secret is not set.");
+        }
     });
 
 // Add services to the container.
@@ -46,18 +59,19 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(
         options.Password.RequireLowercase = true;
         options.Password.RequiredUniqueChars = 4;
         // Other settings can be configured here
-
     })
     .AddEntityFrameworkStores<AppIdentityDbContext>()
-    .AddDefaultTokenProviders(); builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(10));
+    .AddDefaultTokenProviders();
+
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(10));
 
 builder.Services.AddTransient<ISenderEmail, EmailSender>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    // If the LoginPath isn't set, ASP.NET Core defaults the path to /Account/Login.
-    options.LoginPath = "/Account/Login"; // Set your login path here
-    options.AccessDeniedPath = "/Account/InsufficientPrivileges"; // Set the path to the page for insufficient privileges
+    // Set paths for login and access denied
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/InsufficientPrivileges";
 });
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
@@ -72,7 +86,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS vall is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -84,19 +97,20 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// CSP Middleware
+// CSP Middleware setup remains unchanged
 app.Use(async (context, next) =>
 {
     context.Response.Headers.Append("Content-Security-Policy",
         "default-src 'self'; " +
-        "script-src 'self' 'https://apis.google.com' 'unsafe-inline'; " + // Added 'unsafe-inline' for inline scripts if needed
-        "style-src 'self' 'https://fonts.googleapis.com' 'https://cdn.jsdelivr.net' 'unsafe-inline'; " + // Added another CDN and 'unsafe-inline' for inline styles
+        "script-src 'self' 'https://apis.google.com' 'unsafe-inline'; " +
+        "style-src 'self' 'https://fonts.googleapis.com' 'https://cdn.jsdelivr.net' 'unsafe-inline'; " +
         "img-src 'self' https://example.com; " +
-        "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; " + // Added another source for fonts
+        "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; " +
         "connect-src 'self';");
     await next();
 });
 
+// Mapping routes remain unchanged
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
