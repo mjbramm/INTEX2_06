@@ -20,6 +20,10 @@ builder.Services.AddAuthentication()
         // You can set other options as needed.
     });
 
+
+
+
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
