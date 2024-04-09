@@ -84,6 +84,19 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// CSP Middleware
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Append("Content-Security-Policy",
+        "default-src 'self'; " +
+        "script-src 'self' 'https://apis.google.com' 'unsafe-inline'; " + // Added 'unsafe-inline' for inline scripts if needed
+        "style-src 'self' 'https://fonts.googleapis.com' 'https://cdn.jsdelivr.net' 'unsafe-inline'; " + // Added another CDN and 'unsafe-inline' for inline styles
+        "img-src 'self' https://example.com; " +
+        "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; " + // Added another source for fonts
+        "connect-src 'self';");
+    await next();
+});
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
