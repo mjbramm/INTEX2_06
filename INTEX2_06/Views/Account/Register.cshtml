@@ -29,7 +29,7 @@
             </div>
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
-    </div>
+            </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
             <h3>Use another service to register.</h3>
@@ -42,7 +42,7 @@
                             There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
                             about setting up this ASP.NET application to support logging in via external services</a>.
                         </p>
-                    </div>
+            </div>
                 }
                 else
                 {
@@ -54,8 +54,11 @@
                                     <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
                                 }
                             </p>
-                        </div>
-                    </form>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="button" class="btn btn-primary" style="width:auto" onclick="history.back()">Cancel</button>
+        </form>
                 }
             }
         </section>
