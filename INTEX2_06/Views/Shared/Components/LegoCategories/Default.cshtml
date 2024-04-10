@@ -6,11 +6,11 @@
 @model IEnumerable<string>
 
 <div class="d-grid gap-2">
-    <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index" asp-route-legoCategory="", asp-route-pageNum="">Home</a>
+    <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Legostore" asp-route-legoCategory="", asp-route-pageNum="">View All</a>
 
     @foreach(string bc in Model ?? Enumerable.Empty<string>()) 
     {
-        <a class="btn @(bc == ViewBag.SelectedLegoCategory ? "btn-primary" : "btn-outline-secondary")" asp-controller="Home" asp-action="Index" asp-route-legoCategory="@bc" asp-route-pageNum="1">@bc</a>
+        <a class="btn @(bc == ViewBag.SelectedLegoCategory ? "btn-primary" : "btn-outline-secondary")" asp-controller="Home" asp-action="Legostore" asp-route-legoCategory="@bc" asp-route-pageNum="1">@bc</a>
     }
 
 </div>
