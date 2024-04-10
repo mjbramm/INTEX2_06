@@ -1,8 +1,10 @@
-﻿using INTEX2_06.Models;
+﻿using INTEX2_06.Models.ViewModels;
+using INTEX2_06.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace INTEX2_06.Controllers
 {
@@ -10,11 +12,13 @@ namespace INTEX2_06.Controllers
     {
         private UserManager<AppUser> userManager;
         private RoleManager<IdentityRole> roleManager;
+        private ILegoRepository _repo;
 
-        public AdminController(UserManager<AppUser> usrMgr, RoleManager<IdentityRole> roleMgr)
+        public AdminController(UserManager<AppUser> usrMgr, RoleManager<IdentityRole> roleMgr, ILegoRepository temp)
         {
             userManager = usrMgr;
             roleManager = roleMgr;
+            _repo = temp;
         }
 
         [HttpGet]
@@ -473,6 +477,36 @@ namespace INTEX2_06.Controllers
             }
 
             return RedirectToAction("EditUser", new { UserId = UserId });
+        }
+
+        public async Task<IActionResult> ListOrders()
+        {
+            var orders = _repo.Orders.ToList();
+
+            return View(orders);
+        }
+
+        public async Task<IActionResult> CreateProduct(CreateProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Lego product = new Lego
+                {
+                    name = model.name,
+                    year = model.year,
+                    num_parts = model.num_parts,
+                    img_link = model.img_link,
+                    primary_color = model.primary_color,
+                    secondary_color = model.secondary_color,
+                    description = model.description,
+                    category = model.category,
+                    price = model.price
+                };
+                _repo.AddProduct(product);
+
+                return RedirectToAction("Legostore", "Home");
+            }
+            return View(model);
         }
     }
 }

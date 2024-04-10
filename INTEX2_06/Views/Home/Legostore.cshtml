@@ -9,23 +9,28 @@
     <h7>Please <a asp-controller="Account" asp-action="Login">login</a> to add items to your cart</h7>
 }
 
-<h1>The Lego Store</h1>
-<div class="row">
-    <div class="col-md-6">
-        <div class="sticky-top">
-            <iframe width="560" height="600" src="https://www.youtube.com/embed/6BV1EPjzKLs?si=9BUlfuc5qFz57RGx&amp;controls=0&amp;start=173" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <form asp-controller="Admin" asp-action="CreateProduct" method="get">
+        <button type="submit" class="btn-success btn-sm float-end">Create New Product</button>
+    </form>
+    <br /><br />
+}
+
+<div class="row m-1 p-1">
+    <div class="col-3">
+        <vc:lego-categories />
     </div>
+    <div class="container col-9">
+        <main role="main" class="pb-3">
+            @foreach (Lego l in Model.Legos)
+            {
+                <partial name="LegoSummary" model="l" />
+            }
 
-
-    <div class="col-md-6 flex-wrap mw-50">
-    @foreach (Lego l in Model.Legos)
-    {
-        <partial name="LegoSummary" model="l" />
-    }
-
-    <div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
-         page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
-             page-url-legoCategory="@Model.CurrentLegoCategory" class="btn-group pull-right m-1"></div>
+            <div page-model="@Model.PaginationInfo" page-action="Legostore" page-classes-enabled="true" page-class="btn"
+                 page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+                 page-url-legoCategory="@Model.CurrentLegoCategory" class="btn-group pull-right m-1"></div>
+        </main>
     </div>
 </div>

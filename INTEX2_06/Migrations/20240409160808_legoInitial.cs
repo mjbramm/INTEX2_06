@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace _INTEX2_06.Migrations
+namespace INTEX2_06.Migrations
 {
     /// <inheritdoc />
     public partial class legoInitial : Migration
