@@ -517,5 +517,15 @@ namespace INTEX2_06.Controllers
             }
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteProduct(int product_ID)
+        {
+            var product = await _repo.GetProductByIdAsync(product_ID);
+            await _repo.DeleteProductAsync(product_ID);
+            await _repo.SaveChangesAsync();
+
+            return RedirectToAction("Legostore");
+        }
     }
 }

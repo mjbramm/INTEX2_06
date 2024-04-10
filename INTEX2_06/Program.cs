@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
+using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,23 +15,11 @@ var configuration = builder.Configuration;
 var googleClientId = builder.Configuration["GoogleClientId"];
 var googleClientSecret = builder.Configuration["GoogleClientSecret"];
 
-// Logging the environment variables to verify they are picked up correctly
-Console.WriteLine($"Google Client ID: {builder.Configuration["GoogleClientId"]}");
-Console.WriteLine($"Google Client Secret: {builder.Configuration["GoogleClientSecret"]}");
-
 builder.Services.AddAuthentication()
     .AddGoogle(options =>
     {
-        options.ClientId = builder.Configuration["GoogleClientId"];
-        options.ClientSecret = builder.Configuration["GoogleClientSecret"];
-        if (string.IsNullOrEmpty(options.ClientId))
-        {
-            throw new InvalidOperationException("Google Client ID is not set.");
-        }
-        if (string.IsNullOrEmpty(options.ClientSecret))
-        {
-            throw new InvalidOperationException("Google Client Secret is not set.");
-        }
+        options.ClientId = googleClientId;
+        options.ClientSecret = googleClientSecret;
     });
 
 // Add services to the container.
@@ -101,13 +90,16 @@ app.Use(async (context, next) =>
 {
     context.Response.Headers.Append("Content-Security-Policy",
         "default-src 'self'; " +
-        "script-src 'self' 'apis.google.com' 'www.youtube.com' 's.ytimg.com' 'unsafe-inline'; " +
-        "style-src 'self' 'fonts.googleapis.com' 'cdn.jsdelivr.net' 'unsafe-inline' 'www.youtube.com'; " +
-        "img-src 'self' 'bwbricks.azurewebsites.net' 'www.youtube.com' 'www.lego.com' 'm.media-amazon.com' 'images.brickset.com' 'www.brickeconomy.com'; " +
-        "font-src 'self' fonts.gstatic.com cdn.jsdelivr.net 'www.youtube.com'; " + 
-        "connect-src 'self' 'www.youtube.com'; "); 
-    await next();
+        "script-src 'self' https://apis.google.com https://www.youtube.com https://s.ytimg.com 'unsafe-inline' 'unsafe-eval'; " +
+        "style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net 'unsafe-inline'; " +
+        "img-src 'self' https://bwbricks.azurewebsites.net https://www.youtube.com https://www.lego.com https://m.media-amazon.com https://images.brickset.com https://www.brickeconomy.com; " +
+        "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; " +
+        "connect-src 'self' https://www.youtube.com; " +
+        "frame-src 'self' https://www.youtube.com https://*.youtube.com; " +
+        "media-src https://www.youtube.com; "); // Allow media from YouTube
+    await next.Invoke();
 });
+
 
 app.MapControllerRoute("pagenumandcategory", "{legoCategory}/Page{pageNum}", new { Controller = "Home", Action = "Legostore" });
 app.MapControllerRoute("page", "Page/{pageNum}", new { Controller = "Home", Action = "Legostore", pageNum = 1 });

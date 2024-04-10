@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace INTEX2_06.Models;
 
-public partial class Order
+public class Order
 {
     [Key]
+    [Required]
     public int transaction_ID { get; set; }
 
+    [ForeignKey("Customer")]
     public int customer_ID { get; set; }
 
     public string date { get; set; }
 
     public string day_of_week { get; set; }
 
-    public string time { get; set; }
+    public int time { get; set; }
 
     public string entry_mode { get; set; }
 
-    public int amount { get; set; }
+    public double amount { get; set; }
 
     public string type_of_transaction { get; set; }
 
@@ -31,9 +34,9 @@ public partial class Order
 
     public string type_of_card { get; set; }
 
-    public bool fraud { get; set; }
+    public int fraud { get; set; }
 
-    public bool predict_fraud { get; set; }
+    public int predict_fraud { get; set; }
 
-    public bool complete { get; set; }
+    public int complete { get; set; }
 }
