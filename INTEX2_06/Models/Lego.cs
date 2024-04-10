@@ -30,4 +30,45 @@ public partial class Lego
     public double avg_rating { get; set; }
 
     public double price { get; set; }
+
+    public int small_rec_1 { get; set; }
+
+    public int small_rec_2 { get; set; }
+
+    public int small_rec_3 { get; set; }
+
+    public int small_rec_4 { get; set; }
+
+    public int small_rec_5 { get; set; }
+
+    public int small_rec_6 { get; set; }
+
+    public int small_rec_7 { get; set; }
+
+    public int small_rec_8 { get; set; }
+
+    public int small_rec_9 { get; set; }
+
+    public int small_rec_10 { get; set; }
+
+    public int pop_recommend1 { get; set; }
+
+    public int pop_recommend2 { get; set; }
+
+    public int pop_recommend3 { get; set; }
+
+    public int pop_recommend4 { get; set; }
+
+    public int pop_recommend5 { get; set; }
+
+    public int pop_recommend6 { get; set; }
+
+    public int pop_recommend7 { get; set; }
+
+    public int pop_recommend8 { get; set; }
+
+    public int pop_recommend9 { get; set; }
+
+    public int pop_recommend10 { get; set; }
+
 }
