@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using INTEX2_06.Models.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
 
 namespace INTEX2_06.Controllers
 {
