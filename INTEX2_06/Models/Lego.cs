@@ -27,7 +27,7 @@ public partial class Lego
 
     public int total_ordered { get; set; }
 
-    public float avg_rating { get; set; }
+    public double avg_rating { get; set; }
 
-    public float price { get; set; }
+    public double price { get; set; }
 }
