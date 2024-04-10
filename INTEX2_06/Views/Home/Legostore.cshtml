@@ -23,6 +23,11 @@
         <!-- Left Sidebar for Categories -->
         <div class="col-2">
             <div class="sticky-top">
+@*                 <select class="form-control">
+                    <option asp-controller="Home" asp-action="Legostore" asp-route-pageSize="5" value="5">5</option>
+                    <option asp-controller="Home" asp-action="Legostore" asp-route-pageSize="10" value="10">10</option>
+                    <option asp-controller="Home" asp-action="Legostore" asp-route-pageSize="20" value="20">20</option>
+                </select> *@
                 <vc:lego-categories />
             </div>
         </div>
@@ -47,7 +52,13 @@
                 }
                 <div page-model="@Model.PaginationInfo" page-action="Legostore" page-classes-enabled="true" page-class="btn"
                      page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
-                     page-url-legoCategory="@Model.CurrentLegoCategory" class="btn-group pull-right m-1"></div>
+                     page-url-legoCategory="@Model.CurrentLegoCategory" page-url-pageSize="@Model.CurrentPageSize" class="btn-group pull-right m-1"></div>
+
+                 <div>Show: 
+                    <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="5">5</a>
+                    <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="10">10</a>
+                    <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="20">20</a>
+                 </div>
             </div>
         </div>
 
