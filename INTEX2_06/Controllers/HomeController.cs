@@ -21,7 +21,7 @@ namespace INTEX2_06.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var legos = new Lego();
+            var legos = _repo.Legos.ToList();
 
             return View(legos);
         }
