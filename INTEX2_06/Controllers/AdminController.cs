@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing.Printing;
 
 namespace INTEX2_06.Controllers
 {
@@ -525,7 +526,21 @@ namespace INTEX2_06.Controllers
             await _repo.DeleteProductAsync(product_ID);
             await _repo.SaveChangesAsync();
 
-            return RedirectToAction("Legostore");
+            return RedirectToAction("Legostore", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditProduct(int product_ID)
+        {
+            var product = await _repo.Legos.FirstOrDefaultAsync(x => x.product_ID == product_ID);
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditProduct()
+        {
+            return View();
         }
     }
 }
