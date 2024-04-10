@@ -13,26 +13,39 @@
         Add New User
     </a>
 
-    @foreach (var user in Model)
-    {
-        <div class="card mb-3">
-            <div class="card-header">
-                User Id : @user.Id
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">@user.UserName</h5>
-            </div>
-            <div class="card-footer">
-
-                <form method="post" asp-action="DeleteUser" asp-route-UserId="@user.Id" onsubmit="return confirmDelete()">
-                    <a asp-controller="Admin" asp-action="EditUser" asp-route-UserId="@user.Id" class="btn btn-primary">Edit</a>
-
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </div>
-        </div>
-    }
-
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <a asp-controller="Admin" asp-action="EditUser" asp-route-UserId="@user.Id" class="btn btn-primary">Edit</a>
+                    </td>
+                    <td>
+                        <form method="post" asp-action="DeleteUser" asp-route-UserId="@user.Id" onsubmit="return confirmDelete()">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {
