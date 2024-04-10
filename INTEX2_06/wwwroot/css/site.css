@@ -59,13 +59,13 @@ body {
     display: flex;
     flex-direction: column;
     text-align: center;
-    height: 100vh;
+    height: 20vh;
 }
 
 .tiktok-h2 {
     color: #fff;
     font-family: monospace;
-    font-size:  5em;
+    font-size:  3em;
     font-weight: bold;
     animation: glitch 0.5s linear infinite;
 }
