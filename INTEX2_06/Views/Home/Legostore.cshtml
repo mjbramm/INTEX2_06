@@ -4,7 +4,6 @@
 
 @model LegosListViewModel
 
-<h1>The Lego Store</h1>
 @if (!User.Identity.IsAuthenticated)
 {
     <h7>Please <a asp-controller="Account" asp-action="Login">login</a> to add items to your cart</h7>

@@ -44,3 +44,46 @@ body {
         opacity: 0;
     }
 }
+
+.text-white {
+    color: white;
+}
+
+
+/*Tiktok Classes*/
+.tiktok-body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 20vh;
+}
+
+.tiktok-h2 {
+    color: #fff;
+    font-family: monospace;
+    font-size:  3em;
+    font-weight: bold;
+    animation: glitch 0.5s linear infinite;
+}
+
+@keyframes glitch {
+    0%, 100% {
+        text-shadow: -1.5px -1.5px 0 #0ff, 1.5px 1.5px 0 #f00;
+    }
+
+    25% {
+        text-shadow: 1.5px 1.5px 0 #0ff, -1.5px -1.5px 0 #f00;
+    }
+
+    50% {
+        text-shadow: 1.5px -1.5px 0 #0ff, -1.5px 1.5px 0 #f00;
+    }
+
+    75% {
+        text-shadow: -1.5px 1.5px 0 #0ff, 1.5px -1.5px 0 #f00;
+    }
+}
