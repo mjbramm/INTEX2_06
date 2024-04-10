@@ -10,6 +10,11 @@
     <h7>Please <a asp-controller="Account" asp-action="Login">login</a> to add items to your cart</h7>
 }
 
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <button type="submit" class="btn-success btn-sm float-end">Create New Product (Don't touch)</button><br /><br />
+}
+
 @foreach (Lego l in Model.Legos)
 {
     <partial name="LegoSummary" model="l" />

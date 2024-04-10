@@ -10,11 +10,13 @@ namespace INTEX2_06.Controllers
     {
         private UserManager<AppUser> userManager;
         private RoleManager<IdentityRole> roleManager;
+        private ILegoRepository _repo;
 
-        public AdminController(UserManager<AppUser> usrMgr, RoleManager<IdentityRole> roleMgr)
+        public AdminController(UserManager<AppUser> usrMgr, RoleManager<IdentityRole> roleMgr, ILegoRepository temp)
         {
             userManager = usrMgr;
             roleManager = roleMgr;
+            _repo = temp;
         }
 
         [HttpGet]
@@ -473,6 +475,13 @@ namespace INTEX2_06.Controllers
             }
 
             return RedirectToAction("EditUser", new { UserId = UserId });
+        }
+
+        public async Task<IActionResult> ListOrders()
+        {
+            var orders = _repo.Orders.ToList();
+
+            return View(orders);
         }
     }
 }
