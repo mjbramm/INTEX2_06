@@ -11,27 +11,27 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-//var googleClientId = builder.Configuration["GoogleClientId"];
-//var googleClientSecret = builder.Configuration["GoogleClientSecret"];
+var googleClientId = builder.Configuration["GoogleClientId"];
+var googleClientSecret = builder.Configuration["GoogleClientSecret"];
 
-//// Logging the environment variables to verify they are picked up correctly
-//Console.WriteLine($"Google Client ID: {builder.Configuration["GoogleClientId"]}");
-//Console.WriteLine($"Google Client Secret: {builder.Configuration["GoogleClientSecret"]}");
+// Logging the environment variables to verify they are picked up correctly
+Console.WriteLine($"Google Client ID: {builder.Configuration["GoogleClientId"]}");
+Console.WriteLine($"Google Client Secret: {builder.Configuration["GoogleClientSecret"]}");
 
-//builder.Services.AddAuthentication()
-//    .AddGoogle(options =>
-//    {
-//        options.ClientId = builder.Configuration["GoogleClientId"];
-//        options.ClientSecret = builder.Configuration["GoogleClientSecret"];
-//        if (string.IsNullOrEmpty(options.ClientId))
-//        {
-//            throw new InvalidOperationException("Google Client ID is not set.");
-//        }
-//        if (string.IsNullOrEmpty(options.ClientSecret))
-//        {
-//            throw new InvalidOperationException("Google Client Secret is not set.");
-//        }
-//    });
+builder.Services.AddAuthentication()
+    .AddGoogle(options =>
+    {
+        options.ClientId = builder.Configuration["GoogleClientId"];
+        options.ClientSecret = builder.Configuration["GoogleClientSecret"];
+        if (string.IsNullOrEmpty(options.ClientId))
+        {
+            throw new InvalidOperationException("Google Client ID is not set.");
+        }
+        if (string.IsNullOrEmpty(options.ClientSecret))
+        {
+            throw new InvalidOperationException("Google Client Secret is not set.");
+        }
+    });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

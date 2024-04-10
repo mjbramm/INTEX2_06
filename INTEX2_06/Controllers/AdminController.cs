@@ -1,8 +1,10 @@
-﻿using INTEX2_06.Models;
+﻿using INTEX2_06.Models.ViewModels;
+using INTEX2_06.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace INTEX2_06.Controllers
 {
@@ -482,6 +484,29 @@ namespace INTEX2_06.Controllers
             var orders = _repo.Orders.ToList();
 
             return View(orders);
+        }
+
+        public async Task<IActionResult> CreateProduct(CreateProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Lego product = new Lego
+                {
+                    name = model.name,
+                    year = model.year,
+                    num_parts = model.num_parts,
+                    img_link = model.img_link,
+                    primary_color = model.primary_color,
+                    secondary_color = model.secondary_color,
+                    description = model.description,
+                    category = model.category,
+                    price = model.price
+                };
+                _repo.AddProduct(product);
+
+                return RedirectToAction("Legostore", "Home");
+            }
+            return View(model);
         }
     }
 }

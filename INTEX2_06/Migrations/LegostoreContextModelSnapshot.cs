@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace _INTEX2_06.Migrations
+namespace INTEX2_06.Migrations
 {
     [DbContext(typeof(LegostoreContext))]
     partial class LegostoreContextModelSnapshot : ModelSnapshot
