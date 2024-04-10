@@ -1,4 +1,6 @@
-﻿namespace INTEX2_06.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace INTEX2_06.Models
 {
     public class EFLegoRepository : ILegoRepository
     {
@@ -34,6 +36,17 @@
             if (product != null)
             {
                 _context.Legos.Remove(product);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task UpdateProductAsync(int product_ID)
+        {
+            var product = await _context.Legos.FindAsync(product_ID);
+
+            if (product != null)
+            {
+                _context.Legos.Update(product);
                 await _context.SaveChangesAsync();
             }
         }

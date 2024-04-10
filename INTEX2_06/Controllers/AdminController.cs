@@ -538,9 +538,28 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditProduct()
+        public async Task<IActionResult> EditProduct(Lego model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var product = await _repo.Legos.FirstOrDefaultAsync(x => x.product_ID == model.product_ID);
+
+                product.name = model.name;
+                product.year = model.year;
+                product.num_parts = model.num_parts;
+                product.img_link = model.img_link;
+                product.primary_color = model.primary_color;
+                product.secondary_color = model.secondary_color;
+                product.description = model.description;
+                product.category = model.category;
+                product.price = model.price;
+
+                await _repo.UpdateProductAsync(model.product_ID);
+                await _repo.SaveChangesAsync();
+
+                return RedirectToAction("Legostore", "Home");
+            }
+            return View(model);
         }
     }
 }
