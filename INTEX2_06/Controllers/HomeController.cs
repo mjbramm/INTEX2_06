@@ -25,7 +25,8 @@ namespace INTEX2_06.Controllers
             var legos = new LegosListViewModel
             {
                 Legos = _repo.Legos
-                   .OrderBy(x => x.name)
+                   .OrderByDescending(x => x.avg_rating)
+                   .Take(6)
             };
             return View(legos);
         }
