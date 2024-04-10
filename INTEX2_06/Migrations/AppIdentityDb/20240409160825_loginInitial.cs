@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace _INTEX2_06.Migrations.AppIdentityDb
+namespace INTEX2_06.Migrations.AppIdentityDb
 {
     /// <inheritdoc />
     public partial class loginInitial : Migration

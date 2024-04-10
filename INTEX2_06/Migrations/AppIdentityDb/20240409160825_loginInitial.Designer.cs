@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace _INTEX2_06.Migrations.AppIdentityDb
+namespace INTEX2_06.Migrations.AppIdentityDb
 {
     [DbContext(typeof(AppIdentityDbContext))]
     [Migration("20240409160825_loginInitial")]
