@@ -12,7 +12,10 @@
 
 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 {
-    <button type="submit" class="btn-success btn-sm float-end">Create New Product (Don't touch)</button><br /><br />
+    <form asp-controller="Admin" asp-action="CreateProduct" method="get">
+        <button type="submit" class="btn-success btn-sm float-end">Create New Product</button>
+    </form>
+    <br /><br />
 }
 
 <div class="row m-1 p-1">

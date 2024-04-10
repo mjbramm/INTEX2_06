@@ -11,27 +11,27 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-//var googleClientId = builder.Configuration["GoogleClientId"];
-//var googleClientSecret = builder.Configuration["GoogleClientSecret"];
+var googleClientId = builder.Configuration["GoogleClientId"];
+var googleClientSecret = builder.Configuration["GoogleClientSecret"];
 
-//// Logging the environment variables to verify they are picked up correctly
-//Console.WriteLine($"Google Client ID: {builder.Configuration["GoogleClientId"]}");
-//Console.WriteLine($"Google Client Secret: {builder.Configuration["GoogleClientSecret"]}");
+// Logging the environment variables to verify they are picked up correctly
+Console.WriteLine($"Google Client ID: {builder.Configuration["GoogleClientId"]}");
+Console.WriteLine($"Google Client Secret: {builder.Configuration["GoogleClientSecret"]}");
 
-//builder.Services.AddAuthentication()
-//    .AddGoogle(options =>
-//    {
-//        options.ClientId = builder.Configuration["GoogleClientId"];
-//        options.ClientSecret = builder.Configuration["GoogleClientSecret"];
-//        if (string.IsNullOrEmpty(options.ClientId))
-//        {
-//            throw new InvalidOperationException("Google Client ID is not set.");
-//        }
-//        if (string.IsNullOrEmpty(options.ClientSecret))
-//        {
-//            throw new InvalidOperationException("Google Client Secret is not set.");
-//        }
-//    });
+builder.Services.AddAuthentication()
+    .AddGoogle(options =>
+    {
+        options.ClientId = builder.Configuration["GoogleClientId"];
+        options.ClientSecret = builder.Configuration["GoogleClientSecret"];
+        if (string.IsNullOrEmpty(options.ClientId))
+        {
+            throw new InvalidOperationException("Google Client ID is not set.");
+        }
+        if (string.IsNullOrEmpty(options.ClientSecret))
+        {
+            throw new InvalidOperationException("Google Client Secret is not set.");
+        }
+    });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -97,16 +97,16 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// CSP Middleware setup remains unchanged
 app.Use(async (context, next) =>
 {
     context.Response.Headers.Append("Content-Security-Policy",
         "default-src 'self'; " +
-        "script-src 'self' 'https://apis.google.com' 'unsafe-inline'; " +
-        "style-src 'self' 'https://fonts.googleapis.com' 'https://cdn.jsdelivr.net' 'unsafe-inline'; " +
-        "img-src 'self' https://example.com; " +
-        "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; " +
-        "connect-src 'self';");
+        "script-src 'self' 'https://apis.google.com' 'https://www.youtube.com' 'https://s.ytimg.com' 'unsafe-inline'; " + // Allow scripts from YouTube
+        "style-src 'self' 'https://fonts.googleapis.com' 'https://cdn.jsdelivr.net' 'unsafe-inline'; " + // Allow styles from Google Fonts and jsDelivr
+        "img-src 'self' https://example.com 'https://www.lego.com'; " + // Allow images from your own site, example.com, and LEGO
+        "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; " + // Allow fonts from Google Fonts and jsDelivr
+        "connect-src 'self' 'https://www.youtube.com'; " + // Allow connections to YouTube
+        "frame-src 'self' 'https://www.youtube.com';"); // Allow iframes from YouTube
     await next();
 });
 
