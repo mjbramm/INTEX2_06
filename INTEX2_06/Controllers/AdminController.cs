@@ -486,12 +486,21 @@ namespace INTEX2_06.Controllers
             return View(orders);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> CreateProduct()
+        {
+            var viewModel = new CreateProductViewModel();
+            return View(viewModel);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> CreateProduct(CreateProductViewModel model)
         {
             if (ModelState.IsValid)
             {
                 Lego product = new Lego
                 {
+                    product_ID = model.product_ID,
                     name = model.name,
                     year = model.year,
                     num_parts = model.num_parts,
@@ -502,7 +511,7 @@ namespace INTEX2_06.Controllers
                     category = model.category,
                     price = model.price
                 };
-                _repo.AddProduct(product);
+                await _repo.AddProduct(product);
 
                 return RedirectToAction("Legostore", "Home");
             }
