@@ -23,6 +23,7 @@ namespace INTEX2_06.Controllers
             this.emailSender = emailSndr;
         }
 
+        [HttpGet]
         public IActionResult Register()
         {
             return View();
@@ -53,15 +54,7 @@ namespace INTEX2_06.Controllers
                     //Then send the Confirmation Email to the User
                     await SendConfirmationEmail(model.Email, user);
 
-                    // If the user is signed in and in the Admin role, then it is
-                    // the Admin user that is creating a new user. 
-                    // So, redirect the Admin user to ListUsers action of Administration Controller
-                    if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                    {
-                        return RedirectToAction("ListUsers", "Admin");
-                    }
-
-                    //If it is not Admin user, then redirect the user to RegistrationSuccessful View
+                    //Redirect the user to RegistrationSuccessful View
                     return View("RegistrationSuccessful");
                 }
 
@@ -76,6 +69,8 @@ namespace INTEX2_06.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(string? returnUrl = null)
         {
             LoginViewModel model = new LoginViewModel
@@ -87,6 +82,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
@@ -323,6 +319,7 @@ namespace INTEX2_06.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         private async Task SendConfirmationEmail(string? email, AppUser? user)
         {
             //Generate the Token
@@ -590,6 +587,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> UpdateProfile(string? ReturnUrl = null)
         {
             // Retrieve the current user's ID
@@ -626,6 +624,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> UpdateProfile(UpdateProfileViewModel model)
         {
             // Check if the model state is not valid
