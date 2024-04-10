@@ -19,9 +19,15 @@ namespace INTEX2_06.Controllers
         }
 
 
-        public async Task<IActionResult> Index(int pageNum, string? legoCategory)
+        public async Task<IActionResult> Index()
         {
-            return View();
+            //var legos = _repo.Legos.ToList();
+            var legos = new LegosListViewModel
+            {
+                Legos = _repo.Legos
+                   .OrderBy(x => x.name)
+            };
+            return View(legos);
         }
 
         public async Task<IActionResult> Legostore(int pageNum, string? legoCategory)
@@ -34,12 +40,12 @@ namespace INTEX2_06.Controllers
             
             int pageSize = 5;
 
-            var blah = new LegosListViewModel
+            var legos = new LegosListViewModel
             {
                 Legos = _repo.Legos
                     .Where(x => x.category == legoCategory || legoCategory == null)
                     .OrderBy(x => x.name)
-                    .Skip((pageSize - 1) * pageSize)
+                    .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize),
 
                 PaginationInfo = new PaginationInfo
@@ -53,12 +59,17 @@ namespace INTEX2_06.Controllers
                 CurrentLegoCategory = legoCategory
             };
 
-            return View(blah);
+            return View(legos);
         }
 
         public async Task<IActionResult> Privacy()
         {
-            return View(Privacy);
+            return View();
+        }
+
+        public async Task<IActionResult> AboutUs()
+        {
+            return View();
         }
     }
 }

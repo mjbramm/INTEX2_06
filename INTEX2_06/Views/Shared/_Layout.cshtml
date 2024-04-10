@@ -5,6 +5,7 @@
 @{
     var userDetail = await UserManager.GetUserAsync(User);
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,22 +21,22 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Legostore">Product Catalog</a>
-                        </li>
+
+                        @if (!User.Identity.IsAuthenticated || (User.Identity.IsAuthenticated && !User.IsInRole("Admin")))
+                        {
+                            <li class="nav-item"><a class="nav-link text-dark" asp-controller="Home" asp-action="Legostore">Product Catalog</a></li>
+                        }
+
+                        <li class="nav-item"><a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" asp-controller="Home" asp-action="AboutUs">About Us</a></li>
 
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
@@ -44,13 +45,13 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" asp-controller="Admin" asp-action="ListUsers">Customer Catalog</a>
                                     <a class="dropdown-item" asp-controller="Home" asp-action="Legostore">Product Catalog</a>
-                                    <a class="dropdown-item" asp-controller="" asp-action="">Order Catalog</a>
+                                    <a class="dropdown-item" asp-controller="Admin" asp-action="ListOrders">Order Catalog</a>
 @*                                     <a class="dropdown-item" asp-controller="Admin" asp-action="ListRoles">Roles</a>
- *@                                </ul>
+ *@                             </ul>
                             </li>
                         }
-
                     </ul>
+
                     @if (User.Identity.IsAuthenticated)
                     {
                         <form method="post" id="logout" asp-controller="Account" asp-action="Logout" style="display: none"></form>
@@ -98,7 +99,6 @@
             <button onclick="acceptCookies()" style="margin-left: 15px; background-color: #4CAF50; color: white; border: none; padding: 5px 10px;">Accept</button>
         </p>
     </div>
-
 
     <footer class="border-top footer text-muted">
         <div class="container">
