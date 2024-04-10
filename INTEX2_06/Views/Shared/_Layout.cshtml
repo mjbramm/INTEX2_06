@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] Brickwell Bricks</title>
+    <title>@ViewData["Title"] BrickTok</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Identity.styles.css" asp-append-version="true" />
@@ -35,21 +35,16 @@
                             <li class="nav-item"><a class="nav-link text-white" asp-controller="Home" asp-action="Legostore">Product Catalog</a></li>
                         }
 
-                        <li class="nav-item"><a class="nav-link text-white" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
-                        <li class="nav-item"><a class="nav-link text-white" asp-controller="Home" asp-action="AboutUs">About Us</a></li>
-
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" asp-controller="Admin" asp-action="ListUsers">Customer Catalog</a>
-                                    <a class="dropdown-item" asp-controller="Home" asp-action="Legostore">Product Catalog</a>
-                                    <a class="dropdown-item" asp-controller="Admin" asp-action="ListOrders">Order Catalog</a>
-@*                                     <a class="dropdown-item" asp-controller="Admin" asp-action="ListRoles">Roles</a>
- *@                             </ul>
-                            </li>
+                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Home" asp-action="Legostore">Product Catalog</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Admin" asp-action="ListUsers">Customer Catalog</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Admin" asp-action="ListOrders">Order Catalog</a></li>
+@*                             <li class="nav-item"><a class="nav-link text-white" asp-controller="Admin" asp-action="ListRoles">Roles</a></li> *@
                         }
+
+                        <li class="nav-item"><a class="nav-link text-white" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" asp-controller="Home" asp-action="AboutUs">About Us</a></li>
                     </ul>
 
                     @if (User.Identity.IsAuthenticated)
@@ -95,8 +90,8 @@
     <div id="cookieConsent" style="display:none; position: fixed; bottom: 0; width: 100%; background: black; color: white; text-align: center; padding: 10px; z-index: 1000;">
         <p>
             We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
-            <a href="@Url.Action("Privacy", "Home")" style="color: #27A9C2;">Learn More</a>
-            <button onclick="acceptCookies()" style="margin-left: 15px; background-color: #CB1B76; color: white; border: none; padding: 5px 10px;">Accept</button>
+            <a href="@Url.Action("Privacy", "Home")" style="color: #00f2ea;">Learn More</a>
+            <button onclick="acceptCookies()" style="margin-left: 15px; background-color: #ff0050; color: white; border: none; padding: 5px 10px;">Accept</button>
         </p>
     </div>
 
