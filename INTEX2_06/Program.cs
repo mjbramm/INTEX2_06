@@ -101,12 +101,11 @@ app.Use(async (context, next) =>
 {
     context.Response.Headers.Append("Content-Security-Policy",
         "default-src 'self'; " +
-        "script-src 'self' 'https://apis.google.com' 'https://www.youtube.com' 'https://s.ytimg.com' 'unsafe-inline'; " +
-        "style-src 'self' 'https://fonts.googleapis.com' 'https://cdn.jsdelivr.net' 'unsafe-inline'; " + 
-        "img-src 'self' 'https://bwbricks.azurewebsites.net' 'https://www.lego.com' 'https://m.media-amazon.com' 'https://images.brickset.com' 'https://www.brickeconomy.com'; " + 
-        "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; " + 
-        "connect-src 'self' 'https://www.youtube.com'; " + 
-        "frame-src 'self' 'https://www.youtube.com';"); 
+        "script-src 'self' 'apis.google.com' 'www.youtube.com' 's.ytimg.com' 'unsafe-inline'; " +
+        "style-src 'self' 'fonts.googleapis.com' 'cdn.jsdelivr.net' 'unsafe-inline' 'www.youtube.com'; " +
+        "img-src 'self' 'bwbricks.azurewebsites.net' 'www.youtube.com' 'www.lego.com' 'm.media-amazon.com' 'images.brickset.com' 'www.brickeconomy.com'; " +
+        "font-src 'self' fonts.gstatic.com cdn.jsdelivr.net 'www.youtube.com'; " + 
+        "connect-src 'self' 'www.youtube.com'; "); 
     await next();
 });
 
