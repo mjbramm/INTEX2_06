@@ -70,6 +70,11 @@ body {
     animation: glitch 0.5s linear infinite;
 }
 
+.img-responsive {
+    width: 100%;
+    height: auto;
+}
+
 @keyframes glitch {
     0%, 100% {
         text-shadow: -1.5px -1.5px 0 #0ff, 1.5px 1.5px 0 #f00;
