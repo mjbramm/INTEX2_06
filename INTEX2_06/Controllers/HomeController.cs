@@ -29,7 +29,7 @@ namespace INTEX2_06.Controllers
             {
                 Legos = _repo.Legos
                    .OrderByDescending(x => x.avg_rating)
-                   .Take(6)
+                   .Take(9)
             };
             return View(legos);
         }

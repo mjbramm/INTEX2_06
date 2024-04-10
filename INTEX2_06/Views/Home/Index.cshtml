@@ -1,23 +1,57 @@
-﻿
+﻿@using INTEX2_06.Infrastructure
 
-<div class="container">
+<link rel="stylesheet" href="~/css/custom.css" asp-append-version="true">
+
+<div class="container mt-3">
+    <div class="tiktok-body">
+        <h2 class="tiktok-h2">Welcome to BrickTok</h2>
+        <h2 class="text-white">Find your favorite sets!</h2>
+    </div>
+    <div class="product-grid">
+        @foreach (Lego l in Model.Legos)
+        {
+            <div class="card m-1 p-1">
+                <a asp-action="SingleProduct" asp-route-product_ID="@l.product_ID" class="text-decoration-none">
+                    <h4 class="text-white">@l.name</h4>
+                    <img src="@l.img_link" alt="Product Image">
+                </a>
+                <ul class="text-white">
+                    <li>Rating: @l.avg_rating</li>
+                    <li>Year: @l.year</li>
+                    <li>Brick Count: @l.num_parts</li>
+                    <li>Category: @l.category</li>
+                </ul>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <form method="post" asp-controller="Admin" asp-action="DeleteProduct">
+                        <!-- Admin controls here -->
+                    </form>
+                }
+                else if (User.Identity.IsAuthenticated)
+                {
+                    <form method="post" asp-page="/Cart">
+                        <!-- Cart controls here -->
+                    </form>
+                }
+            </div>
+        }
+    </div>
+    <button asp-controller="Home" asp-action="Legostore" class="more-catalog">Want to see more? View our entire catalog</button>
+</div>
+
+
+@* <div class="container">
     <div class="tiktok-body">
         <h2 class="tiktok-h2">Welcome to BrickTok </h2>
         <h2 class="text-white">Find your favorite sets!</h2>
     </div>
-    <div class="row">
-        <div class="card m-1 p-1 col-md-4">Product 1
-            <div>@@Model.name</div>
-            <span>@@Model.img_link</span>
-        </div>
+</div>
 
-<div class="col-md-6 flex-wrap mw-50">
+<div class="col-md-12 flex-wrap mw-50">
     @foreach (Lego l in Model.Legos)
     {
         <partial name="LegoSummary" model="l" />
     }
 
-</div>
-
-
+</div> *@
 
