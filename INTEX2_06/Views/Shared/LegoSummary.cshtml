@@ -6,7 +6,7 @@
 <div class="card m-1 p-1">
     <h4>
         @Model.name
-        <span class="badge rounded-pill bg-primary text-white float-end"><small>Price: $@Model.price.ToString("0.00")</small></span>
+        <img src="@Model.img_link" alt="Product Image" class="float-end" style="max-height: 100px;"> <!-- Display image with max-height -->
     </h4>
     <ul>
         <li>Image Link: @Model.img_link</li>
@@ -14,7 +14,6 @@
         <li>Year: @Model.year</li>
         <li>Brick Count: @Model.num_parts</li>
         <li>Category: @Model.category</li>
-        <li>Description: @Model.description</li>
     </ul>
     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
     {
