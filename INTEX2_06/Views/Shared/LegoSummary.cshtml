@@ -15,10 +15,20 @@
         <li>Brick Count: @Model.num_parts</li>
         <li>Category: @Model.category</li>
     </ul>
-    <form id="@Model.product_ID" method="post" asp-page="/Cart">
-        <input type="hidden" asp-for="product_ID" />
-        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-        <button type="submit" class="btn-success btn-sm float-end">Add to Cart</button>
-    </form>
-
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <form id="@Model.product_ID" method="post" asp-page="/Cart">
+            <input type="hidden" asp-for="product_ID" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <button type="submit" class="btn-danger btn-sm float-end">Delete (Don't touch yet)</button>
+        </form>
+    }
+    else if (User.Identity.IsAuthenticated)
+    {
+        <form id="@Model.product_ID" method="post" asp-page="/Cart">
+            <input type="hidden" asp-for="product_ID" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <button type="submit" class="btn-success btn-sm float-end">Add to Cart</button>
+        </form>
+    } 
 </div>

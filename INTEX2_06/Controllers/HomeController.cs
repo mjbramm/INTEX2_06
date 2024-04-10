@@ -64,7 +64,12 @@ namespace INTEX2_06.Controllers
 
         public async Task<IActionResult> Privacy()
         {
-            return View(Privacy);
+            return View();
+        }
+
+        public async Task<IActionResult> AboutUs()
+        {
+            return View();
         }
     }
 }
