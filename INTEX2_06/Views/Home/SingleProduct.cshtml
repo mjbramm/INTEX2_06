@@ -1,5 +1,23 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model INTEX2_06.Models.ProductViewModel // Update the model namespace and class
+
 @{
+    Layout = "_Layout";
+}
+
+<h2>@Model.MainProduct.name</h2>
+<div>
+    <img src="@Model.MainProduct.img_link" alt="Product Image" />
+    <p>Price: @Model.MainProduct.price</p>
+</div>
+<p>Product ID: @Model.MainProduct.product_ID</p>
+
+<h3>Recommended Products</h3>
+@foreach (var item in Model.Recommendations)
+{
+    <div>
+        <h4>@item.name</h4>
+        <img src="@item.img_link" alt="@item.name" />
+        <p>Price: @item.price</p>
+        <p>Product ID: @item.product_ID</p>
+    </div>
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using INTEX2_06.Models.ViewModels;
 using Microsoft.AspNet.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace INTEX2_06.Controllers
 {
@@ -30,6 +31,44 @@ namespace INTEX2_06.Controllers
             };
             return View(legos);
         }
+        [HttpGet]
+        public async Task<IActionResult> SingleProduct(int product_ID)
+        {
+            var product = await _repo.Legos.FirstOrDefaultAsync(p => p.product_ID == product_ID);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var recommendationIDs = new List<int>
+    {
+        product.small_rec_1,
+        product.small_rec_2,
+        product.small_rec_3,
+        product.pop_recommend1,
+        product.pop_recommend2,
+        product.pop_recommend3
+    };
+
+            var recommendedProducts = new List<Lego>();
+            foreach (var id in recommendationIDs)
+            {
+                var recommendedProduct = await _repo.Legos.FirstOrDefaultAsync(p => p.product_ID == id);
+                if (recommendedProduct != null)
+                {
+                    recommendedProducts.Add(recommendedProduct);
+                }
+            }
+
+            var viewModel = new ProductViewModel
+            {
+                MainProduct = product,
+                Recommendations = recommendedProducts
+            };
+
+            return View(viewModel);
+        }
+
 
         public async Task<IActionResult> Legostore(int pageNum, string? legoCategory)
         {
