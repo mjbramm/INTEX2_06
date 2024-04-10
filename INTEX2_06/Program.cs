@@ -97,16 +97,16 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// CSP Middleware setup remains unchanged
 app.Use(async (context, next) =>
 {
     context.Response.Headers.Append("Content-Security-Policy",
         "default-src 'self'; " +
-        "script-src 'self' 'https://apis.google.com' 'unsafe-inline'; " +
-        "style-src 'self' 'https://fonts.googleapis.com' 'https://cdn.jsdelivr.net' 'unsafe-inline'; " +
-        "img-src 'self' https://example.com; " +
-        "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; " +
-        "connect-src 'self';");
+        "script-src 'self' 'https://apis.google.com' 'https://www.youtube.com' 'https://s.ytimg.com' 'unsafe-inline'; " + // Allow scripts from YouTube
+        "style-src 'self' 'https://fonts.googleapis.com' 'https://cdn.jsdelivr.net' 'unsafe-inline'; " + // Allow styles from Google Fonts and jsDelivr
+        "img-src 'self' https://example.com 'https://www.lego.com'; " + // Allow images from your own site, example.com, and LEGO
+        "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; " + // Allow fonts from Google Fonts and jsDelivr
+        "connect-src 'self' 'https://www.youtube.com'; " + // Allow connections to YouTube
+        "frame-src 'self' 'https://www.youtube.com';"); // Allow iframes from YouTube
     await next();
 });
 
