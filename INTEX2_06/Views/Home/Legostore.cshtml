@@ -14,59 +14,46 @@
     <form asp-controller="Admin" asp-action="CreateProduct" method="get">
         <button type="submit" class="btn-success btn-sm float-end">Create New Product</button>
     </form>
-    <br /><br />
+    <br />
+    <br />
 }
-
 
 <div class="container-fluid">
     <div class="row m-1 p-1">
         <!-- Left Sidebar for Categories -->
-        <div class="col-2">
-            <div class="sticky-top">
-@*                 <select class="form-control">
-                    <option asp-controller="Home" asp-action="Legostore" asp-route-pageSize="5" value="5">5</option>
-                    <option asp-controller="Home" asp-action="Legostore" asp-route-pageSize="10" value="10">10</option>
-                    <option asp-controller="Home" asp-action="Legostore" asp-route-pageSize="20" value="20">20</option>
-                </select> *@
-                <vc:lego-categories />
-            </div>
+        <div class="col-3 sticky-top">
+            <vc:lego-categories />
+            <button class="btn btn-primary video-popup-btn" onclick="toggleVideo()">Watch Build Tips</button>
         </div>
 
-        <!-- Right Sidebar for Lego Listings -->
-        <div class="col-3">
-            <div role="main" class="pb-3">
-                @foreach (Lego l in Model.Legos)
+        <!-- Product Listings -->
+        <div class="col-6">
+            <div role="main" class="pb-3 product-grid2">
+                @foreach (Lego l in Model.Legos.Distinct())
                 {
                     <partial name="LegoSummary" model="l" />
                 }
-                <div page-model="@Model.PaginationInfo" page-action="Legostore" page-classes-enabled="true" page-class="btn"
-                     page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
-                     page-url-legoCategory="@Model.CurrentLegoCategory" class="btn-group pull-right m-1"></div>
             </div>
-        </div>
-        <div class="col-3">
-            <div role="main" class="pb-3">
-                @foreach (Lego l in Model.Legos)
-                {
-                    <partial name="LegoSummary" model="l" />
-                }
-                <div page-model="@Model.PaginationInfo" page-action="Legostore" page-classes-enabled="true" page-class="btn"
-                     page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
-                     page-url-legoCategory="@Model.CurrentLegoCategory" page-url-pageSize="@Model.CurrentPageSize" class="btn-group pull-right m-1"></div>
-
-                 <div>Show: 
-                    <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="5">5</a>
-                    <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="10">10</a>
-                    <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="20">20</a>
-                 </div>
-            </div>
+            <div page-model="@Model.PaginationInfo" page-action="Legostore" page-classes-enabled="true" page-class="btn"
+                 page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
         </div>
 
-        <!-- Right Column for YouTube Video -->
-        <div class="col-md-4">
-            <div class="sticky-top">
-                <iframe width="100%" height="600" src="https://www.youtube.com/embed/6BV1EPjzKLs?si=9BUlfuc5qFz57RGx&amp;controls=0&amp;start=173" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
+        <!-- Hidden YouTube Video Container -->
+        <div id="videoContainer" class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/6BV1EPjzKLs?autoplay=1&amp;controls=0&amp;start=173"
+                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            <button class="btn btn-danger" onclick="toggleVideo()">Close</button>
         </div>
     </div>
 </div>
+
+
+<link rel="stylesheet" href="~/css/custom.css" asp-append-version="true">
+
+<script>
+    function toggleVideo() {
+        var videoContainer = document.getElementById('videoContainer');
+        videoContainer.style.display = (videoContainer.style.display == 'none' || videoContainer.style.display === '') ? 'block' : 'none';
+    }
+</script>

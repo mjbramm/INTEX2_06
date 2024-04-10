@@ -131,3 +131,32 @@
     .more-catalog:hover {
         background-color: var(--tt-blue);
     }
+
+
+.video-container {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    z-index: 1050;
+    display: none;
+    background-color: black;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.product-grid2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.video-popup-btn {
+    margin-top: 20px;
+}
+
+.sticky-top {
+    top: 20px;
+}
+
