@@ -4,6 +4,9 @@ namespace INTEX2_06.Models.ViewModels
 {
     public class CreateProductViewModel
     {
+        [Key]
+        [Required]
+        public int product_ID { get; set; }
         [Required]
         public string name { get; set; } = null!;
         [Required]
