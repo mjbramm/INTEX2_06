@@ -6,7 +6,7 @@
 <div class="card m-1 p-1">
     <h4>
         @Model.name
-        <span class="badge rounded-pill bg-primary text-white float-end"><small>@Model.img_link</small></span>
+        <img src="@Model.img_link" alt="Product Image" class="float-end" style="max-height: 100px;"> <!-- Display image with max-height -->
     </h4>
     <ul>
         <li>Price: @Model.price</li>
@@ -14,12 +14,11 @@
         <li>Year: @Model.year</li>
         <li>Brick Count: @Model.num_parts</li>
         <li>Category: @Model.category</li>
-        <li>Description: @Model.description</li>
     </ul>
     <form id="@Model.product_ID" method="post" asp-page="/Cart">
-        <input type="hidden" asp-for="product_ID"/>
+        <input type="hidden" asp-for="product_ID" />
         <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
         <button type="submit" class="btn-success btn-sm float-end">Add to Cart</button>
     </form>
-    
+
 </div>

@@ -5,12 +5,29 @@
 @model LegosListViewModel
 
 <h1>The Lego Store</h1>
+<div class="row">
+    <div class="col-md-6">
+        <div class="sticky-top">
+            <iframe width="560" height="600" src="https://www.youtube.com/embed/6BV1EPjzKLs?si=9BUlfuc5qFz57RGx&amp;controls=0&amp;start=173" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </div>
 
-@foreach (Lego l in Model.Legos)
-{
-    <partial name="LegoSummary" model="l" />
-}
 
-<div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
-     page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
-     page-url-legoCategory="@Model.CurrentLegoCategory" class="btn-group pull-right m-1"></div>
+    <div class="col-md-3 flex-wrap">
+    @foreach (Lego l in Model.Legos)
+    {
+        <partial name="LegoSummary" model="l" />
+    }
+
+    <div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
+         page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+             page-url-legoCategory="@Model.CurrentLegoCategory" class="btn-group pull-right m-1"></div>
+    </div>
+
+    <div class="col-md-3 flex-wrap">
+        @foreach (Lego l in Model.Legos)
+        {
+            <partial name="LegoSummary" model="l" />
+        }
+    </div>
+</div>

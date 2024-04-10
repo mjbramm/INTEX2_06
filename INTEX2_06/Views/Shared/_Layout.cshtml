@@ -18,7 +18,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-black border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,13 +28,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">About Us</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Legostore">Product Catalog</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Legostore">Product Catalog</a>
                         </li>
 
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
@@ -75,10 +75,10 @@
                     {
                         <ul class="nav" style="list-style: none;">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                         </ul>
 
@@ -96,8 +96,8 @@
     <div id="cookieConsent" style="display:none; position: fixed; bottom: 0; width: 100%; background: black; color: white; text-align: center; padding: 10px; z-index: 1000;">
         <p>
             We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
-            <a href="@Url.Action("Privacy", "Home")" style="color: #4CAF50;">Learn More</a>
-            <button onclick="acceptCookies()" style="margin-left: 15px; background-color: #4CAF50; color: white; border: none; padding: 5px 10px;">Accept</button>
+            <a href="@Url.Action("Privacy", "Home")" style="color: #27A9C2;">Learn More</a>
+            <button onclick="acceptCookies()" style="margin-left: 15px; background-color: #CB1B76; color: white; border: none; padding: 5px 10px;">Accept</button>
         </p>
     </div>
 
