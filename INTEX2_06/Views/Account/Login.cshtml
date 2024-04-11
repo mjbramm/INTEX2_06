@@ -34,7 +34,7 @@
             </div>
             <br />
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-info">Login</button>
             </div>
             <br />
             <div>
@@ -48,6 +48,9 @@
     <div class="col-md-6 text-center">
         <h1>External Login</h1>
         <hr />
+        <img src="~/img/citizen.jpg" alt="New Lego Users" style="max-width: 50%; height: auto;" />
+        <br />
+        <br />
         @{
             if (Model.ExternalLogins?.Count == 0)
             {
@@ -59,7 +62,7 @@
                     <div>
                         @foreach (var provider in Model.ExternalLogins)
                             {
-                                <button onclick="ExternalLogin(@provider.Name, @Model.ReturnUrl)" type="submit" class="btn btn-primary"
+                                <button onclick="ExternalLogin(@provider.Name, @Model.ReturnUrl)" type="submit" class="btn btn-info"
                                         name="provider" value="@provider.Name"
                                         title="Log in using your @provider.DisplayName account">
                                     @provider.DisplayName
