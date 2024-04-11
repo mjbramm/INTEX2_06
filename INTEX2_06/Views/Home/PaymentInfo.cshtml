@@ -6,36 +6,39 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-3"></div>
-        <div class="form">
-            <!-- Card Type Field -->
-            <label for="cardType">Card Type</label>
-            <select id="cardType" name="cardType">
-                <option value="visa">Visa</option>
-                <option value="mastercard">MasterCard</option>
-                <option value="amex">American Express</option>
-                <option value="discover">Discover</option>
-                <!-- Add more card types as options here -->
-            </select>
-
-            <!-- Bank Field -->
-            <label for="bank">Bank</label>
-            <select id="bank" name="bank">
-                <option value="barclays">Barclays</option>
-                <option value="halifax">Halifax</option>
-                <option value="hsbc">HSBC</option>
-                <option value="lloyds">Lloyds</option>
-                <option value="metro">Metro</option>
-                <option value="monzo">Monzo</option>
-                <option value="rbs">RBS</option>
-                <!-- Add more banks as options here -->
-            </select>
-
-            <!-- Shipping Address Field -->
-            <label for="shippingAddress">Shipping Address</label>
-            <input type="text" id="shippingAddress" name="shippingAddress">
-        </div>
-        <div class="col-3"></div>
+        <form class="form-outline offset-3">
+            <h1 class="text-center">Payment Info</h1>
+                <!-- Card Type Field -->
+                <label for="cardType">Card Type</label>
+                <br />
+                <select id="cardType" name="cardType">
+                    <option value=""></option>
+                    <option value="visa">Visa</option>
+                    <option value="mastercard">MasterCard</option>
+                    <option value="amex">American Express</option>
+                    <option value="discover">Discover</option>
+                    <!-- Add more card types as options here -->
+                </select>
+                <br />
+                <!-- Bank Field -->
+                <label for="bank">Bank</label>
+                <br />
+                <select id="bank" name="bank">
+                    <option value=""></option>
+                    <option value="barclays">Barclays</option>
+                    <option value="halifax">Halifax</option>
+                    <option value="hsbc">HSBC</option>
+                    <option value="lloyds">Lloyds</option>
+                    <option value="metro">Metro</option>
+                    <option value="monzo">Monzo</option>
+                    <option value="rbs">RBS</option>
+                    <!-- Add more banks as options here -->
+                </select>
+                <br />
+                <!-- Shipping Address Field -->
+                <label for="shippingAddress">Shipping Country</label>
+                <input type="text" id="shippingAddress" name="shippingAddress">
+        </form>
     </div>
 </div>
 
