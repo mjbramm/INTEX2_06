@@ -7,6 +7,15 @@
     --text-dark: #000000; /* Dark text color */
 }
 
+.underline-off {
+    /*text-decoration: border;*/
+    font-size: 20px;
+    padding: 5px;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
 div {
     border-radius: 20px; /* Adjust the pixel value to increase or decrease the roundness */
 }
@@ -153,6 +162,7 @@ body, html {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    color: var(--text-dark);
 }
 
 .main-product {
@@ -226,6 +236,7 @@ body, html {
 .product-details-container {
     flex: 1 1 60%; /* 60% width of the container */
     padding: 20px;
+    color: var(--text-dark);
     overflow: auto; /* Adds scrollbar if content overflows */
     max-height: 60vh; /* Matches image height to align tops and bottoms */
 }
@@ -251,4 +262,29 @@ body, html {
 
 
 
+
+
+
+
+.pagination-wrapper {
+    display: flex;
+    justify-content: space-between; /* This will align children to opposite ends */
+    align-items: center;
+    padding: 10px;
+}
+
+.pagination-container {
+    /* If you have specific styles for your pagination numbers, set them here */
+}
+
+.page-size-container span,
+.page-size-container a {
+    margin-right: 10px; /* Space out the 'Show Pages:' label and the numbers */
+    color: var(--text-dark); /* Use your color variable */
+}
+
+.page-size-container a {
+    text-decoration: none; /* Optional: if you want to remove the underline from links */
+    /* Add any additional styles for the links if necessary */
+}
 
