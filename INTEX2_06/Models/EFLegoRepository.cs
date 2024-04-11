@@ -23,6 +23,12 @@ namespace INTEX2_06.Models
             await _context.SaveChangesAsync();
         }
 
+        public async Task AddOrder(Order order)
+        {
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync(); // Save changes to the database asynchronously
