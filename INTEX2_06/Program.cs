@@ -60,7 +60,7 @@ builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.Toke
 
 builder.Services.AddTransient<ISenderEmail, EmailSender>();
 
-builder.Services.AddScoped<UserImporter>(); // AddScoped is used here assuming it's appropriate for your scenarioo
+/*builder.Services.AddScoped<UserImporter>();*/ // AddScoped is used here assuming it's appropriate for your scenarioo
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
