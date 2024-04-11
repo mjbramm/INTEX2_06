@@ -10,5 +10,7 @@
         public string? CurrentLegoCategory { get; set; }
 
         public int? CurrentPageSize { get; set; }
+
+        public string? CurrentLegoColor { get; set; }
     }
 }

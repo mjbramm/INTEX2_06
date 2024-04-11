@@ -17,7 +17,7 @@
                     <label for="type_of_card">Card Type</label>
                     <br />
                     <select asp-for="type_of_card" class="form-control" style="margin-bottom:10px;" required>
-                        <option value=""></option>
+                        <option value="" disabled selected></option>
                         <option value="Visa">Visa</option>
                         <option value="MasterCard">MasterCard</option>
                         <option value="Amex">American Express</option>
@@ -33,14 +33,17 @@
                     <label for="bank">Bank</label>
                     <br />
                     <select asp-for="bank" class="form-control" style="margin-bottom:10px;" required>
-                        <option value=""></option>
-                        <option value="barclays">Barclays</option>
-                        <option value="halifax">Halifax</option>
-                        <option value="hsbc">HSBC</option>
-                        <option value="lloyds">Lloyds</option>
-                        <option value="metro">Metro</option>
-                        <option value="monzo">Monzo</option>
-                        <option value="rbs">RBS</option>
+                        <select>
+                            <option value="" disabled selected></option>
+                            <option value="Barclays">Barclays</option>
+                            <option value="Halifax">Halifax</option>
+                            <option value="HSBC">HSBC</option>
+                            <option value="Lloyds">Lloyds</option>
+                            <option value="Metro">Metro</option>
+                            <option value="Monzo">Monzo</option>
+                            <option value="Rbs">RBS</option>
+                        </select>
+
                         <!-- Add more banks as options here -->
                     </select>
                     <span asp-validation-for="bank" class="text-danger"></span>

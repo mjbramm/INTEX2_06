@@ -12,11 +12,11 @@
     @foreach (string bc in Model ?? Enumerable.Empty<string>())
     {
         <!-- Generate category link with current page size and legoColor -->
-        <a class="btn @(bc == ViewBag.SelectedLegoCategory ? "btn-primary" : "btn-outline-secondary")"
+        <a class="btn @(bc == ViewBag.SelectedLegoColor ? "btn-primary" : "btn-outline-secondary")"
            asp-controller="Home"
            asp-action="Legostore"
-           asp-route-legoCategory="@bc"
-           asp-route-legoColor="@ViewBag.SelectedLegoColor"
+           asp-route-legoCategory="@ViewBag.SelectedLegoCategory"
+           asp-route-legoColor="@bc"
            asp-route-pageNum="1"
            asp-route-pageSize="@ViewBag.PageSize">@bc</a>
     }
