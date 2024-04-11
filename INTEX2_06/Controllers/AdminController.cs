@@ -484,7 +484,10 @@ namespace INTEX2_06.Controllers
 
         public async Task<IActionResult> ListOrders()
         {
-            var orders = _repo.Orders.ToList();
+            var orders = new OrdersListViewModel
+            {
+                Orders = _repo.Orders.Where(x => x.transaction_ID != null && x.UserID != null).ToList()
+            };
 
             return View(orders);
         }
