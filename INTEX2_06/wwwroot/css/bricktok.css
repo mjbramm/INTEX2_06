@@ -83,3 +83,15 @@ footer {
         background-color: var(--tt-pink);
     }
 
+.pagination-container {
+    display: flex;
+    justify-content: flex-end; /* Align items to the end (right side) */
+    align-items: flex-end; /* Align items to the end (bottom) */
+    /*width: 100%;
+    position: fixed;*/ /* Fix the container to stay in the same position */
+    /*bottom: 0;*/ /* Position the container at the bottom */
+    /*right: 0;*/ /* Position the container at the right */
+    /*padding: 10px;*/ /* Add some padding */
+    /*background-color: white;*/ /* Add a background color */
+    /*z-index: 999;*/ /* Ensure it's above other elements */
+}
