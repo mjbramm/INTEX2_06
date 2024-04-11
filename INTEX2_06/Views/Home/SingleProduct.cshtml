@@ -5,7 +5,9 @@
 @{
     Layout = "_Layout";
 }
-
+<div class="col-1">
+    <button type="button" class="btn btn-dark" style="width:auto" onclick="history.back()">Cancel</button>
+</div>
 <div class="product-main-container">
     <div class="product-image-container">
         <img src="@Model.MainProduct.img_link" alt="Product Image" class="main-product-image">
@@ -50,7 +52,7 @@
     }
 </div>
 
-    <h3>Others also purchase:</h3>
+    <h3>Others also purchased:</h3>
     <div class="product-grid">
         @foreach (var item in Model.Recommendations.Skip(3).Take(3))
         {

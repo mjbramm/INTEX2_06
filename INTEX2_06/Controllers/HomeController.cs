@@ -111,5 +111,20 @@ namespace INTEX2_06.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> PaymentInfo()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> OrderConfirmation()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> OrderUnderReview()
+        {
+            return View();
+        }
     }
 }

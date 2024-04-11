@@ -5,7 +5,7 @@
 }
 
     <div class="row">
-        <div class="col-md-6 offset-4">
+        <div class="col-md-6 offset-1">
             <form class="form-outline" method="post">
                 <h1 class="text-center">User Registration</h1>
                 <div asp-validation-summary="All" class="text-danger"></div>
@@ -46,9 +46,12 @@
                 </div>
                 <br />
 
-                <button type="submit" class="btn btn-primary">Register</button>
-                <button type="button" class="btn btn-secondary" style="width:auto" onclick="history.back()">Cancel</button>
+                <button type="submit" class="btn btn-info">Register</button>
+                <button type="button" class="btn btn-danger" style="width:auto" onclick="history.back()">Cancel</button>
             </form>
+        </div>
+        <div class="col-md-5">
+            <img src="~/img/users.jpg" alt="New Lego Users" style="max-width: 110%; height: auto;" />
         </div>
     </div>
 </div>
