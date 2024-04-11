@@ -15,7 +15,7 @@
                     <h4 class="name-tag">@l.name</h4>
                 </a>
             </div>
-            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+@*             @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
                 <form method="post" asp-controller="Admin" asp-action="DeleteProduct">
                     <!-- Admin controls here -->
@@ -26,7 +26,7 @@
                 <form method="post" asp-page="/Cart">
                     <!-- Cart controls here -->
                 </form>
-            }
+            } *@
         }
     </div>
     <div class="more-catalog">
