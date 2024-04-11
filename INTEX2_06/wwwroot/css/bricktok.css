@@ -1,4 +1,31 @@
-﻿.form-outline {
+﻿:root {
+    --tt-blue: #00f2ea;
+    --tt-pink: #ff0050;
+    --bg-dark: #121212; /* Dark background for title */
+    --bg-light: #ffffff; /* Light background for the page */
+    --text-light: #ffffff; /* Light text color */
+    --text-dark: #000000; /* Dark text color */
+}
+
+.footer {
+    width: 100%;
+    max-width: 100%;
+    color: var(--text-light);
+    overflow: hidden; /* Prevent unnecessary scrolling */
+}
+
+.sticktobottom {
+    position: fixed;
+    bottom: 0
+}
+
+/*body, html {
+    height: 100%;
+    margin: 0;
+    background-color: var(--bg-light);*/ /* Set the overall background to light */
+/*}*/
+
+.form-outline {
     width: 50%;
     border: 1px solid #ced4da;
     padding: 15px;
@@ -29,8 +56,8 @@
 
 /* Overall dark theme background */
 body {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
+    background-color: var(--bg-light);
+    color: var(--text-dark);
 }
 
 /* Dark navbar with light text */
