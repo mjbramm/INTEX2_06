@@ -4,36 +4,39 @@
 @model Lego
 <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true">
 
-<div class="card m-1 p-1">
+<div class="card m-1 p-1 custom-center">
     <a asp-action="SingleProduct" asp-route-product_ID="@Model.product_ID" class="text-decoration-none">
-        <h4>@Model.name</h4>
+        <img src="@Model.img_link" alt="Product Image" class="card-img">
+        <div class="card-body">
+            <h4 class="name-tag">@Model.name</h4>
+            <ul class="list-unstyled">
+                <li>Rating: @Model.avg_rating</li>
+                <li>Year: @Model.year</li>
+                <li>Brick Count: @Model.num_parts</li>
+                <li>Category: @Model.category</li>
+            </ul>
+            <!-- Admin and Cart Forms Here -->
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <form id="@Model.product_ID" method="post" asp-controller="Admin" asp-action="DeleteProduct">
+                    <input type="hidden" asp-for="product_ID" />
+                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                    <button type="submit" class="btn-danger btn-sm float-end">Delete</button>
+                </form>
+                <form id="@Model.product_ID" method="get" asp-controller="Admin" asp-action="EditProduct">
+                    <input type="hidden" asp-for="product_ID" />
+                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                    <button type="submit" class="btn-success btn-sm float-end">Edit</button>
+                </form>
+            }
+            else if (User.Identity.IsAuthenticated)
+            {
+                <form id="@Model.product_ID" method="post" asp-page="/Cart">
+                    <input type="hidden" asp-for="@Model.product_ID" />
+                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                    <button type="submit" class="btn-success btn-sm float-end">Add to Cart</button>
+                </form>
+            }
+        </div>
     </a>
-    <img src="@Model.img_link" alt="Product Image" class="float-end img-responsive">
-    <ul>
-        <li>Rating: @Model.avg_rating</li>
-        <li>Year: @Model.year</li>
-        <li>Brick Count: @Model.num_parts</li>
-        <li>Category: @Model.category</li>
-    </ul>
-    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-    {
-        <form id="@Model.product_ID" method="post" asp-controller="Admin" asp-action="DeleteProduct">
-            <input type="hidden" asp-for="product_ID" />
-            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-            <button type="submit" class="btn-danger btn-sm float-end">Delete</button>
-        </form>
-        <form id="@Model.product_ID" method="get" asp-controller="Admin" asp-action="EditProduct">
-            <input type="hidden" asp-for="product_ID" />
-            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-            <button type="submit" class="btn-success btn-sm float-end">Edit</button>
-        </form>
-    }
-    else if (User.Identity.IsAuthenticated)
-    {
-        <form id="@Model.product_ID" method="post" asp-page="/Cart">
-            <input type="hidden" asp-for="@Model.product_ID" />
-            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-            <button type="submit" class="btn-success btn-sm float-end">Add to Cart</button>
-        </form>
-    } 
 </div>
