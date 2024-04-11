@@ -9,10 +9,10 @@
     </a>
     <img src="@Model.img_link" alt="Product Image" class="float-end img-responsive">
     <ul>
-        @* <li>Rating: @Model.avg_rating</li>
+        <li>Rating: @Model.avg_rating</li>
         <li>Year: @Model.year</li>
         <li>Brick Count: @Model.num_parts</li>
-        <li>Category: @Model.category</li> *@
+        <li>Category: @Model.category</li>
     </ul>
     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
     {
