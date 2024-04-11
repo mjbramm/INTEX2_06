@@ -1,50 +1,48 @@
-﻿@model IEnumerable<Order>
+﻿@model OrdersListViewModel
 
-@* @if (Model.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Transaction ID</th>
-                <th>Date</th>
-                <th>Day of Week</th>
-                <th>Time</th>
-                <th>Entry Mode</th>
-                <th>Amount</th>
-                <th>Type of Transaction</th>
-                <th>Country of Transaction</th>
-                <th>Shipping Address</th>
-                <th>Bank</th>
-                <th>Type of Card</th>
-                <th>Fraud</th>
-                <th>Predict Fraud</th>
-                <th>Complete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var t in Model)
-            {
-                <tr>
-                    <td>@t.transaction_ID</td>
-                    <td>@t.date</td>
-                    <td>@t.day_of_week</td>
-                    <td>@t.time</td>
-                    <td>@t.entry_mode</td>
-                    <td>@t.amount</td>
-                    <td>@t.type_of_transaction</td>
-                    <td>@t.country_of_transaction</td>
-                    <td>@t.shipping_address</td>
-                    <td>@t.bank</td>
-                    <td>@t.type_of_card</td>
-                    <td>@t.fraud</td>
-                    <td>@t.predict_fraud</td>
-                    <td>@t.complete</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "All Orders";
 }
-else
-{
-    <p>No transactions available.</p>
-} *@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Transaction ID</th>
+            <th>Date</th>
+            <th>Day of Week</th>
+            <th>Time</th>
+            <th>Entry Mode</th>
+            <th>Amount</th>
+            <th>Type of Transaction</th>
+            <th>Country of Transaction</th>
+            <th>Shipping Address</th>
+            <th>Bank</th>
+            <th>Type of Card</th>
+            <th>Fraud</th>
+            <th>Predict Fraud</th>
+            <th>Complete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var t in Model.Orders.Distinct())
+        {
+            <tr>
+                <td>@t.transaction_ID</td>
+                <td>@t.date</td>
+                <td>@t.day_of_week</td>
+                <td>@t.time</td>
+                <td>@t.entry_mode</td>
+                <td>@t.amount</td>
+                <td>@t.type_of_transaction</td>
+                <td>@t.country_of_transaction</td>
+                <td>@t.shipping_address</td>
+                <td>@t.bank</td>
+                <td>@t.type_of_card</td>
+                <td>@t.fraud</td>
+                <td>@t.predict_fraud</td>
+                <td>@t.complete</td>
+            </tr>
+        }
+    </tbody>
+</table>
