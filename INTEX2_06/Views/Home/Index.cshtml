@@ -1,36 +1,58 @@
 ﻿@using INTEX2_06.Infrastructure
+
 <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true">
 
 <div class="container mt-3">
     <div class="tiktok-body">
-        <h2 class="tiktok-h2 text-center" style="color: var(--text-light);">Welcome to BrickTok</h2>
-        <h3 class="text-center" style="color: var(--text-light);">Find your favorite sets!</h3>
+        <h2 class="tiktok-h2">Welcome to BrickTok</h2>
+        <h2 class="text-white">Find your favorite sets!</h2>
     </div>
+    <br />
     <div class="product-grid">
         @foreach (Lego l in Model.Legos)
         {
-            <div class="card custom-center">
-                <a asp-action="SingleProduct" asp-route-product_ID="@l.product_ID">
-                    <img class="card-img" src="@l.img_link" alt="Product Image">
-                    <h4 class="name-tag">@l.name</h4>
+            <div class="card m-1 p-1">
+                <a asp-action="SingleProduct" asp-route-product_ID="@l.product_ID" class="text-decoration-none">
+                    <h4 class="text-white">@l.name</h4>
+                    <img src="@l.img_link" alt="Product Image">
                 </a>
+                <ul class="text-white">
+                    <li>Rating: @l.avg_rating</li>
+                    <li>Year: @l.year</li>
+                    <li>Brick Count: @l.num_parts</li>
+                    <li>Category: @l.category</li>
+                </ul>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <form method="post" asp-controller="Admin" asp-action="DeleteProduct">
+                        <!-- Admin controls here -->
+                    </form>
+                }
+                else if (User.Identity.IsAuthenticated)
+                {
+                    <form method="post" asp-page="/Cart">
+                        <!-- Cart controls here -->
+                    </form>
+                }
             </div>
-            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-            {
-                <form method="post" asp-controller="Admin" asp-action="DeleteProduct">
-                    <!-- Admin controls here -->
-                </form>
-            }
-            else if (User.Identity.IsAuthenticated)
-            {
-                <form method="post" asp-page="/Cart">
-                    <!-- Cart controls here -->
-                </form>
-            }
         }
     </div>
-    <div class="more-catalog">
-        <a asp-controller="Home" asp-action="Legostore" style="color: var(--text-light); text-decoration: none;">Want to see more? View our entire catalog</a>
+    <a class="more-catalog" asp-controller="Home" asp-action="Legostore">Want to see more? View our entire catalog</a>
+</div>
+
+
+@* <div class="container">
+    <div class="tiktok-body">
+        <h2 class="tiktok-h2">Welcome to BrickTok </h2>
+        <h2 class="text-white">Find your favorite sets!</h2>
     </div>
 </div>
+
+<div class="col-md-12 flex-wrap mw-50">
+    @foreach (Lego l in Model.Legos)
+    {
+        <partial name="LegoSummary" model="l" />
+    }
+
+</div> *@
 
