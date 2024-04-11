@@ -18,11 +18,13 @@
     <br />
 }
 
+<link rel="stylesheet" href="~/css/custom.css" asp-append-version="true">
+
 <div class="container-fluid">
     <div class="row m-1 p-1">
         <!-- Left Sidebar for Categories -->
         <div class="col-3 sticky-top">
-            <div class="pagination-container">
+            @* <div class="pagination-container">
                 <div page-model="@Model.PaginationInfo" page-action="Legostore" page-classes-enabled="true" page-class="btn"
                      page-class-normal="btn-outline-dark" page-url-pageSize="@Model.CurrentPageSize" page-url-legoCategory="@Model.CurrentLegoCategory" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
                 <div>
@@ -31,7 +33,7 @@
                     <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="10">10</a>
                     <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="20">20</a>
                 </div>
-            </div>
+            </div> *@
             <vc:lego-categories />
             <button class="btn btn-primary video-popup-btn" onclick="toggleVideo()">Watch Building Video</button>
             <button class="btn btn-danger" onclick="toggleVideo()">Close Video</button>
@@ -46,7 +48,7 @@
             </div>
         </div>
 
-</div>
+    </div>
 
         <!-- Hidden YouTube Video Container -->
         <div id="videoContainer" class="video-container">
@@ -58,8 +60,20 @@
     </div>
 </div>
 
+<div class="pagination-container">
+    <div page-model="@Model.PaginationInfo" page-action="Legostore" page-classes-enabled="true" page-class="btn"
+         page-class-normal="btn-outline-dark" page-url-pageSize="@Model.CurrentPageSize" page-url-legoCategory="@Model.CurrentLegoCategory" page-class-selected="btn-secondary" class="btn-group pull-right m-1">
+    </div>
+    <br />
+    <br />
 
-<link rel="stylesheet" href="~/css/custom.css" asp-append-version="true">
+    <div>
+        <p>Show:</p>
+        <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="5">5</a>
+        <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="10">10</a>
+        <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="20">20</a>
+    </div>
+</div>
 
 <script>
     function toggleVideo() {
