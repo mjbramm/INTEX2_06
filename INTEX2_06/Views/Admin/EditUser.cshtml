@@ -1,6 +1,7 @@
 ﻿@model EditUserViewModel
 
 @{
+    Layout = "_Layout";
     ViewBag.Title = "Edit User";
 }
 
@@ -54,12 +55,13 @@
 
     <div class="form-group row">
         <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-info">Update</button>
 
-            <a asp-action="ListUsers" class="btn btn-primary">Cancel</a>
+            <a asp-action="ListUsers" class="btn btn-danger">Cancel</a>
         </div>
     </div>
-
+    <br />
+    <br />
     <div class="card">
         <div class="card-header">
             <h3>User Roles</h3>
@@ -81,7 +83,7 @@
 
         <div class="card-footer">
             <a asp-action="ManageUserRoles" asp-controller="Admin" style="width:auto" asp-route-UserId="@Model.Id"
-               class="btn btn-primary">
+               class="btn btn-info">
                 Manage Roles
             </a>
         </div>

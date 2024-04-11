@@ -2,6 +2,7 @@
 {
     public class LegosListViewModel
     {
+        
         public IEnumerable<Lego> Legos { get; set; }
 
         public PaginationInfo PaginationInfo { get; set; } = new PaginationInfo();

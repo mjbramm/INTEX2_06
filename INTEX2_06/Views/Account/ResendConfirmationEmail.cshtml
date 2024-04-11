@@ -3,15 +3,16 @@
 }
 
 <div class="row">
-    <div class="col-md-6">
-        <h1>@ViewBag.Message</h1>
-        <form asp-action="ResendConfirmationEmail" asp-controller="Account" method="post">
+    <div>
+        <form class="form-outline text-center offset-3" asp-action="ResendConfirmationEmail" asp-controller="Account" method="post">
+            <h2>@ViewBag.Message</h2>
+            <hr />
             <div class="form-group">
                 <input type="email" name="email" class="form-control" placeholder="Enter your email" required />
             </div>
             <br />
             <div class="form-group">
-                <button class="btn btn-primary" type="submit">@ViewBag.Message</button>
+                <button class="btn btn-info" type="submit">@ViewBag.Message</button>
             </div>
         </form>
     </div>

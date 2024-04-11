@@ -1,5 +1,5 @@
 ﻿.form-outline {
-    width: 60%;
+    width: 50%;
     border: 1px solid #ced4da;
     padding: 15px;
     border-radius: 5px;
@@ -26,3 +26,60 @@
         border-radius: 5px;
         cursor: pointer;
     }
+
+/* Overall dark theme background */
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+/* Dark navbar with light text */
+.navbar {
+    background-color: var(--bg-dark) !important;
+    color: var(--text-light) !important;
+}
+
+/* Brand Logo */
+.navbar-brand img {
+    height: 40px; /* Adjust as per your logo's aspect ratio */
+}
+
+/* Navigation link styles */
+.nav-link {
+    color: var(--text-light) !important;
+}
+
+    .nav-link:hover {
+        color: var(--tt-pink) !important; /* Highlight color for hover state */
+    }
+
+/* Dropdown menu with dark theme */
+.dropdown-menu {
+    background-color: var(--bg-dark);
+    border-color: var(--tt-blue);
+}
+
+.dropdown-item {
+    color: var(--text-light);
+}
+
+    .dropdown-item:hover {
+        background-color: var(--tt-blue);
+    }
+
+/* Footer with dark theme */
+footer {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+/* Cookie consent banner */
+#cookieConsent {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+    #cookieConsent button {
+        background-color: var(--tt-pink);
+    }
+

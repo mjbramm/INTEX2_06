@@ -4,12 +4,11 @@
     ViewData["Title"] = "VerifyTwoFactorToken";
 }
 
-<h1>Verify Two Factor Token</h1>
-
-<hr />
 <div class="row">
     <div class="col-md-6">
-        <form method="post" asp-action="VerifyTwoFactorToken" asp-controller="Account">
+        <form class="form-outline text-center offset-3" method="post" asp-action="VerifyTwoFactorToken" asp-controller="Account">
+            <h1>Verify Two Factor Token</h1>
+            <hr />
             <input asp-for="Email" type="hidden" />
             <input asp-for="ReturnUrl" type="hidden" />
             <input asp-for="Token" type="hidden" />
@@ -20,8 +19,9 @@
                 <input asp-for="TwoFactorCode" class="form-control" />
                 <span asp-validation-for="TwoFactorCode" class="text-danger"></span>
             </div>
-
-            <button type="submit" class="btn btn-primary">Verify</button>
+            <br />
+            <br />
+            <button type="submit" class="btn btn-info">Verify</button>
         </form>
     </div>
 </div>

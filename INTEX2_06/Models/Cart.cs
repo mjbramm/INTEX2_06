@@ -16,7 +16,8 @@
                 Lines.Add(new CartLine
                 {
                     Lego = leg,
-                    Quantity = quantity
+                    Quantity = quantity,
+                    Price = (float)leg.price
                 });
             }
             else
@@ -29,13 +30,15 @@
 
         public virtual void Clear() => Lines.Clear(); 
 
-        public decimal CalculateTotal() => Lines.Sum(x => 25 * x.Quantity);
+        public float CalculateTotal() => Lines.Sum(x => x.Price * x.Quantity);
     
         public class CartLine 
         {
             public int CartLineId { get; set; }
             public Lego Lego { get; set; }
             public int Quantity { get; set; }
+            public double Subtotal { get; set; }
+            public float Price { get; set; }
 
         }
     

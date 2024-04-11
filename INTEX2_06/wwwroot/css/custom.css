@@ -7,6 +7,14 @@
     --text-dark: #000000; /* Dark text color */
 }
 
+div {
+    border-radius: 20px; /* Adjust the pixel value to increase or decrease the roundness */
+}
+
+.rounded-div {
+    border-radius: 20px; /* Adjust as necessary */
+}
+
 body, html {
     height: 100%;
     margin: 0;
@@ -20,18 +28,46 @@ body, html {
     overflow: hidden; /* Prevent unnecessary scrolling */
 }
 
+    .container-fluid {
+        padding: 0 4rem; /* Adds padding to the left and right */
+    }
+
 .tiktok-body {
     background-color: var(--bg-dark);
     padding: 20px 0;
     margin-bottom: 20px; /* Space below the title area */
 }
 
+
 .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Three items per row, each taking up a fraction of the space */
+    gap: 10px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    min-width: 60vh;
+    max-height: 100vh; /* Limit the height to maintain a scrollable area */
+    padding: 20px; /* Add some padding to the container */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    justify-items: center;
+}
+
+.home-product-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 items per row */
     gap: 10px;
     overflow-y: auto; /* Enable vertical scrolling */
     max-height: 60vh; /* Limit the height to maintain a scrollable area */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.single-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+    gap: 10px;
+    overflow-x: none;
+    max-heigh: 80vh; /* Limit the height to maintain a scrollable area */
     scrollbar-width: none; /* For Firefox */
     -ms-overflow-style: none; /* For Internet Explorer and Edge */
 }
@@ -42,6 +78,19 @@ body, html {
 
 .card {
     border: 1px solid var(--tt-blue);
+    background-color: var(--bg-dark);
+    display: flex;
+    min-width: 100px;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem; /* Increase padding to make the card content look bigger */
+    margin: 10px; /* Adjust margin as needed */
+    color: white;
+    flex-grow: 1; /* Add this to make the card expand */
+}
+
+.home-card {
+    border: 1px solid var(--tt-blue);
     background-color: var(--bg-light);
     display: flex; /* Makes the content of the card nicely centered and flexibly filling */
     justify-content: center;
@@ -51,9 +100,19 @@ body, html {
 }
 
     .card:hover {
-        transform: scale(1.05);
+        transform: scale(1.03);
+        transition: transform .3s ease-in-out;
         border-color: var(--tt-pink);
     }
+
+    .card-img {
+        width: auto;
+        max-width: 100%; /* Make the image responsive to the card's size */
+        height: auto;
+        border-radius: 10px; /* Optional: if you want to make the images rounded */
+        object-fit: contain;
+    }
+
 
 .custom-center {
     display: flex;
@@ -62,25 +121,134 @@ body, html {
     height: 100%;
 }
 
-.card-img {
-    width: 100%; /* Adjust width to make sure it fits the card */
-    height: auto;
-}
-
 .name-tag {
-    font-size: 1.2rem;
+    font-size: 2rem;
     text-align: center;
     text-decoration: none;
     padding: 5px;
+    color: black;
 }
 
+
 .more-catalog {
+    display: block;
     width: 100%;
     text-align: center;
-    padding: 15px 20px; /* Increased padding for a bigger, more appealing look */
+    padding: 10px 20px;
+    margin-top: 20px;
     background-color: var(--tt-pink);
-    color: var(--text-light);
-    font-size: 1.5rem; /* Larger text size */
-    margin-top: 30px; /* Space above the catalog link */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
 }
+
+
+    .more-catalog:hover {
+        background-color: var(--tt-blue);
+    }
+
+.product-detail-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.main-product {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: black;
+    color: white;
+}
+
+.product-image {
+    width: 50%;
+    height: auto;
+}
+
+.product-info {
+    padding: 20px;
+    width: 50%;
+}
+
+.product-price {
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.recommendations h3 {
+    background: var(--tt-blue);
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.recommended-products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.recommended-product {
+    background: #333;
+    color: white;
+    padding: 10px;
+}
+
+.recommended-image {
+    width: 100%;
+    height: auto;
+}
+
+.product-main-container {
+    display: flex;
+    width: 100%; /* Ensures full width usage */
+    margin-bottom: 20px; /* Space between product details and recommendations */
+}
+
+.product-image-container {
+    flex: 1 1 40%; /* 40% width of the container */
+    padding: 10px;
+    max-height: 60vh; /* Maximum height of the image container */
+    overflow: hidden; /* Prevents overflow of the image outside the container */
+}
+
+.main-product-image {
+    display: flex;
+    width: 100%;
+    height: auto;
+    max-height: 100%; /* Ensures image doesn't overflow its container */
+}
+
+.product-details-container {
+    flex: 1 1 60%; /* 60% width of the container */
+    padding: 20px;
+    overflow: auto; /* Adds scrollbar if content overflows */
+    max-height: 60vh; /* Matches image height to align tops and bottoms */
+}
+
+.star-rating {
+    display: flex;
+    align-items: right;
+    font-size: 1.5em; /* Adjust the size of the stars */
+}
+
+.star {
+    color: #ffd700; /* Star color - gold for filled stars */
+    cursor: default;
+}
+
+.full-star:before {
+    content: "\2605"; /* Unicode solid star */
+}
+
+.empty-star:before {
+    content: "\2606"; /* Unicode outlined star */
+}
+
+
+
+
