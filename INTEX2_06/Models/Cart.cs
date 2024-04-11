@@ -36,7 +36,6 @@
             public int CartLineId { get; set; }
             public Lego Lego { get; set; }
             public int Quantity { get; set; }
-
         }
     
     }
