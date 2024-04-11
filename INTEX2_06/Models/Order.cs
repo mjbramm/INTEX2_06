@@ -11,9 +11,6 @@ public class Order
     [Required]
     public int transaction_ID { get; set; }
 
-    [ForeignKey("Customer")]
-    public int customer_ID { get; set; }
-
     public string date { get; set; }
 
     public string day_of_week { get; set; }
@@ -39,4 +36,6 @@ public class Order
     public int predict_fraud { get; set; }
 
     public int complete { get; set; }
+    [ForeignKey("AppUser")]
+    public string UserID { get; set; }
 }
