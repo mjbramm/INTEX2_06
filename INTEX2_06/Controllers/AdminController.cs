@@ -486,7 +486,7 @@ namespace INTEX2_06.Controllers
         {
             var orders = new OrdersListViewModel
             {
-                Orders = _repo.Orders.Where(x => x.transaction_ID != null && x.UserID != null).ToList()
+                Orders = _repo.Orders.OrderByDescending(x => x.date).Where(x => x.transaction_ID != null && x.UserID != null).ToList()
             };
 
             return View(orders);

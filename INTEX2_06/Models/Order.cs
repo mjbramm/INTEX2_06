@@ -11,7 +11,7 @@ public class Order
     [Required]
     public int transaction_ID { get; set; }
 
-    public string? date { get; set; }
+    public DateTime? date { get; set; }
 
     public string? day_of_week { get; set; }
 
@@ -37,5 +37,5 @@ public class Order
 
     public int? complete { get; set; }
     [ForeignKey("AppUser")]
-    public string UserID { get; set; }
+    public string? UserID { get; set; }
 }

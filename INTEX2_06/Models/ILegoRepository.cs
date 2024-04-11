@@ -7,6 +7,7 @@
         public IQueryable<AppUser> AppUser { get; }
         public IQueryable<LineItem> LineItems { get; }
         Task AddProduct(Lego product);
+        Task AddOrder(Order order);
         Task<int> SaveChangesAsync();
         Task<Lego> GetProductByIdAsync(int product_ID);
         Task DeleteProductAsync(int product_ID);
