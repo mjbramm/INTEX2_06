@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using INTEX2_06.Models.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
 
 namespace INTEX2_06.Controllers
 {
@@ -27,7 +29,7 @@ namespace INTEX2_06.Controllers
             {
                 Legos = _repo.Legos
                    .OrderByDescending(x => x.avg_rating)
-                   .Take(6)
+                   .Take(9)
             };
             return View(legos);
         }
@@ -70,15 +72,13 @@ namespace INTEX2_06.Controllers
         }
 
 
-        public async Task<IActionResult> Legostore(int pageNum, string? legoCategory)
+        public async Task<IActionResult> Legostore(string? legoCategory, int pageNum=1, int pageSize=5)
         {
             // Check if the user is authenticated
             //if (User.Identity.IsAuthenticated)
             //{
             //    AppUser user = await userManager.GetUserAsync(HttpContext.User);
             //}
-            
-            int pageSize = 5;
 
             var legos = new LegosListViewModel
             {
@@ -93,10 +93,10 @@ namespace INTEX2_06.Controllers
                     CurrentPage = pageNum,
                     ItemsPerPage = pageSize,
                     TotalItems = legoCategory == null ? _repo.Legos.Count() : _repo.Legos.Where(x => x.category == legoCategory).Count()
-
                 },
 
-                CurrentLegoCategory = legoCategory
+                CurrentLegoCategory = legoCategory,
+                CurrentPageSize = pageSize
             };
 
             return View(legos);
@@ -108,6 +108,21 @@ namespace INTEX2_06.Controllers
         }
 
         public async Task<IActionResult> AboutUs()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> PaymentInfo()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> OrderConfirmation()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> OrderUnderReview()
         {
             return View();
         }

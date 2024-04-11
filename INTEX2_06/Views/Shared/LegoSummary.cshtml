@@ -7,9 +7,8 @@
     <a asp-action="SingleProduct" asp-route-product_ID="@Model.product_ID" class="text-decoration-none">
         <h4>@Model.name</h4>
     </a>
-    <img src="@Model.img_link" alt="Product Image" class="float-end" style="max-height: 100px;"> <!-- Display image with max-height -->
+    <img src="@Model.img_link" alt="Product Image" class="float-end img-responsive">
     <ul>
-        <li>Image Link: @Model.img_link</li>
         <li>Rating: @Model.avg_rating</li>
         <li>Year: @Model.year</li>
         <li>Brick Count: @Model.num_parts</li>
@@ -21,6 +20,11 @@
             <input type="hidden" asp-for="product_ID" />
             <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
             <button type="submit" class="btn-danger btn-sm float-end">Delete</button>
+        </form>
+        <form id="@Model.product_ID" method="get" asp-controller="Admin" asp-action="EditProduct">
+            <input type="hidden" asp-for="product_ID" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <button type="submit" class="btn-success btn-sm float-end">Edit</button>
         </form>
     }
     else if (User.Identity.IsAuthenticated)

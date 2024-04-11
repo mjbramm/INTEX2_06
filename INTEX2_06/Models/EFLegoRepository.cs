@@ -43,5 +43,16 @@ namespace INTEX2_06.Models
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task UpdateProductAsync(int product_ID)
+        {
+            var product = await _context.Legos.FindAsync(product_ID);
+
+            if (product != null)
+            {
+                _context.Legos.Update(product);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

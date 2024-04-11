@@ -1,0 +1,92 @@
+﻿@model Lego
+
+@{
+    ViewData["Title"] = "Edit Lego Product";
+}
+
+<form asp-controller="Admin" asp-action="EditProduct" method="post" class="mt-3">
+    <input asp-for="product_ID" type="hidden" />
+
+    <div class="text-danger">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="name" class="col-sm-2 col-form-label">Name:</label>
+        <div class="col-sm-10">
+            <input asp-for="name" class="form-control" placeholder="Name of the product">
+            <span asp-validation-for="name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="year" class="col-sm-2 col-form-label">Year:</label>
+        <div class="col-sm-10">
+            <input asp-for="year" class="form-control" placeholder="Year of release">
+            <span asp-validation-for="year" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="num_parts" class="col-sm-2 col-form-label">Number of Parts:</label>
+        <div class="col-sm-10">
+            <input asp-for="num_parts" class="form-control" placeholder="Total number of parts">
+            <span asp-validation-for="num_parts" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="img_link" class="col-sm-2 col-form-label">Image Link:</label>
+        <div class="col-sm-10">
+            <input asp-for="img_link" class="form-control" placeholder="URL of the product image">
+            <span asp-validation-for="img_link" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="primary_color" class="col-sm-2 col-form-label">Primary Color:</label>
+        <div class="col-sm-10">
+            <input asp-for="primary_color" class="form-control" placeholder="Primary color of the product">
+            <span asp-validation-for="primary_color" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="secondary_color" class="col-sm-2 col-form-label">Secondary Color:</label>
+        <div class="col-sm-10">
+            <input asp-for="secondary_color" class="form-control" placeholder="Secondary color of the product">
+            <span asp-validation-for="secondary_color" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="description" class="col-sm-2 col-form-label">Description:</label>
+        <div class="col-sm-10">
+            <input asp-for="description" class="form-control" placeholder="Description of the product">
+            <span asp-validation-for="description" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="category" class="col-sm-2 col-form-label">Category:</label>
+        <div class="col-sm-10">
+            <input asp-for="category" class="form-control" placeholder="Category of the product">
+            <span asp-validation-for="category" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="price" class="col-sm-2 col-form-label">Price:</label>
+        <div class="col-sm-10">
+            <input asp-for="price" class="form-control" placeholder="Price of the product">
+            <span asp-validation-for="price" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-10 offset-sm-2">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="button" class="btn btn-secondary onclick="history.back();">Cancel</button>
+        </div>
+    </div>
+</form>

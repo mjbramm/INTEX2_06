@@ -14,6 +14,7 @@
     <title>@ViewData["Title"] BrickTok</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/bricktok.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Identity.styles.css" asp-append-version="true" />
     <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
 </head>
@@ -21,7 +22,7 @@
     <header>
         <nav class=" sticky-top navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-black border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="text-white" asp-controller="Home" asp-action="Index">BrickTok</a> @* navbar-brand *@
+                <img src="/img/BrickTok.png" asp-controller="Home" asp-action="Index" />
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

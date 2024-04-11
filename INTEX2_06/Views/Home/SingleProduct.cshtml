@@ -1,25 +1,84 @@
-﻿@model INTEX2_06.Models.ProductViewModel // Update the model namespace and class
+﻿@model INTEX2_06.Models.ProductViewModel
+<link rel="stylesheet" href="~/css/custom.css" asp-append-version="true">
+
 
 @{
     Layout = "_Layout";
 }
-
-<h2>@Model.MainProduct.name</h2>
-<div>
-    <img src="@Model.MainProduct.img_link" alt="Product Image" />
-    <p>Price: @Model.MainProduct.price</p>
-    <p>@Model.MainProduct.description</p>
-    <p>Price: @Model.MainProduct.price</p>
+<div class="col-1">
+    <button type="button" class="btn btn-dark" style="width:auto" onclick="history.back()">Cancel</button>
 </div>
-<p>Product ID: @Model.MainProduct.product_ID</p>
-
-<h3>Recommended Products</h3>
-@foreach (var item in Model.Recommendations)
-{
-    <div>
-        <h4>@item.name</h4>
-        <img src="@item.img_link" alt="@item.name" />
-        <p>Price: @item.price</p>
-        <p>Product ID: @item.product_ID</p>
+<div class="product-main-container">
+    <div class="product-image-container">
+        <img src="@Model.MainProduct.img_link" alt="Product Image" class="main-product-image">
     </div>
-}
+    <div class="product-details-container">
+        <h2>@Model.MainProduct.name</h2>
+        <p class="product-price">Price: $@Model.MainProduct.price</p>
+        <p>Brick Count: @Model.MainProduct.num_parts</p>
+        <p>Category: @Model.MainProduct.category</p>
+        <p>@Model.MainProduct.description</p>
+    </div>
+</div>
+
+<h3>Aurora's Picks For You:</h3>
+<div class="product-grid">
+    @foreach (var item in Model.Recommendations.Take(3))
+    {
+        <div class="card m-1 p-1">
+            <a asp-action="SingleProduct" asp-route-product_ID="@item.product_ID" class="text-decoration-none">
+                <h4 class="text-white">@item.name</h4>
+                <img src="@item.img_link" alt="Product Image">
+            </a>
+            <ul class="text-white">
+                <li>Rating: @item.avg_rating</li>
+                <li>Year: @item.year</li>
+                <li>Brick Count: @item.num_parts</li>
+                <li>Category: @item.category</li>
+            </ul>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <form method="post" asp-controller="Admin" asp-action="DeleteProduct">
+                    <!-- Admin controls here -->
+                </form>
+            }
+            else if (User.Identity.IsAuthenticated)
+            {
+                <form method="post" asp-page="/Cart">
+                    <!-- Cart controls here -->
+                </form>
+            }
+        </div>
+    }
+</div>
+
+    <h3>Others also purchased:</h3>
+    <div class="product-grid">
+        @foreach (var item in Model.Recommendations.Skip(3).Take(3))
+        {
+            <div class="card m-1 p-1">
+                <a asp-action="SingleProduct" asp-route-product_ID="@item.product_ID" class="text-decoration-none">
+                    <h4 class="text-white">@item.name</h4>
+                    <img src="@item.img_link" alt="Product Image">
+                </a>
+                <ul class="text-white">
+                    <li>Rating: @item.avg_rating</li>
+                    <li>Year: @item.year</li>
+                    <li>Brick Count: @item.num_parts</li>
+                    <li>Category: @item.category</li>
+                </ul>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <form method="post" asp-controller="Admin" asp-action="DeleteProduct">
+                        <!-- Admin controls here -->
+                    </form>
+                }
+                else if (User.Identity.IsAuthenticated)
+                {
+                    <form method="post" asp-page="/Cart">
+                        <!-- Cart controls here -->
+                    </form>
+                }
+            </div>
+        }
+</div>

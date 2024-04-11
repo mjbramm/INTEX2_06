@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing.Printing;
 
 namespace INTEX2_06.Controllers
 {
@@ -527,7 +528,40 @@ namespace INTEX2_06.Controllers
             await _repo.DeleteProductAsync(product_ID);
             await _repo.SaveChangesAsync();
 
-            return RedirectToAction("Legostore");
+            return RedirectToAction("Legostore", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditProduct(int product_ID)
+        {
+            var product = await _repo.Legos.FirstOrDefaultAsync(x => x.product_ID == product_ID);
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditProduct(Lego model)
+        {
+            if (ModelState.IsValid)
+            {
+                var product = await _repo.Legos.FirstOrDefaultAsync(x => x.product_ID == model.product_ID);
+
+                product.name = model.name;
+                product.year = model.year;
+                product.num_parts = model.num_parts;
+                product.img_link = model.img_link;
+                product.primary_color = model.primary_color;
+                product.secondary_color = model.secondary_color;
+                product.description = model.description;
+                product.category = model.category;
+                product.price = model.price;
+
+                await _repo.UpdateProductAsync(model.product_ID);
+                await _repo.SaveChangesAsync();
+
+                return RedirectToAction("Legostore", "Home");
+            }
+            return View(model);
         }
 
 

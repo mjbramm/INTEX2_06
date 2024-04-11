@@ -7,5 +7,7 @@
         public PaginationInfo PaginationInfo { get; set; } = new PaginationInfo();
 
         public string? CurrentLegoCategory { get; set; }
+
+        public int? CurrentPageSize { get; set; }
     }
 }

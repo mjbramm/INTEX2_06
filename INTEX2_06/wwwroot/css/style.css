@@ -73,7 +73,7 @@ html {
   box-sizing: border-box;
 }
 body {
-  font-family: var(--body-font);
+  font-family: Montserrat;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.6;

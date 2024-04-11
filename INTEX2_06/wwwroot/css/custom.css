@@ -1,0 +1,162 @@
+﻿:root {
+    --tt-blue: #00f2ea;
+    --tt-pink: #ff0050;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.card {
+    background: black;
+    color: white;
+    border: 1px solid var(--tt-blue);
+}
+
+    .card:hover {
+        transform: scale(1.03);
+        transition: transform .3s ease-in-out;
+        border-color: var(--tt-pink);
+    }
+
+    .card img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .card h4 {
+        color: var(--tt-blue);
+    }
+
+.more-catalog {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: var(--tt-pink);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+    .more-catalog:hover {
+        background-color: var(--tt-blue);
+    }
+
+
+
+
+
+
+
+
+/* Root colors defined */
+:root {
+    --tt-blue: #00f2ea;
+    --tt-pink: #ff0050;
+}
+
+.product-main-container {
+    display: flex;
+    width: 100%; /* Ensures full width usage */
+    margin-bottom: 20px; /* Space between product details and recommendations */
+}
+
+.product-image-container {
+    flex: 1 1 40%; /* 40% width of the container */
+    padding: 10px;
+    max-height: 60vh; /* Maximum height of the image container */
+    overflow: hidden; /* Prevents overflow of the image outside the container */
+}
+
+.main-product-image {
+    width: 100%;
+    height: auto;
+    max-height: 100%; /* Ensures image doesn't overflow its container */
+}
+
+.product-details-container {
+    flex: 1 1 60%; /* 60% width of the container */
+    padding: 20px;
+    overflow: auto; /* Adds scrollbar if content overflows */
+    max-height: 60vh; /* Matches image height to align tops and bottoms */
+}
+
+.card {
+    background: black;
+    color: white;
+    border: 1px solid var(--tt-blue);
+}
+
+    .card:hover {
+        transform: scale(1.03);
+        transition: transform .3s ease-in-out;
+        border-color: var(--tt-pink);
+    }
+
+    .card img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .card h4 {
+        color: var(--tt-blue);
+    }
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.more-catalog {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: var(--tt-pink);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+    .more-catalog:hover {
+        background-color: var(--tt-blue);
+    }
+
+
+.video-container {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    z-index: 1050;
+    display: none;
+    background-color: black;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.product-grid2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.video-popup-btn {
+    margin-top: 20px;
+}
+
+.sticky-top {
+    top: 20px;
+}
+
