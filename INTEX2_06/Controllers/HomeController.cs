@@ -91,8 +91,7 @@ namespace INTEX2_06.Controllers
                     ItemsPerPage = pageSize,
                     TotalItems = (legoCategory == null && legoColor == null) ?
                         _repo.Legos.Count() : _repo.Legos.Where(x => (x.category == legoCategory || legoCategory == null) &&
-                            (x.primary_color == legoColor || legoColor == null))
-               .Count()
+                            (x.primary_color == legoColor || legoColor == null)).Count()
                 },
 
                 CurrentLegoCategory = legoCategory,

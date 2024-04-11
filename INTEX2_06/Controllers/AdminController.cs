@@ -482,11 +482,19 @@ namespace INTEX2_06.Controllers
             return RedirectToAction("EditUser", new { UserId = UserId });
         }
 
-        public async Task<IActionResult> ListOrders()
+        public async Task<IActionResult> ListOrders(int pageNum)
         {
+            var pageSize = 100;
+            
             var orders = new OrdersListViewModel
             {
-                Orders = _repo.Orders.OrderByDescending(x => x.date).Where(x => x.transaction_ID != null && x.UserID != null).ToList()
+                Orders = _repo.Orders.OrderByDescending(x => x.date).Where(x => x.transaction_ID != null && x.UserID != null).ToList(),
+                PaginationInfo = new PaginationInfo
+                {
+                    CurrentPage = pageNum,
+                    ItemsPerPage = pageSize,
+                    TotalItems = _repo.Orders.Count()
+                },
             };
 
             return View(orders);

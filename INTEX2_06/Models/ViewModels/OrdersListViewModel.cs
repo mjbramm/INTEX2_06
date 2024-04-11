@@ -5,5 +5,6 @@ namespace INTEX2_06.Models.ViewModels
     public class OrdersListViewModel
     {
         public IEnumerable<Order> Orders { get; set; }
+        public PaginationInfo PaginationInfo { get; set; } = new PaginationInfo();
     }
 }

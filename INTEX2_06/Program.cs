@@ -112,7 +112,8 @@ app.Use(async (context, next) =>
 //app.MapControllerRoute("legoCategory", "{legoCategory}", new { Controller = "Home", Action = "Legostore", pageNum = 1 });
 //app.MapControllerRoute("pagination", "Legos/{pageNum}", new { Controller = "Home", Action = "Legostore", pageNum = 1 });
 
-
+//app.MapControllerRoute("default", "/Page{pageNum}/Size{pageSize}", new { Controller = "Home", Action = "Legostore" });
+//app.MapControllerRoute("LNS", "/{legoCategory}/Page{pageNum}/Size{pageSize}", new { Controller = "Home", Action = "Legostore" });
 
 
 app.MapDefaultControllerRoute();
