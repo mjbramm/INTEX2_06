@@ -8,6 +8,12 @@
         <h4>@Model.name</h4>
     </a>
     <img src="@Model.img_link" alt="Product Image" class="float-end img-responsive">
+    <ul>
+        <li>Rating: @Model.avg_rating</li>
+        <li>Year: @Model.year</li>
+        <li>Brick Count: @Model.num_parts</li>
+        <li>Category: @Model.category</li>
+    </ul>
     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
     {
         <form id="@Model.product_ID" method="post" asp-controller="Admin" asp-action="DeleteProduct">

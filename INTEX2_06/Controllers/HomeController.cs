@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using INTEX2_06.Models.ViewModels;
+using Microsoft.AspNet.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
@@ -12,96 +13,25 @@ namespace INTEX2_06.Controllers
     public class HomeController : Controller
     {
         private ILegoRepository _repo;
-        private AppUser _appUser;
-        
+        //private UserManager<AppUser> userManager;
 
-        public HomeController(ILegoRepository temp, AppUser user) //UserManager<AppUser> userMgr
+        public HomeController(ILegoRepository temp) //UserManager<AppUser> userMgr
         {
+            //userManager = userMgr;
             _repo = temp;
-            _appUser = user;
         }
 
 
         public async Task<IActionResult> Index()
         {
-            if (User.Identity.IsAuthenticated)
+            //var legos = _repo.Legos.ToList();
+            var legos = new LegosListViewModel
             {
-                var ordersAndLineItems = (from order in _repo.Orders
-                                          join lineItem in _repo.LineItems on order.transaction_ID equals lineItem.transaction_ID
-                                          where order.customer_ID == _appUser.CustomerID
-                                          orderby order.date descending
-                                          select new
-                                          {
-                                              Order = order,
-                                              LineItem = lineItem
-                                          }).FirstOrDefault();
-
-                var productID = ordersAndLineItems.LineItem.product_ID;
-
-                var product = await _repo.Legos.FirstOrDefaultAsync(p => p.product_ID == productID);
-
-                var recommendationIDs = new List<int>
-                {
-                    product.small_rec_1,
-                    product.small_rec_2,
-                    product.small_rec_3,
-                    product.pop_recommend1,
-                    product.pop_recommend2,
-                    product.pop_recommend3
-                };
-
-                var recommendedProducts = new List<Lego>();
-                foreach (var id in recommendationIDs)
-                {
-                    var recommendedProduct = await _repo.Legos.FirstOrDefaultAsync(p => p.product_ID == id);
-                    if (recommendedProduct != null)
-                    {
-                        recommendedProducts.Add(recommendedProduct);
-                    }
-                }
-
-                var viewModel = new ProductViewModel
-                {
-                    MainProduct = product,
-                    Recommendations = recommendedProducts
-                };
-
-                //var legos = new LegosListViewModel
-                //{
-                //    Legos = _repo.Legos
-                //        .Where(x => x.product_ID == productID)    
-                //        .OrderByDescending(x => x.avg_rating)
-                //        .Take(9)
-                //};
-
-                //var viewModel = new OrderAndLineItemViewModel
-                //{
-                //    Order = ordersAndLineItems?.Order,
-                //    LineItem = ordersAndLineItems?.LineItem
-                //};
-                //var orders = new OrderListViewModel
-                //{
-                //    Orders = _repo.Orders.Where(x => x.customer_ID == _appUser.CustomerID).OrderByDescending(x => x.date).Take(1)
-                //};
-                //var lineItems = new LineItemListViewModel
-                //{
-                //    LineItems = _repo.LineItems.Where(x => x.transaction_ID == Orders.transaction_ID).Take(1)
-                //};
-
-                return View(viewModel);
-
-            }
-            else
-            {
-                var legos = new LegosListViewModel
-                {
-                    Legos = _repo.Legos
-                        .OrderByDescending(x => x.avg_rating)
-                        .Take(9)
-                };
-                return View(legos);
-            }
-
+                Legos = _repo.Legos
+                   .OrderByDescending(x => x.avg_rating)
+                   .Take(9)
+            };
+            return View(legos);
         }
         [HttpGet]
         public async Task<IActionResult> SingleProduct(int product_ID)
