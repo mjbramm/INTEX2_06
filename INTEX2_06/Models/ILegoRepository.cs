@@ -3,8 +3,8 @@
     public interface ILegoRepository
     {
         public IQueryable<Lego> Legos { get; }
-        public IQueryable<Customer> Customers { get; }
         public IQueryable<Order> Orders { get; }
+        public IQueryable<AppUser> AppUser { get; }
         public IQueryable<LineItem> LineItems { get; }
         Task AddProduct(Lego product);
         Task<int> SaveChangesAsync();
