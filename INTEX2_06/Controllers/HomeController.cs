@@ -68,7 +68,7 @@ namespace INTEX2_06.Controllers
         }
 
 
-        public async Task<IActionResult> Legostore(string? legoCategory, int pageNum=1, int pageSize=5)
+        public async Task<IActionResult> Legostore(string? legoCategory, string? legoColor, int pageNum=1, int pageSize=5)
         {
             // Check if the user is authenticated
             //if (User.Identity.IsAuthenticated)
@@ -79,7 +79,8 @@ namespace INTEX2_06.Controllers
             var legos = new LegosListViewModel
             {
                 Legos = _repo.Legos
-                    .Where(x => x.category == legoCategory || legoCategory == null)
+                    .Where(x => (x.category == legoCategory || legoCategory == null) &&
+                        (x.primary_color == legoColor || legoColor == null))
                     .OrderBy(x => x.name)
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize),
@@ -88,11 +89,15 @@ namespace INTEX2_06.Controllers
                 {
                     CurrentPage = pageNum,
                     ItemsPerPage = pageSize,
-                    TotalItems = legoCategory == null ? _repo.Legos.Count() : _repo.Legos.Where(x => x.category == legoCategory).Count()
+                    TotalItems = (legoCategory == null && legoColor == null) ?
+                        _repo.Legos.Count() : _repo.Legos.Where(x => (x.category == legoCategory || legoCategory == null) &&
+                            (x.primary_color == legoColor || legoColor == null))
+               .Count()
                 },
 
                 CurrentLegoCategory = legoCategory,
-                CurrentPageSize = pageSize
+                CurrentPageSize = pageSize,
+                CurrentLegoColor = legoColor
             };
 
             return View(legos);
