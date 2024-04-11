@@ -1,4 +1,31 @@
-﻿.form-outline {
+﻿:root {
+    --tt-blue: #00f2ea;
+    --tt-pink: #ff0050;
+    --bg-dark: #121212; /* Dark background for title */
+    --bg-light: #ffffff; /* Light background for the page */
+    --text-light: #ffffff; /* Light text color */
+    --text-dark: #000000; /* Dark text color */
+}
+
+.footer {
+    width: 100%;
+    max-width: 100%;
+    color: var(--text-light);
+    overflow: hidden; /* Prevent unnecessary scrolling */
+}
+
+.sticktobottom {
+    position: fixed;
+    bottom: 0
+}
+
+/*body, html {
+    height: 100%;
+    margin: 0;
+    background-color: var(--bg-light);*/ /* Set the overall background to light */
+/*}*/
+
+.form-outline {
     width: 50%;
     border: 1px solid #ced4da;
     padding: 15px;
@@ -29,14 +56,14 @@
 
 /* Overall dark theme background */
 body {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
+    background-color: var(--bg-light);
+    color: var(--text-dark);
 }
 
 /* Dark navbar with light text */
 .navbar {
-    background-color: var(--bg-dark) !important;
-    color: var(--text-light) !important;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
 }
 
 /* Brand Logo */
@@ -46,7 +73,7 @@ body {
 
 /* Navigation link styles */
 .nav-link {
-    color: var(--text-light) !important;
+    color: var(--text-light);
 }
 
     .nav-link:hover {
@@ -83,3 +110,15 @@ footer {
         background-color: var(--tt-pink);
     }
 
+.pagination-container {
+    display: flex;
+    justify-content: flex-end; /* Align items to the end (right side) */
+    align-items: flex-end; /* Align items to the end (bottom) */
+    /*width: 100%;
+    position: fixed;*/ /* Fix the container to stay in the same position */
+    /*bottom: 0;*/ /* Position the container at the bottom */
+    /*right: 0;*/ /* Position the container at the right */
+    /*padding: 10px;*/ /* Add some padding */
+    /*background-color: white;*/ /* Add a background color */
+    /*z-index: 999;*/ /* Ensure it's above other elements */
+}
