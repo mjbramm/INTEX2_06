@@ -1,23 +1,19 @@
 ﻿using INTEX2_06.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using INTEX2_06.Models.ViewModels;
-using Microsoft.AspNet.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.ML.OnnxRuntime;
-using Microsoft.ML.OnnxRuntime.Tensors;
 
 namespace INTEX2_06.Controllers
 {
     public class HomeController : Controller
     {
         private ILegoRepository _repo;
-        //private UserManager<AppUser> userManager;
+        private UserManager<AppUser> _userManager;
 
-        public HomeController(ILegoRepository temp) //UserManager<AppUser> userMgr
+        public HomeController(ILegoRepository temp, UserManager<AppUser> userMgr)
         {
-            //userManager = userMgr;
+            _userManager = userMgr;
             _repo = temp;
         }
 
@@ -112,9 +108,41 @@ namespace INTEX2_06.Controllers
             return View();
         }
 
+        [HttpGet]
         public async Task<IActionResult> PaymentInfo()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PaymentInfo(CreateOrderViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                AppUser currentUser = await _userManager.GetUserAsync(User);
+
+                Order order = new Order
+                {
+                    transaction_ID = new Random().Next(100000, 999999),
+                    date = DateTime.Now.Date,
+                    day_of_week = DateTime.Now.ToString("ddd"),
+                    time = DateTime.Now.Hour,
+                    entry_mode = "CVC",
+                    amount = model.amount,
+                    type_of_transaction = "Online",
+                    country_of_transaction = "USA",
+                    shipping_address = model.shipping_address,
+                    bank = model.bank,
+                    type_of_card = model.type_of_card,
+                    UserID = currentUser.Id
+                };
+
+                await _repo.AddOrder(order);
+
+                return RedirectToAction("OrderConfirmation", "Home");
+            }
+            
+            return View(model);
         }
 
         public async Task<IActionResult> OrderConfirmation()
@@ -123,6 +151,18 @@ namespace INTEX2_06.Controllers
         }
 
         public async Task<IActionResult> OrderUnderReview()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmOrderDetails()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmOrderCancel()
         {
             return View();
         }

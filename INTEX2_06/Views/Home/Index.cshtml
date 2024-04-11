@@ -4,15 +4,16 @@
 <div class="container mt-3">
     <div class="tiktok-body">
         <h2 class="tiktok-h2 text-center" style="color: var(--text-light);">Welcome to BrickTok</h2>
+        <br />
         <h3 class="text-center" style="color: var(--text-light);">Find your favorite sets!</h3>
     </div>
-    <div class="product-grid">
+    <div class="home-product-grid">
         @foreach (Lego l in Model.Legos)
         {
-            <div class="card custom-center">
+            <div class="home-card custom-center rounded-div">
                 <a asp-action="SingleProduct" asp-route-product_ID="@l.product_ID" class="text-decoration-none">
                     <img class="card-img" src="@l.img_link" alt="Product Image">
-                    <h4 class="name-tag">@l.name</h4>
+                    <h1 class="name-tag">@l.name</h1>
                 </a>
             </div>
         }
