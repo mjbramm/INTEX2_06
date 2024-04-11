@@ -22,21 +22,40 @@
     <div class="row m-1 p-1">
         <!-- Left Sidebar for Categories -->
         <div class="col-3 sticky-top">
+                <div class="pagination-container">
+                    <div page-model="@Model.PaginationInfo" page-action="Legostore" page-classes-enabled="true" page-class="btn"
+                         page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
+                    <div>
+                        Show:
+                        <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="5">5</a>
+                        <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="10">10</a>
+                        <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="20">20</a>
+                    </div>
+                </div>
             <vc:lego-categories />
             <button class="btn btn-primary video-popup-btn" onclick="toggleVideo()">Watch Build Tips</button>
         </div>
 
-        <!-- Product Listings -->
         <div class="col-6">
-            <div role="main" class="pb-3 product-grid2">
+            <div role="main" class="pb-3 product-grid">
                 @foreach (Lego l in Model.Legos.Distinct())
                 {
                     <partial name="LegoSummary" model="l" />
                 }
             </div>
-            <div page-model="@Model.PaginationInfo" page-action="Legostore" page-classes-enabled="true" page-class="btn"
-                 page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
+            <div class="pagination-container">
+                <div page-model="@Model.PaginationInfo" page-action="Legostore" page-classes-enabled="true" page-class="btn"
+                     page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
+                <div>
+                    Show:
+                    <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="5">5</a>
+                    <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="10">10</a>
+                    <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="20">20</a>
+                </div>
+            </div>
         </div>
+
+</div>
 
         <!-- Hidden YouTube Video Container -->
         <div id="videoContainer" class="video-container">
