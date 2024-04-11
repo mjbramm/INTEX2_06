@@ -5,19 +5,18 @@
     ViewBag.Title = "All Users";
 }
 
-<h1>All Users</h1>
+<h1 class="text-center">All Users</h1>
 
 @if (Model.Any())
 {
     <a asp-action="Register" asp-controller="Account"
-       class="btn btn-primary mb-3" style="width:auto">
+       class="btn btn-info" style="width:auto">
         Add New User
     </a>
 
     <table class="table">
         <thead>
             <tr>
-                <th>User Id</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Username</th>
@@ -30,13 +29,12 @@
             @foreach (var user in Model)
             {
                 <tr>
-                    <td>@user.Id</td>
                     <td>@user.FirstName</td>
                     <td>@user.LastName</td>
                     <td>@user.UserName</td>
                     <td>@user.Email</td>
                     <td>
-                        <a asp-controller="Admin" asp-action="EditUser" asp-route-UserId="@user.Id" class="btn btn-primary">Edit</a>
+                        <a asp-controller="Admin" asp-action="EditUser" asp-route-UserId="@user.Id" class="btn btn-info">Edit</a>
                     </td>
                     <td>
                         <form method="post" asp-action="DeleteUser" asp-route-UserId="@user.Id" onsubmit="return confirmDelete()">

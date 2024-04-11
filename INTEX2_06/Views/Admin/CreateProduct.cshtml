@@ -1,14 +1,13 @@
 ﻿@model CreateProductViewModel
 
-<h1>Create New Product</h1>
-<hr />
-
-<form asp-controller="Admin" asp-action="CreateProduct" method="post" class="mt-3">
+<form class="form-outline text-center offset-3" asp-controller="Admin" asp-action="CreateProduct" method="post" class="mt-3">
+    <h1>Create New Product</h1>
+    <hr />
     <input asp-for="product_ID" type="hidden" />
     <div class="text-danger">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     </div>
-    <div class="form-group row">
+    @* <div class="form-group row">
         <div class="col-sm-10">
             <input asp-for="name" class="form-control" style="margin-bottom:10px;" placeholder="Name of new product" required>
             <span asp-validation-for="name" class="text-danger"></span>
@@ -70,13 +69,84 @@
             <span asp-validation-for="price" class="text-danger"></span>
         </div>
     </div>
-
-    <div class="form-group row">
+ *@
+    <div class="form-group row offset-1">
         <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary" style="width:auto">Create Product</button>
-            <button type="button" class="btn btn-primary" style="width:auto" onclick="history.back()">Cancel</button>
+            <label for="name" class="col-form-label">Name of New Product</label>
+            <input asp-for="name" id="name" class="form-control" style="margin-bottom:10px;" required>
+            <span asp-validation-for="name" class="text-danger"></span>
         </div>
     </div>
+
+    <div class="form-group row offset-1">
+        <div class="col-sm-10">
+            <label for="year" class="col-form-label">Year</label>
+            <input asp-for="year" id="year" class="form-control" style="margin-bottom:10px;" required>
+            <span asp-validation-for="year" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row offset-1">
+        <div class="col-sm-10">
+            <label for="num_parts" class="col-form-label">Number of parts</label>
+            <input asp-for="num_parts" id="num_parts" class="form-control" style="margin-bottom:10px;" required>
+            <span asp-validation-for="num_parts" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row offset-1">
+        <div class="col-sm-10">
+            <label for="img_link" class="col-form-label">Image link</label>
+            <input asp-for="img_link" id="img_link" class="form-control" style="margin-bottom:10px;" required>
+            <span asp-validation-for="img_link" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row offset-1">
+        <div class="col-sm-10">
+            <label for="primary_color" class="col-form-label">Primary color</label>
+            <input asp-for="primary_color" id="primary_color" class="form-control" style="margin-bottom:10px;" required>
+            <span asp-validation-for="primary_color" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row offset-1">
+        <div class="col-sm-10">
+            <label for="secondary_color" class="col-form-label">Secondary color</label>
+            <input asp-for="secondary_color" id="secondary_color" class="form-control" style="margin-bottom:10px;" required>
+            <span asp-validation-for="secondary_color" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row offset-1">
+        <div class="col-sm-10">
+            <label for="description" class="col-form-label">Description</label>
+            <input asp-for="description" id="description" class="form-control" style="margin-bottom:10px;" required>
+            <span asp-validation-for="description" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row offset-1">
+        <div class="col-sm-10">
+            <label for="category" class="col-form-label">Category</label>
+            <input asp-for="category" id="category" class="form-control" style="margin-bottom:10px;" required>
+            <span asp-validation-for="category" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row offset-1">
+        <div class="col-sm-10">
+            <label for="price" class="col-form-label">Price</label>
+            <input asp-for="price" id="price" class="form-control" style="margin-bottom:10px;" required>
+            <span asp-validation-for="price" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row offset-1">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-info" style="width:auto">Create Product</button>
+            <button type="button" class="btn btn-danger" style="width:auto" onclick="history.back()">Cancel</button>
+        </div>
+    </div>
+
+
 </form>
-
-
