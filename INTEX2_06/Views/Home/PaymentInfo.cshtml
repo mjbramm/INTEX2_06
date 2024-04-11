@@ -6,8 +6,8 @@
 
 <div class="container">
     <div class="row">
-        <form class="form-outline offset-3">
-            <h1 class="text-center">Payment Info</h1>
+        <form class="col-6 form-outline offset-3">
+            <h1 class="text-center">Payment Information</h1>
                 <!-- Card Type Field -->
                 <label for="cardType">Card Type</label>
                 <br />
@@ -38,6 +38,9 @@
                 <!-- Shipping Address Field -->
                 <label for="shippingAddress">Shipping Country</label>
                 <input type="text" id="shippingAddress" name="shippingAddress">
+                <br />
+                <br />
+            <a class="btn btn-info d-flex justify-content-center" asp-controller="Home" asp-action="ConfirmOrderDetails">Continue to Confirm Info</a>
         </form>
     </div>
 </div>
