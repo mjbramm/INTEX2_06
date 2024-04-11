@@ -16,7 +16,7 @@ namespace INTEX2_06.Controllers
         private ILegoRepository _repo;
         //private readonly UserImporter _userImporter;
 
-        public AdminController(UserManager<AppUser> usrMgr, RoleManager<IdentityRole> roleMgr, ILegoRepository temp) //UserImporter userImporter)
+        public AdminController(UserManager<AppUser> usrMgr, RoleManager<IdentityRole> roleMgr, ILegoRepository temp)//, UserImporter userImporter)
         {
             userManager = usrMgr;
             roleManager = roleMgr;
