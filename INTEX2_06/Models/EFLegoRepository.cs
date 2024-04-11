@@ -5,12 +5,16 @@ namespace INTEX2_06.Models
     public class EFLegoRepository : ILegoRepository
     {
         private LegostoreContext _context;
-        public EFLegoRepository(LegostoreContext temp) {
-            _context = temp;
+
+        private AppIdentityDbContext _identitycontext;
+        public EFLegoRepository(LegostoreContext context, AppIdentityDbContext identityContext)
+        {
+            _context = context;
+            _identitycontext = identityContext;
         }
         public IQueryable<Lego> Legos => _context.Legos;
-        public IQueryable<Customer> Customers => _context.Customers;
         public IQueryable<Order> Orders => _context.Orders;
+        public IQueryable<AppUser> AppUser => _identitycontext.Users;
         public IQueryable<LineItem> LineItems => _context.LineItems;
 
         public async Task AddProduct(Lego product)
