@@ -1,5 +1,9 @@
-﻿<div class="container">
-   <div class="form">
+﻿@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<div class="container">
+   <div class="form-outline text-center offset-3">
        <div class="row">
             <h1>Thank You!</h1>
        </div>
@@ -10,8 +14,8 @@
             </h4>
         </div>
         <div class="row">
-            <a class="btn btn-pink" asp-controller="Home" asp-action="Legostore">Continue Shopping</a>
-            <a class="btn btn-cyan" asp-controller="Home" asp-action="Index">Return to Home</a>
+            <a class="btn btn-danger" asp-controller="Home" asp-action="Legostore">Continue Shopping</a>
+            <a class="btn btn-info" asp-controller="Home" asp-action="Index">Return to Home</a>
         </div>
     </div>
 </div>
