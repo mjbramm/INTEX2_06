@@ -12,24 +12,28 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-var googleClientId = builder.Configuration["GoogleClientId"];
-var googleClientSecret = builder.Configuration["GoogleClientSecret"];
-
 builder.Services.AddAuthentication()
     .AddGoogle(options =>
     {
-        options.ClientId = googleClientId;
-        options.ClientSecret = googleClientSecret;
+        options.ClientId = builder.Configuration["GoogleClientId"];
+        options.ClientSecret = builder.Configuration["GoogleClientSecret"];
     });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Manually configure the connection string
+var connectionString = Environment.GetEnvironmentVariable("BwBricksConnectionString");
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new InvalidOperationException("The database connection string 'BwBricksConnectionString' was not found.");
+}
+
 builder.Services.AddDbContext<AppIdentityDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddDbContext<LegostoreContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<ILegoRepository, EFLegoRepository>();
 builder.Services.AddRazorPages();
@@ -55,6 +59,8 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(10));
 
 builder.Services.AddTransient<ISenderEmail, EmailSender>();
+
+builder.Services.AddScoped<UserImporter>(); // AddScoped is used here assuming it's appropriate for your scenarioo
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -105,6 +111,7 @@ app.Use(async (context, next) =>
 //app.MapControllerRoute("page", "Page/{pageNum}", new { Controller = "Home", Action = "Legostore", pageNum = 1 });
 //app.MapControllerRoute("legoCategory", "{legoCategory}", new { Controller = "Home", Action = "Legostore", pageNum = 1 });
 //app.MapControllerRoute("pagination", "Legos/{pageNum}", new { Controller = "Home", Action = "Legostore", pageNum = 1 });
+
 
 
 
