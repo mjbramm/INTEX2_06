@@ -4,5 +4,6 @@
     {
         public IEnumerable<AppUser> Users { get; set; }
         public PaginationInfo PaginationInfo { get; set; } = new PaginationInfo();
+
     }
 }
