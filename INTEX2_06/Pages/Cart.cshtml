@@ -2,7 +2,7 @@
 @model INTEX2_06.Pages.CartModel
 @{
 }
-<div class="cart-outline offset-2">
+<div class="cart-outline offset-3">
     <h2>YOUR CART</h2>
     <hr />
     <table class="table table-bordered table-striped">
@@ -24,9 +24,12 @@
                     <td class="text-right">@l.Lego.price</td>
                     <td class="text-right">@((l.Quantity * l.Price).ToString("c"))</td>
                     <td>
-                        <form method="post" asp-action="" asp-route-UserId="" onsubmit="">
+                        <form method="post" asp-page="/Cart" asp-page-handler="RemoveFromCart" asp-route-productId="@l.Lego.product_ID">
                             <button type="submit" class="btn btn-danger">Remove</button>
                         </form>
+@*                      <form method="post" asp-action="" asp-route-UserId="" onsubmit="">
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form> *@
                     </td>
                 </tr>
             }

@@ -517,7 +517,6 @@ namespace INTEX2_06.Controllers
             {
                 Orders = _repo.Orders
                     .OrderByDescending(x => x.date)
-                    .Where(x => x.transaction_ID != null && x.UserID != null)
                     .Skip(pageSize * (Math.Max(1, pageNum - 1)))
                     .Take(pageSize),
                 PaginationInfo = new PaginationInfo
@@ -526,6 +525,19 @@ namespace INTEX2_06.Controllers
                     ItemsPerPage = pageSize,
                     TotalItems = _repo.Orders.Count()
                 },
+            };
+
+            return View(orders);
+        }
+
+        public async Task<IActionResult> FraudOrders()
+        {
+
+            var orders = new OrdersListViewModel
+            {
+                Orders = _repo.Orders
+                    .OrderByDescending(x => x.date)
+                    .Where(t => t.fraud == 0 && t.predict_fraud == 1)
             };
 
             return View(orders);
@@ -563,14 +575,23 @@ namespace INTEX2_06.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> DeleteProduct(int product_ID)
+        [HttpGet]
+        public async Task<IActionResult> DeleteProductConfirm(int product_ID)
         {
             var product = await _repo.GetProductByIdAsync(product_ID);
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteProductConfirmPost(int product_ID)
+        {
+            // Attempt to delete the user
             await _repo.DeleteProductAsync(product_ID);
             await _repo.SaveChangesAsync();
 
-            return RedirectToAction("Legostore", "Home");
+            // Handle a successful delete
+            return RedirectToAction("ListOrders"); 
         }
 
         [HttpGet]
