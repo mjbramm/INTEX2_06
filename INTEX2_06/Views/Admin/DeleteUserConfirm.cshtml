@@ -1,0 +1,18 @@
+﻿@model AppUser
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Confirm Delete User";
+}
+
+<div class="form-outline text-center offset-3">
+    <div class="row">
+        <h4>Are You Sure You Want to Delete this User?</h4>
+    </div>
+    <div class="row">
+        <button type="button" class="btn btn-info" style="width:auto" onclick="history.back()">Cancel</button>
+        <form method="post" asp-action="DeleteUserConfirmPost" asp-route-UserId="@Model.Id" onsubmit="return confirmDelete()">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+
+</div>
