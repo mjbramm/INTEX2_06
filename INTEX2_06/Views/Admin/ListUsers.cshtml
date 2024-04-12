@@ -12,53 +12,44 @@
     Add New User
 </a>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model.Users)
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <td>@user.FirstName</td>
-                <td>@user.LastName</td>
-                <td>@user.UserName</td>
-                <td>@user.Email</td>
-                <td>
-                    <a asp-controller="Admin" asp-action="EditUser" asp-route-UserId="@user.Id" class="btn btn-info">Edit</a>
-                </td>
-                <td>
-                    <form method="post" asp-action="DeleteUser" asp-route-UserId="@user.Id" onsubmit="return confirmDelete()">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
-        }
-    </tbody>
-</table>
-@if (Model.PaginationInfo.TotalNumPages > 1)
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <a asp-controller="Admin" asp-action="EditUser" asp-route-UserId="@user.Id" class="btn btn-info">Edit</a>
+                    </td>
+                    <td>
+@*                         <form method="post" asp-action="DeleteUser" asp-route-UserId="@user.Id" onsubmit="return confirmDelete()">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form> *@
+                        <a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteUserConfirm" asp-route-UserId="@user.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
 {
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="pagination justify-content-center">
-                    @if (Model.PaginationInfo.CurrentPage > 0)
-                    {
-                        <a asp-action="ListUsers" asp-route-pageNum="@(Model.PaginationInfo.CurrentPage - 1)" class="btn btn-primary">Previous</a>
-                    }
-                    @if (Model.PaginationInfo.CurrentPage < Model.PaginationInfo.TotalNumPages)
-                    {
-                        <a asp-action="ListUsers" asp-route-pageNum="@(Model.PaginationInfo.CurrentPage + 1)" class="btn btn-primary">Next</a>
-                    }
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-header">
+            No Users Added Yet
         </div>
     </div>
 }
