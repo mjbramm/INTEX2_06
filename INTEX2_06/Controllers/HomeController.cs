@@ -12,16 +12,18 @@ namespace INTEX2_06.Controllers
 {
     public class HomeController : Controller
     {
-        private ILegoRepository _repo; //This gives us our product/ lego set data
-        private UserManager<AppUser> _userManager; //this gives us the identity/customer tables
-        private readonly string _modelPath = @"fraud_model2.onnx"; //This enables the fraud detector to work.
+        private ILegoRepository _repo;
+        private UserManager<AppUser> _userManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly string _modelPath;
 
-        public HomeController(ILegoRepository temp, UserManager<AppUser> userMgr)
+        public HomeController(ILegoRepository temp, UserManager<AppUser> userMgr, IWebHostEnvironment env)
         {
             _userManager = userMgr;
             _repo = temp;
+            _webHostEnvironment = env;
+            _modelPath = Path.Combine(_webHostEnvironment.WebRootPath, "fraud_model2.onnx");
         }
-
 
         //This is our home page, and how the opening products.
         public async Task<IActionResult> Index()
@@ -101,7 +103,7 @@ namespace INTEX2_06.Controllers
 
         }
 
-        //This is how we suggest the next best products
+
         [HttpGet]
         public async Task<IActionResult> SingleProduct(int product_ID)
         {
@@ -260,7 +262,7 @@ namespace INTEX2_06.Controllers
 
         private int PredictFraud(CreateOrderViewModel data)
         {
-            using var session = new InferenceSession(@"fraud_model2.onnx");
+            using var session = new InferenceSession(_modelPath);
 
             var day_of_week = DateTime.Now.ToString("ddd");
 
