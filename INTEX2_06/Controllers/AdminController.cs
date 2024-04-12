@@ -605,14 +605,14 @@ namespace INTEX2_06.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteProductConfirmPost(int product_ID)
+        public async Task<IActionResult> DeleteProduct(int product_ID)
         {
             // Attempt to delete the user
             await _repo.DeleteProductAsync(product_ID);
             await _repo.SaveChangesAsync();
 
             // Handle a successful delete
-            return RedirectToAction("ListOrders"); 
+            return RedirectToAction("Legostore", "Home"); 
         }
 
         [HttpGet]
