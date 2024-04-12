@@ -217,12 +217,12 @@ namespace INTEX2_06.Controllers
                     complete = 0
                 };
 
-                await _repo.AddOrder(order);
-
                 var result = PredictFraud(model);
                 order.predict_fraud = result;
 
-                await _repo.UpdateOrderAsync(order.transaction_ID);
+                await _repo.AddOrder(order);
+              
+                //await _repo.UpdateOrderAsync(order.transaction_ID);
 
                 // Redirect based on the fraud prediction result
                 if (result == 0)
