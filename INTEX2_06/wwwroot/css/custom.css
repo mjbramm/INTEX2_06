@@ -98,6 +98,18 @@ body, html {
     flex-grow: 1; /* Add this to make the card expand */
 }
 
+.button-attach {
+    position: absolute;
+    bottom: 10px; /* adjust as necessary for your layout */
+    right: 10px;
+}
+
+.button-edit {
+    position: absolute;
+    bottom: 10px; /* adjust as necessary for your layout */
+    right: 90px;
+}
+
     .card:hover {
         transform: scale(1.03);
         transition: transform .3s ease-in-out;
@@ -265,9 +277,6 @@ body, html {
 .empty-star:before {
     content: "\2606"; /* Unicode outlined star */
 }
-
-
-
 
 
 
