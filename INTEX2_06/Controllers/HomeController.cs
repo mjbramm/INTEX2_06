@@ -12,9 +12,9 @@ namespace INTEX2_06.Controllers
 {
     public class HomeController : Controller
     {
-        private ILegoRepository _repo;
-        private UserManager<AppUser> _userManager;
-        private readonly string _modelPath = @"fraud_model2.onnx";
+        private ILegoRepository _repo; //This gives us our product/ lego set data
+        private UserManager<AppUser> _userManager; //this gives us the identity/customer tables
+        private readonly string _modelPath = @"fraud_model2.onnx"; //This enables the fraud detector to work.
 
         public HomeController(ILegoRepository temp, UserManager<AppUser> userMgr)
         {
@@ -23,18 +23,85 @@ namespace INTEX2_06.Controllers
         }
 
 
+        //This is our home page, and how the opening products.
         public async Task<IActionResult> Index()
         {
             //var legos = _repo.Legos.ToList();
-            var legos = new LegosListViewModel
+
+            if (User.Identity.IsAuthenticated)
             {
-                Legos = _repo.Legos
-                   .OrderByDescending(x => x.avg_rating)
-                   .Take(9)
-            };
-            return View(legos);
+                Random rand = new Random();
+                int sortOrder = rand.Next(1, 3); // Generates either 1 or 2
+
+                var legos = new LegosListViewModel
+                {
+                    // Conditionally apply ordering based on the random number
+                    Legos = sortOrder == 1 ?
+                            _repo.Legos.OrderBy(x => x.product_ID).Take(9) :
+                            _repo.Legos.OrderByDescending(x => x.product_ID).Take(9)
+                };
+
+                return View(legos);
+            }
+            else
+            {
+              var legos = new LegosListViewModel
+                {
+                 Legos = _repo.Legos
+                .OrderByDescending(x => x.avg_rating)
+                .Take(9)
+                };
+                return View(legos);
+            }
+
+            // alternate approach to use suggestions!
+
+            //var user = User.Identity.GetUserId();
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    var ordersAndLineItems = (from order in _repo.Orders
+            //                              join lineItem in _repo.LineItems on order.transaction_ID equals lineItem.transaction_ID
+            //                              where order.customer_ID == user.CustomerID
+            //                              orderby order.date descending
+            //                              select new
+            //                              {
+            //                                  Order = order,
+            //                                  LineItem = lineItem
+            //                              }).FirstOrDefault();
+
+            //    var productID = ordersAndLineItems.LineItem.product_ID;
+
+            //    var product = await _repo.Legos.FirstOrDefaultAsync(p => p.product_ID == productID);
+
+            //    var recommendationIDs = new List<int>
+            //    {
+            //        product.small_rec_1,
+            //        product.small_rec_2,
+            //        product.small_rec_3,
+            //        product.pop_recommend1,
+            //        product.pop_recommend2,
+            //        product.pop_recommend3
+            //    };
+
+            //    var recommendedProducts = new List<Lego>();
+            //    foreach (var id in recommendationIDs)
+            //    {
+            //        var recommendedProduct = await _repo.Legos.FirstOrDefaultAsync(p => p.product_ID == id);
+            //        if (recommendedProduct != null)
+            //        {
+            //            recommendedProducts.Add(recommendedProduct);
+            //        }
+            //    }
+
+            //    var viewModel = new ProductViewModel
+            //    {
+            //        MainProduct = product,
+            //        Recommendations = recommendedProducts
+            //    };
+
         }
 
+        //This is how we suggest the next best products
         [HttpGet]
         public async Task<IActionResult> SingleProduct(int product_ID)
         {
