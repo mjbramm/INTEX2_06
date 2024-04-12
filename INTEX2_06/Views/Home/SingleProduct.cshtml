@@ -2,7 +2,6 @@
 @model ProductViewModel
 <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true">
 
-
 @{
     Layout = "_Layout";
 }
@@ -45,7 +44,7 @@
     </div>
 </div>
 
-<h3>Aurora's Picks For You:</h3>
+<h3 style="color: var(--text-dark)">Aurora's Picks For You:</h3>
 <div class="single-product-grid">
     @foreach (var item in Model.Recommendations.Take(3))
     {
@@ -70,7 +69,7 @@
     }
 </div>
 
-    <h3>Others also purchased:</h3>
+<h3 style="color: var(--text-dark)">Others also purchased:</h3>
     <div class="single-product-grid">
         @foreach (var item in Model.Recommendations.Skip(3).Take(3))
         {

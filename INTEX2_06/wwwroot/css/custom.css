@@ -54,7 +54,7 @@ body, html {
     gap: 10px;
     overflow-y: auto; /* Enable vertical scrolling */
     min-width: 60vh;
-    max-height: 132vh; /* Limit the height to maintain a scrollable area */
+    max-height: 66vh; /* Limit the height to maintain a scrollable area */
     padding: 20px; /* Add some padding to the container */
     scrollbar-width: none; /* For Firefox */
     -ms-overflow-style: none; /* For Internet Explorer and Edge */
@@ -98,6 +98,12 @@ body, html {
     flex-grow: 1; /* Add this to make the card expand */
 }
 
+    .card:hover {
+        transform: scale(1.03);
+        transition: transform .3s ease-in-out;
+        border-color: var(--tt-pink);
+    }
+
 .home-card {
     border: 1px solid var(--tt-blue);
     background-color: var(--bg-light);
@@ -108,7 +114,7 @@ body, html {
     margin: 5px;
 }
 
-    .card:hover {
+    .home-card:hover {
         transform: scale(1.03);
         transition: transform .3s ease-in-out;
         border-color: var(--tt-pink);
