@@ -12,5 +12,6 @@
         Task<Lego> GetProductByIdAsync(int product_ID);
         Task DeleteProductAsync(int product_ID);
         Task UpdateProductAsync(int product_ID);
+        Task UpdateOrderAsync(int transaction_ID);
     }
 }

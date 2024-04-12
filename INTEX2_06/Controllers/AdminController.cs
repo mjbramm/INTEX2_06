@@ -509,7 +509,6 @@ namespace INTEX2_06.Controllers
             {
                 Orders = _repo.Orders
                     .OrderByDescending(x => x.date)
-                    .Where(x => x.transaction_ID != null && x.UserID != null)
                     .Skip(pageSize * (Math.Max(1, pageNum - 1)))
                     .Take(pageSize),
                 PaginationInfo = new PaginationInfo

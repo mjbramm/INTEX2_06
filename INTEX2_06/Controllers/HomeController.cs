@@ -144,12 +144,18 @@ namespace INTEX2_06.Controllers
                     shipping_address = model.shipping_address,
                     bank = model.bank,
                     type_of_card = model.type_of_card,
-                    UserID = currentUser.Id
+                    UserID = currentUser.Id,
+                    predict_fraud = 0,
+                    fraud = 0,
+                    complete = 0
                 };
 
                 await _repo.AddOrder(order);
 
                 var result = PredictFraud(model);
+                order.predict_fraud = result;
+
+                await _repo.UpdateOrderAsync(order.transaction_ID);
 
                 // Redirect based on the fraud prediction result
                 if (result == 0)

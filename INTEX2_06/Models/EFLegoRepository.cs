@@ -60,5 +60,16 @@ namespace INTEX2_06.Models
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task UpdateOrderAsync(int transaction_ID)
+        {
+            var order = await _context.Orders.FindAsync(transaction_ID);
+
+            if (order != null)
+            {
+                _context.Orders.Update(order);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
