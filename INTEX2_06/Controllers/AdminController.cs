@@ -532,7 +532,15 @@ namespace INTEX2_06.Controllers
 
         public async Task<IActionResult> FraudOrders()
         {
-            return View();
+
+            var orders = new OrdersListViewModel
+            {
+                Orders = _repo.Orders
+                    .OrderByDescending(x => x.date)
+                    .Where(t => t.fraud == 0 && t.predict_fraud == 1)
+            };
+
+            return View(orders);
         }
 
         [HttpGet]

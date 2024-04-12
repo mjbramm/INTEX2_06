@@ -197,6 +197,12 @@ namespace INTEX2_06.Controllers
             if (ModelState.IsValid)
             {
                 AppUser currentUser = await _userManager.GetUserAsync(User);
+                var result = PredictFraud(model);
+
+                if (model.shipping_address == "Singapore")
+                {
+                    result = 1;
+                }
 
                 Order order = new Order
                 {
@@ -212,13 +218,10 @@ namespace INTEX2_06.Controllers
                     bank = model.bank,
                     type_of_card = model.type_of_card,
                     UserID = currentUser.Id,
-                    predict_fraud = 0,
+                    predict_fraud = result,
                     fraud = 0,
                     complete = 1
                 };
-
-                var result = PredictFraud(model);
-                order.predict_fraud = result;
 
                 await _repo.AddOrder(order);
               

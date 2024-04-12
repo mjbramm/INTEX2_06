@@ -27,7 +27,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var t in Model.Orders.Distinct().Where(t => t.fraud == 1))
+        @foreach (var t in Model.Orders)
         {
             <tr>
                 <td>@t.transaction_ID</td>
