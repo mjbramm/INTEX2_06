@@ -360,8 +360,16 @@ namespace INTEX2_06.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DeleteUserConfirm(string UserId)
+        {
+            var user = await userManager.FindByIdAsync(UserId);
+
+            return View(user);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> DeleteUser(string UserId)
+        public async Task<IActionResult> DeleteUserConfirmPost(string UserId)
         {
             // Fetch the user you want to delete
             var user = await userManager.FindByIdAsync(UserId);
