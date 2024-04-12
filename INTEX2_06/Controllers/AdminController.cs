@@ -25,12 +25,14 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateRole()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateRole(CreateRoleViewModel roleModel)
         {
             if (ModelState.IsValid)
@@ -69,6 +71,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ListRoles()
         {
             List<IdentityRole> roles = await roleManager.Roles.ToListAsync();
@@ -77,6 +80,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditRole(string roleId)
         {
             //First Get the role information from the database
@@ -115,6 +119,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
             if (ModelState.IsValid)
@@ -150,6 +155,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditUsersInRole(string roleId)
         {
             ViewBag.roleId = roleId;
@@ -190,6 +196,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string roleId)
         {
             var role = await roleManager.FindByIdAsync(roleId);
@@ -237,6 +244,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteRole(string roleId)
         {
             var role = await roleManager.FindByIdAsync(roleId);
@@ -284,6 +292,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult ListUsers(int pageNum)
         {
             var pageSize = 100;
@@ -310,6 +319,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditUser(string UserId)
         {
             //First Fetch the User Details by UserId
@@ -341,6 +351,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditUser(EditUserViewModel model)
         {
             var user = await userManager.FindByIdAsync(model.Id);
@@ -380,6 +391,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteUserConfirm(string UserId)
         {
             var user = await userManager.FindByIdAsync(UserId);
@@ -388,6 +400,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteUserConfirmPost(string UserId)
         {
             // Fetch the user you want to delete
@@ -422,6 +435,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ManageUserRoles(string UserId)
         {
             //First Fetch the User Information from the Identity database by user Id
@@ -469,6 +483,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ManageUserRoles(List<UserRolesViewModel> model, string UserId)
         {
             var user = await userManager.FindByIdAsync(UserId);
@@ -509,6 +524,7 @@ namespace INTEX2_06.Controllers
             return RedirectToAction("EditUser", new { UserId = UserId });
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ListOrders(int pageNum)
         {
             var pageSize = 100;
@@ -530,6 +546,7 @@ namespace INTEX2_06.Controllers
             return View(orders);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> FraudOrders()
         {
 
@@ -544,6 +561,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateProduct()
         {
             var viewModel = new CreateProductViewModel();
@@ -551,6 +569,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateProduct(CreateProductViewModel model)
         {
             if (ModelState.IsValid)
@@ -576,6 +595,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteProductConfirm(int product_ID)
         {
             var product = await _repo.GetProductByIdAsync(product_ID);
@@ -584,6 +604,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteProductConfirmPost(int product_ID)
         {
             // Attempt to delete the user
@@ -595,6 +616,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditProduct(int product_ID)
         {
             var product = await _repo.Legos.FirstOrDefaultAsync(x => x.product_ID == product_ID);
@@ -603,6 +625,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditProduct(Lego model)
         {
             if (ModelState.IsValid)
