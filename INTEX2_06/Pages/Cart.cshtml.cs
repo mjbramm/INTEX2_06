@@ -7,18 +7,15 @@ namespace INTEX2_06.Pages
 {
     public class CartModel : PageModel
     {
-
         private ILegoRepository _repo;
 
-        public CartModel(ILegoRepository temp) 
+        public CartModel(ILegoRepository repo)
         {
-            _repo = temp;
+            _repo = repo;
         }
 
         public Cart? Cart { get; set; }
         public string ReturnUrl { get; set; } = "/";
-
-
 
         public void OnGet(string returnUrl)
         {
@@ -26,19 +23,34 @@ namespace INTEX2_06.Pages
             Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
         }
 
-        public IActionResult OnPost(int product_Id, string returnUrl) 
+        public IActionResult OnPost(int product_Id, string returnUrl)
         {
-            Lego boo = _repo.Legos
+            Lego ego = _repo.Legos
                 .FirstOrDefault(x => x.product_ID == product_Id);
 
-            if (boo != null)
+            if (ego != null)
             {
                 Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
-                Cart.AddItem(boo, 1);
+                Cart.AddItem(ego, 1);
                 HttpContext.Session.SetJson("cart", Cart);
             }
 
-            return RedirectToPage(new {returnUrl = returnUrl});
+            return RedirectToPage(new { returnUrl = returnUrl});
+        }
+
+        [HttpPost]
+        public IActionResult OnPostRemoveFromCart(int productId)
+        {
+            Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
+            Lego legoToRemove = _repo.Legos.FirstOrDefault(x => x.product_ID == productId);
+
+            if (legoToRemove != null)
+            {
+                Cart.RemoveLine(legoToRemove);
+                HttpContext.Session.SetJson("cart", Cart);
+            }
+
+            return RedirectToPage();
         }
     }
 }

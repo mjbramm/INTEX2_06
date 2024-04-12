@@ -52,19 +52,6 @@
                     <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="20" class="underline-off">20</a>
                 </div>
             </div>
- @*            <div class="pagination-container push-left">
-                <div class="push-left">
-                    <div page-model="@Model.PaginationInfo" page-action="Legostore" page-classes-enabled="true" page-class="btn"
-                         page-class-normal="btn-outline-dark" page-url-pageSize="@Model.CurrentPageSize" page-url-legoCategory="@Model.CurrentLegoCategory" page-class-selected="btn-secondary" class="btn-group pull-right m-1">
-                    </div>
-                </div>
-                <div class="push-right">
-                    <p style="color: var(--text-dark)">Show Pages:</p>
-                    <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="5" class="underline-off">5</a>
-                    <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="10" class="underline-off">10</a>
-                    <a asp-controller="Home" asp-action="Legostore" asp-route-pageSize="20" class="underline-off">20</a>
-                </div>
-            </div> *@
             <div role="main" class="pb-3 product-grid">
                 @foreach (Lego l in Model.Legos.Distinct())
                 {
