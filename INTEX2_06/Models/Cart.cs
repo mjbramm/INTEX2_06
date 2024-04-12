@@ -1,4 +1,6 @@
-﻿namespace INTEX2_06.Models
+﻿using System.Linq;
+
+namespace INTEX2_06.Models
 {
     public class Cart
     {
@@ -31,7 +33,13 @@
         public virtual void Clear() => Lines.Clear(); 
 
         public float CalculateTotal() => Lines.Sum(x => x.Price * x.Quantity);
-    
+
+        public virtual void InitializeCart()
+        {
+            // Clear the cart when initializing for a new user
+            Clear();
+        }
+
         public class CartLine 
         {
             public int CartLineId { get; set; }
