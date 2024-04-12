@@ -214,7 +214,7 @@ namespace INTEX2_06.Controllers
                     UserID = currentUser.Id,
                     predict_fraud = 0,
                     fraud = 0,
-                    complete = 0
+                    complete = 1
                 };
 
                 var result = PredictFraud(model);
