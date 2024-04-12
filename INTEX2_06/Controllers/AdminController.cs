@@ -284,10 +284,29 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListUsers()
+        public IActionResult ListUsers(int pageNum)
         {
-            var users = userManager.Users;
-            return View(users);
+            var pageSize = 100;
+
+            var totalUsers = userManager.Users.Count();
+
+            var users = userManager.Users
+                .Skip(pageSize * (Math.Max(1, pageNum - 1)))
+                .Take(pageSize)
+                .ToList();
+
+            var viewModel = new UsersListViewModel
+            {
+                Users = users,
+                PaginationInfo = new PaginationInfo
+                {
+                    CurrentPage = pageNum,
+                    ItemsPerPage = pageSize,
+                    TotalItems = totalUsers
+                }
+            };
+
+            return View(viewModel);
         }
 
         [HttpGet]
