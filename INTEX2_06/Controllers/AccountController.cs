@@ -25,6 +25,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
@@ -202,6 +203,7 @@ namespace INTEX2_06.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult InsufficientPrivileges(string? ReturnUrl = null)
         {
             ViewData["ReturnUrl"] = ReturnUrl;
@@ -215,6 +217,7 @@ namespace INTEX2_06.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         private async Task SendForgotPasswordEmail(string? email, AppUser? user)
         {
             // Generate the reset password token

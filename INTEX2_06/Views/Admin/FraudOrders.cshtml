@@ -19,9 +19,8 @@
             <th>Shipping Address</th>
             <th>Bank</th>
             <th>Type of Card</th>
-            <th>Fraud</th>
-            <th>Predict Fraud</th>
-            <th>Complete</th>
+            <th>Risk of Fraud</th>
+            <th>Verified Fraud</th>
             <th>Approve</th>
             <th>Reject</th>
         </tr>
@@ -41,9 +40,8 @@
                 <td>@t.shipping_address</td>
                 <td>@t.bank</td>
                 <td>@t.type_of_card</td>
-                <td>@t.fraud</td>
-                <td>@t.predict_fraud</td>
-                <td>@t.complete</td>
+                <td>@(t.predict_fraud == 1 ? "True" : "False")</td>
+                <td>@(t.fraud == 1 ? "True" : "False")</td>
                 <td><button type="submit" class="btn btn-info">Approve</button></td>
                 <td><button type="submit" class="btn btn-danger">Reject</button></td>
             </tr>

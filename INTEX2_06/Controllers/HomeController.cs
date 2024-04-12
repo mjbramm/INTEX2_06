@@ -7,6 +7,7 @@ using _INTEX2_06.Models;
 using Microsoft.ML.OnnxRuntime.Tensors;
 using Microsoft.ML.OnnxRuntime;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INTEX2_06.Controllers
 {
@@ -187,12 +188,14 @@ namespace INTEX2_06.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> PaymentInfo()
         {
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> PaymentInfo(CreateOrderViewModel model)
         {
@@ -248,6 +251,7 @@ namespace INTEX2_06.Controllers
         }
 
         //THIS IS THE FRAUD PIPELINE CODE
+        [Authorize]
         public IActionResult CheckFraud(CreateOrderViewModel data)
         {
             var result = PredictFraud(data);
@@ -304,24 +308,27 @@ namespace INTEX2_06.Controllers
         }
 
 
-
+        [Authorize]
         public async Task<IActionResult> OrderConfirmation()
         {
             return View();
         }
 
+        [Authorize]
         public async Task<IActionResult> OrderUnderReview()
         {
             return View();
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> ConfirmOrderDetails()
         {
             return View();
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> ConfirmOrderCancel()
         {
             return View();
