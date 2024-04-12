@@ -26,16 +26,17 @@
             <!-- Admin and Cart Forms Here -->
             @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
-@*                 <form id="@Model.product_ID" method="post" asp-controller="Admin" asp-action="DeleteProduct">
+                <form id="@Model.product_ID" method="post" asp-controller="Admin" asp-action="DeleteProduct">
                     <input type="hidden" asp-for="product_ID" />
                     <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                     <button type="submit" class="btn-danger btn-sm float-end">Delete</button>
-                </form> *@
-                <a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteProductConfirm" asp-route-ProductId="@Model.product_ID">Delete</a>
+                </form>
+                <a class="btn btn-danger button-attach" asp-controller="Admin" asp-action="DeleteProductConfirm" asp-route-ProductId="@Model.product_ID">Delete</a>
+@*                 <a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteProductConfirm" asp-route-ProductId="@Model.product_ID">Delete</a> *@
                 <form id="@Model.product_ID" method="get" asp-controller="Admin" asp-action="EditProduct">
                     <input type="hidden" asp-for="product_ID" />
                     <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-                    <button type="submit" class="btn-success btn-sm float-end">Edit</button>
+                    <button type="submit" class="btn-success btn-sm float-end button-edit">Edit</button>
                 </form>
             }
             else if (User.Identity.IsAuthenticated)
@@ -43,7 +44,7 @@
                 <form id="@Model.product_ID" method="post" asp-page="/Cart">
                     <input type="hidden" asp-for="@Model.product_ID" />
                     <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-                    <button type="submit" class="btn-success btn-sm float-end">Add to Cart</button>
+                    <button type="submit" class="btn-success btn-sm float-end button-attach">Add to Cart</button>
                 </form>
             }
         </div>
