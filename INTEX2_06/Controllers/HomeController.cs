@@ -195,31 +195,24 @@ namespace INTEX2_06.Controllers
         {
             using var session = new InferenceSession(@"fraud_model2.onnx");
 
-
-
             var day_of_week = DateTime.Now.ToString("ddd");
 
-
-
-
-
-
-        var input = new List<float> {
-        data.Index, (DateTime.Now.Hour), data.Amount, data.country_and_shipping_same,
-        data.day_of_week_Mon, data.day_of_week_Sat, data.day_of_week_Sun,
-        data.day_of_week_Thu, data.day_of_week_Tue, data.day_of_week_Wed,
-        data.entry_mode_PIN, data.entry_mode_Tap, data.type_of_transaction_Online,
-        data.type_of_transaction_POS, data.bank_HSBC, data.bank_Halifax,
-        data.bank_Lloyds, data.bank_Metro, data.bank_Monzo, data.bank_RBS,
-        data.type_of_card_Visa
-        };
+            var input = new List<float> {
+            data.Index, (DateTime.Now.Hour), data.Amount, data.country_and_shipping_same,
+            data.day_of_week_Mon, data.day_of_week_Sat, data.day_of_week_Sun,
+            data.day_of_week_Thu, data.day_of_week_Tue, data.day_of_week_Wed,
+            data.entry_mode_PIN, data.entry_mode_Tap, data.type_of_transaction_Online,
+            data.type_of_transaction_POS, data.bank_HSBC, data.bank_Halifax,
+            data.bank_Lloyds, data.bank_Metro, data.bank_Monzo, data.bank_RBS,
+            data.type_of_card_Visa
+            };
 
             var inputTensor = new DenseTensor<float>(input.ToArray(), new[] { 1, input.Count });
 
             var inputs = new List<NamedOnnxValue>
-        {
-            NamedOnnxValue.CreateFromTensor("float_input", inputTensor)
-        };
+            {
+                NamedOnnxValue.CreateFromTensor("float_input", inputTensor)
+            };
 
 
             using (var results = session.Run(inputs))
@@ -229,6 +222,9 @@ namespace INTEX2_06.Controllers
                 return fraudulent;
             }
         }
+
+
+
         public async Task<IActionResult> OrderConfirmation()
         {
             return View();
