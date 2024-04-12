@@ -38,6 +38,7 @@
     margin-bottom: 15px;
 }
 
+
     .form-outline label {
         font-weight: bold;
     }
@@ -58,6 +59,19 @@
         border-radius: 5px;
         cursor: pointer;
     }
+
+.cart-outline {
+    width: 60%;
+    border: 1px solid #ced4da;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+
+.bold-text {
+    font-weight: bold;
+}
 
 /* Overall dark theme background */
 body {

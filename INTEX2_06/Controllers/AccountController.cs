@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace INTEX2_06.Controllers
 {
@@ -54,6 +55,12 @@ namespace INTEX2_06.Controllers
                     //Then send the Confirmation Email to the User
                     await SendConfirmationEmail(model.Email, user);
 
+                    // Initialize cart for the user
+                    var cart = new Cart();
+                    var userId = user.Id;
+                    // Optionally, you can store the cart in the user's session or database
+                    // For simplicity, let's assume you're storing it in session
+                    // HttpContext.Session.Set<Cart>("Cart_" + userId, cart);
                     //Redirect the user to RegistrationSuccessful View
                     return View("RegistrationSuccessful");
                 }
@@ -86,6 +93,9 @@ namespace INTEX2_06.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
+            // Clear cart on logout
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            HttpContext.Session.Remove("Cart_" + userId);
             return RedirectToAction("Index", "Home");
         }
 
