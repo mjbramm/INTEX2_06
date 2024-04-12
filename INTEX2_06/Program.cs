@@ -115,6 +115,54 @@ app.Use(async (context, next) =>
 //app.MapControllerRoute("default", "/Page{pageNum}/Size{pageSize}", new { Controller = "Home", Action = "Legostore" });
 //app.MapControllerRoute("LNS", "/{legoCategory}/Page{pageNum}/Size{pageSize}", new { Controller = "Home", Action = "Legostore" });
 
+//app.MapControllerRoute(
+//    name: "LegoCategoryColorPageAndSize",
+//    pattern: "{legoCategory}/{legoColor}/Page{pageNum}/Size{pageSize}",
+//    defaults: new { controller = "Home", action = "Legostore" }
+//);
+
+//// Route with legoCategory, pageNum, and pageSize
+//app.MapControllerRoute(
+//    name: "LegoCategoryPageAndSize",
+//    pattern: "{legoCategory}/Page{pageNum}/Size{pageSize}",
+//    defaults: new { controller = "Home", action = "Legostore" }
+//);
+
+//// Route with legoColor, pageNum, and pageSize
+//app.MapControllerRoute(
+//    name: "LegoColorPageAndSize",
+//    pattern: "{legoColor}/Page{pageNum}/Size{pageSize}",
+//    defaults: new { controller = "Home", action = "Legostore" }
+//);
+
+//// Route with pageNum and pageSize only
+//app.MapControllerRoute(
+//    name: "PageAndSize",
+//    pattern: "Page{pageNum}/Size{pageSize}",
+//    defaults: new { controller = "Home", action = "Legostore" }
+//);
+
+//// Route with legoCategory and pageNum
+//app.MapControllerRoute(
+//    name: "LegoCategoryAndPage",
+//    pattern: "{legoCategory}/Page{pageNum}",
+//    defaults: new { controller = "Home", action = "Legostore", pageSize = 5 }
+//);
+
+//// Route with legoColor and pageNum
+//app.MapControllerRoute(
+//    name: "LegoColorAndPage",
+//    pattern: "{legoColor}/Page{pageNum}",
+//    defaults: new { controller = "Home", action = "Legostore", pageSize = 5 }
+//);
+
+//// Route with pageNum only
+//app.MapControllerRoute(
+//    name: "PageOnly",
+//    pattern: "Page{pageNum}",
+//    defaults: new { controller = "Home", action = "Legostore", pageSize = 5 }
+//);
+
 
 app.MapDefaultControllerRoute();
 
