@@ -174,11 +174,11 @@ namespace INTEX2_06.Controllers
 
             if (data.shipping_address == "Singapore")
             {
-                result = 0;
+                result = 1;
             }
 
             // Redirect based on the fraud prediction result
-            if (result == 0)
+            if (result == 1)
             {
                 // Redirect to "OrderUnderReview" view when fraud is detected
                 return RedirectToAction("OrderUnderReview");

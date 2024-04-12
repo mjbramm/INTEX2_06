@@ -9,10 +9,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Transaction ID</th>
-            <th>Date</th>
-            <th>Day of Week</th>
-            <th>Time</th>
+            <th>Order Date</th>
+            <th>Day of the Week</th>
+            <th>Hour of Day</th>
             <th>Entry Mode</th>
             <th>Amount</th>
             <th>Type of Transaction</th>
@@ -20,16 +19,14 @@
             <th>Shipping Address</th>
             <th>Bank</th>
             <th>Type of Card</th>
-            <th>Fraud</th>
-            <th>Predict Fraud</th>
-            <th>Complete</th>
+            <th>Risk of Fraud</th>
+            <th>Verified Fraud</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var t in Model.Orders.Distinct())
         {
             <tr>
-                <td>@t.transaction_ID</td>
                 <td>@t.date</td>
                 <td>@t.day_of_week</td>
                 <td>@t.time</td>
@@ -40,9 +37,8 @@
                 <td>@t.shipping_address</td>
                 <td>@t.bank</td>
                 <td>@t.type_of_card</td>
-                <td>@t.fraud</td>
-                <td>@t.predict_fraud</td>
-                <td>@t.complete</td>
+                <td>@(t.predict_fraud == 1 ? "True" : "False")</td>
+                <td>@(t.fraud == 1 ? "True" : "False")</td>
             </tr>
         }
     </tbody>
