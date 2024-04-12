@@ -226,7 +226,9 @@ namespace INTEX2_06.Controllers
                 };
 
                 await _repo.AddOrder(order);
-              
+
+                HttpContext.Session.Remove("cart");
+
                 //await _repo.UpdateOrderAsync(order.transaction_ID);
 
                 // Redirect based on the fraud prediction result

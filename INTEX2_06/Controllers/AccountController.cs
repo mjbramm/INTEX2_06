@@ -95,7 +95,8 @@ namespace INTEX2_06.Controllers
             await signInManager.SignOutAsync();
             // Clear cart on logout
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            HttpContext.Session.Remove("Cart_" + userId);
+            //HttpContext.Session.Remove("Cart_" + userId);
+            HttpContext.Session.Remove("cart");
             return RedirectToAction("Index", "Home");
         }
 
