@@ -9,10 +9,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Transaction ID</th>
-            <th>Date</th>
-            <th>Day of Week</th>
-            <th>Time</th>
+            <th>Order Date</th>
+            <th>Day of the Week</th>
+            <th>Hour of Day</th>
             <th>Entry Mode</th>
             <th>Amount</th>
             <th>Type of Transaction</th>
@@ -20,16 +19,14 @@
             <th>Shipping Address</th>
             <th>Bank</th>
             <th>Type of Card</th>
-            <th>Fraud</th>
-            <th>Predict Fraud</th>
-            <th>Complete</th>
+            <th>Risk of Fraud</th>
+            <th>Verified Fraud</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var t in Model.Orders.Distinct())
         {
             <tr>
-                <td>@t.transaction_ID</td>
                 <td>@t.date</td>
                 <td>@t.day_of_week</td>
                 <td>@t.time</td>
@@ -40,14 +37,33 @@
                 <td>@t.shipping_address</td>
                 <td>@t.bank</td>
                 <td>@t.type_of_card</td>
-                <td>@t.fraud</td>
-                <td>@t.predict_fraud</td>
-                <td>@t.complete</td>
+                <td>@(t.predict_fraud == 1 ? "True" : "False")</td>
+                <td>@(t.fraud == 1 ? "True" : "False")</td>
             </tr>
         }
     </tbody>
 </table>
 
-<div page-model="@Model.PaginationInfo" page-action="ListOrders" page-classes-enabled="true" page-class="btn"
+@* <div page-model="@Model.PaginationInfo" page-action="ListOrders" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark" page-class-selected="btn-secondary" class="btn-group pull-right m-1">
-</div>
+</div> *@
+
+@if (Model.PaginationInfo.TotalNumPages > 1)
+{
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="pagination justify-content-center">
+                    @if (Model.PaginationInfo.CurrentPage > 0)
+                    {
+                        <a asp-action="ListOrders" asp-route-pageNum="@(Model.PaginationInfo.CurrentPage - 1)" class="btn btn-primary">Previous</a>
+                    }
+                    @if (Model.PaginationInfo.CurrentPage < Model.PaginationInfo.TotalNumPages)
+                    {
+                        <a asp-action="ListOrders" asp-route-pageNum="@(Model.PaginationInfo.CurrentPage + 1)" class="btn btn-primary">Next</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

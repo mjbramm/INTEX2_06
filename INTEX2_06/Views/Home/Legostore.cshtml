@@ -6,7 +6,7 @@
 
 @if (!User.Identity.IsAuthenticated)
 {
-    <h7>Please <a asp-controller="Account" asp-action="Login">login</a> to add items to your cart</h7>
+    <h7 style="color: var(--text-dark)">Please <a asp-controller="Account" asp-action="Login">login</a> to add items to your cart</h7>
 }
 
 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
@@ -23,23 +23,26 @@
 <div class="container-fluid">
     <div class="row m-1 p-1">
         <!-- Left Sidebar for Categories -->
-        <div class="col-3 sticky-top">
+        <div class="col-1 sticky-top">
             <p style="color: var(--text-dark)">Categories</p>
             <vc:lego-categories />
             <br />
+        </div>
+        <div class="col-1 sticky-top">
             <p style="color: var(--text-dark)">Colors</p>
             <vc:lego-colors />
             <br />
             <button class="btn btn-primary video-popup-btn" onclick="toggleVideo()">Watch Building Video</button>
-            <button class="btn btn-danger" onclick="toggleVideo()">Close Video</button>
+            <br />
+            <button class="btn btn-danger" style="padding: 10px" onclick="toggleVideo()">Close Video</button>
         </div>
 
-        <div class="col-9">
+        <div class="col-10">
 
             <div class="pagination-wrapper">
                 <div class="pagination-container">
                     <div page-model="@Model.PaginationInfo" page-action="Legostore" page-classes-enabled="true" page-class="btn"
-                         page-class-normal="btn-outline-dark" page-url-pageSize="@Model.CurrentPageSize" page-url-legoCategory="@Model.CurrentLegoCategory" page-class-selected="btn-secondary" class="btn-group pull-right m-1">
+                         page-class-normal="btn-outline-dark" page-url-legoCategory="@Model.CurrentLegoCategory" page-url-pageSize="@Model.CurrentPageSize" page-class-selected="btn-secondary" class="btn-group pull-right m-1">
                     </div>
                 </div>
                 <div class="page-size-container">

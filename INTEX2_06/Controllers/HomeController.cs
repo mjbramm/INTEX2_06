@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using INTEX2_06.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using _INTEX2_06.Models;
+using Microsoft.ML.OnnxRuntime.Tensors;
+using Microsoft.ML.OnnxRuntime;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace INTEX2_06.Controllers
 {
@@ -10,6 +14,7 @@ namespace INTEX2_06.Controllers
     {
         private ILegoRepository _repo;
         private UserManager<AppUser> _userManager;
+        private readonly string _modelPath = @"fraud_model2.onnx";
 
         public HomeController(ILegoRepository temp, UserManager<AppUser> userMgr)
         {
@@ -29,6 +34,7 @@ namespace INTEX2_06.Controllers
             };
             return View(legos);
         }
+
         [HttpGet]
         public async Task<IActionResult> SingleProduct(int product_ID)
         {
@@ -143,11 +149,81 @@ namespace INTEX2_06.Controllers
 
                 await _repo.AddOrder(order);
 
-                return RedirectToAction("OrderConfirmation", "Home");
+                var result = PredictFraud(model);
+
+                // Redirect based on the fraud prediction result
+                if (result == 0)
+                {
+                    // Redirect to "OrderUnderReview" view when fraud is detected
+                    return RedirectToAction("OrderUnderReview");
+                }
+                else
+                {
+                    // Redirect to "OrderConfirmation" view when no fraud is detected
+                    return RedirectToAction("OrderConfirmation");
+                }
             }
             
             return View(model);
         }
+
+        //THIS IS THE FRAUD PIPELINE CODE
+        public IActionResult CheckFraud(CreateOrderViewModel data)
+        {
+            var result = PredictFraud(data);
+
+            if (data.shipping_address == "Singapore")
+            {
+                result = 1;
+            }
+
+            // Redirect based on the fraud prediction result
+            if (result == 1)
+            {
+                // Redirect to "OrderUnderReview" view when fraud is detected
+                return RedirectToAction("OrderUnderReview");
+            }
+            else
+            {
+                // Redirect to "OrderConfirmation" view when no fraud is detected
+                return RedirectToAction("OrderConfirmation");
+            }
+        }
+
+
+        private int PredictFraud(CreateOrderViewModel data)
+        {
+            using var session = new InferenceSession(@"fraud_model2.onnx");
+
+            var day_of_week = DateTime.Now.ToString("ddd");
+
+            var input = new List<float> {
+            data.Index, (DateTime.Now.Hour), data.Amount, data.country_and_shipping_same,
+            data.day_of_week_Mon, data.day_of_week_Sat, data.day_of_week_Sun,
+            data.day_of_week_Thu, data.day_of_week_Tue, data.day_of_week_Wed,
+            data.entry_mode_PIN, data.entry_mode_Tap, data.type_of_transaction_Online,
+            data.type_of_transaction_POS, data.bank_HSBC, data.bank_Halifax,
+            data.bank_Lloyds, data.bank_Metro, data.bank_Monzo, data.bank_RBS,
+            data.type_of_card_Visa
+            };
+
+            var inputTensor = new DenseTensor<float>(input.ToArray(), new[] { 1, input.Count });
+
+            var inputs = new List<NamedOnnxValue>
+            {
+                NamedOnnxValue.CreateFromTensor("float_input", inputTensor)
+            };
+
+
+            using (var results = session.Run(inputs))
+            {
+                var prediction = results.FirstOrDefault(item => item.Name == "output_label")?.AsTensor<long>().ToArray();
+                var fraudulent = (int)prediction[0];
+                return fraudulent;
+            }
+        }
+
+
 
         public async Task<IActionResult> OrderConfirmation()
         {
