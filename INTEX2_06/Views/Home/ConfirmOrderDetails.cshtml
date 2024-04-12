@@ -1,1 +1,77 @@
 ﻿@* This page will display everything from payment info along with the total and ordered items, displayed dynamically *@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@model Cart
+
+<div class="container">
+    <div class="form-outline text-center ">
+        <div class="row">
+            <h1>Confirm Order?</h1>
+        </div>
+        <div class="row">
+            <h4>
+                Your order will be fulfilled.
+            </h4>
+        </div>
+        <div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Lego Name</th>
+                        <th>Quantity</th>
+                        <th class="text-right">Amount</th>
+                        <th class="text-right">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var l in Model.Lines ?? Enumerable.Empty<Cart.CartLine>())
+                    {
+                        <tr>
+                            <td class="text-left">@l.Lego.name</td>
+                            <td class="text-center">@l.Quantity</td>
+                            <td class="text-right">@l.Lego.price</td>
+                            <td class="text-right">@((l.Quantity * l.Price).ToString("c"))</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-secondary" style="width:auto" onclick="history.back()">Confirm</button>
+            <a class="btn btn-danger" asp-controller="Home" asp-action="">Confirm Order</a>
+        </div>
+    </div>
+</div>
