@@ -26,14 +26,14 @@
             <!-- Admin and Cart Forms Here -->
             @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
-                <form id="@Model.product_ID" method="post" asp-controller="Admin" asp-action="DeleteProduct">
+@*                 <form id="@Model.product_ID" method="post" asp-controller="Admin" asp-action="DeleteProduct">
                     <input type="hidden" asp-for="product_ID" />
                     <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                     <button type="submit" class="btn-danger btn-sm float-end">Delete</button>
-                </form>
-                <a class="btn btn-danger button-attach" asp-controller="Admin" asp-action="DeleteProductConfirm" asp-route-ProductId="@Model.product_ID">Delete</a>
+                </form> *@
+                <button type="submit" method="get" class="btn btn-danger button-attach" asp-controller="Admin" asp-action="DeleteProductConfirm" asp-route-ProductId="@Model.product_ID">Delete</button>
 @*                 <a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteProductConfirm" asp-route-ProductId="@Model.product_ID">Delete</a> *@
-                <form id="@Model.product_ID" method="get" asp-controller="Admin" asp-action="EditProduct">
+                <form id="@Model.product_ID" method="get" asp-controller="Admin" asp-action="EditProduct" asp-route-product_ID="@Model.product_ID">
                     <input type="hidden" asp-for="product_ID" />
                     <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                     <button type="submit" class="btn-success btn-sm float-end button-edit">Edit</button>
