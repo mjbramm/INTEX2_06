@@ -27,14 +27,14 @@
                 <button type="submit" class="btn-success btn-sm float-end">Edit</button>
             </form>
         }
-        else if (User.Identity.IsAuthenticated)
+@*         else if (User.Identity.IsAuthenticated)
         {
             <form id="@Model.MainProduct.product_ID" method="post" asp-page="/Cart">
                 <input type="hidden" asp-for="@Model.MainProduct.product_ID" />
                 <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                 <button type="submit" class="btn-success btn-sm float-end">Add to Cart</button>
             </form>
-        }
+        } *@
 
 
         <p class="product-price">Price: $@Model.MainProduct.price</p>
