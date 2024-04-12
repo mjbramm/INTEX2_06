@@ -30,9 +30,8 @@
                     <input type="hidden" asp-for="product_ID" />
                     <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                     <button type="submit" class="btn-danger btn-sm float-end">Delete</button>
-                </form> *@
-                <a class="btn btn-danger button-attach" asp-controller="Admin" asp-action="DeleteProductConfirm" asp-route-ProductId="@Model.product_ID">Delete</a>
                 </form>
+                <a class="btn btn-danger button-attach" asp-controller="Admin" asp-action="DeleteProductConfirm" asp-route-ProductId="@Model.product_ID">Delete</a>
 @*                 <a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteProductConfirm" asp-route-ProductId="@Model.product_ID">Delete</a> *@
                 <form id="@Model.product_ID" method="get" asp-controller="Admin" asp-action="EditProduct">
                     <input type="hidden" asp-for="product_ID" />
